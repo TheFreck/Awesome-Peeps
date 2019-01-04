@@ -1,0 +1,115 @@
+// this affects the whole page
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+// styling for the wrapper
+.modality-form-wrap {
+  position: relative;
+  margin: 0 auto;
+  background: #ecf0f1;
+  width: 350px;
+  border-radius: 5px;
+  box-shadow: 3px 3px 10px #333;
+  padding: 15px;
+  margin-bottom: 30px;
+
+  h2 {
+    text-align: center;
+    font-weight: 200;
+    font-size: 2em;
+    margin-top: 10px;
+    color: #34495e;
+  }
+  // styling for the form
+  .form {
+    padding-top: 20px;
+// input button styling
+    input[type="email"],
+    input[type="password"],
+    button {
+      width: 80%;
+      margin-left: 10%;
+      margin-bottom: 25px;
+      height: 40px;
+      border-radius: 5px;
+      outline: 0;
+      -moz-outline-style: none;
+    }
+//input rows styling
+    input[type="email"],
+    input[type="password"] {
+      border: 1px solid #bbb;
+      padding: 0 0 0 10px;
+      font-size: 14px;
+      &:focus {
+        border: 1px solid #57bfda;
+      }
+    }
+// lower link styling
+    a {
+      text-align: center;
+      font-size: 10px;
+      color: #57bfda;
+
+      p {
+        padding-bottom: 10px;
+      }
+    }
+// login button
+    button {
+      background: #f44336;
+      border: none;
+      color: white;
+      font-size: 18px;
+      font-weight: 200;
+      cursor: pointer;
+      transition: box-shadow 0.4s ease;
+
+      &:hover {
+        box-shadow: 1px 1px 5px #555;
+      }
+
+      &:active {
+        box-shadow: 1px 1px 7px #222;
+      }
+    }
+  }
+// top bar of the login and signup screen
+  &:after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: -webkit-linear-gradient(
+      left,
+      #27ae60 0%,
+      #27ae60 20%,
+      #8e44ad 20%,
+      #8e44ad 40%,
+      #57bfda 40%,
+      #57bfda 60%,
+      #f44336 60%,
+      #f44336 80%,
+      #fed81f 80%,
+      #fed81f 100%
+    );
+    background: -moz-linear-gradient(
+      left,
+      #27ae60 0%,
+      #27ae60 20%,
+      #8e44ad 20%,
+      #8e44ad 40%,
+      #57bfda 40%,
+      #57bfda 60%,
+      #f44336 60%,
+      #f44336 80%,
+      #fed81f 80%,
+      #fed81f 100%
+    );
+    height: 5px;
+    border-radius: 5px 5px 0 0;
+  }
+}
