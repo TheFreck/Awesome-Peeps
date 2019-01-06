@@ -74,7 +74,7 @@ class Create extends Component {
     console.log("CLICK")
     if (this.state.item) {
       API.saveItem({
-        name: this.state.user,
+        item: this.state.item,
         price: this.state.price,
         url: this.state.url,
         occasion: this.state.occasion,
