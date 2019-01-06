@@ -17,5 +17,21 @@ export default {
   saveUser: userData => {
     // console.log("API user data: ", userData);
     return axios.post("/api/users", userData);
+  },
+  getItems: () => {
+    return axios.get("/api/items");
+  },
+  getItem: id => {
+    return axios.get("/api/items/" + id);
+  },
+  // Deletes the book with the given id
+  deleteItem: id => {
+    return axios.delete("/api/items/" + id);
+  },
+  // Saves a book to the database
+  saveItem: itemData => {
+    console.log("API user data: ", itemData);
+    return axios.post("/api/items", itemData);
   }
+
 };

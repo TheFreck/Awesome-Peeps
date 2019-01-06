@@ -1,10 +1,87 @@
 import React, { Component } from "react";
 import Row from "../../components/Row"
+import API from "../../utils/API"
 
 class Create extends Component {
     state = {
-      items: []
+      savedItems: [],
+      item: "",
+      price: 0,
+      url: "",
+      occasion: "",
+      comments: ""
     }
+
+    getSavedItems = () => {
+      API.getItems()
+        .then(res =>
+          this.setState({ savedItems: res.data })
+        )
+        .catch(err => console.log(err));
+    };
+
+    deleteItem = (id) => {
+      API.deleteItem(id)
+        .then(res =>
+          this.getSavedItems())
+        .catch((err) => {
+          console.log(err);
+        });
+    };
+
+    handleChange = (event) => {
+      const { name, value } = event.target;
+      this.setState({
+        [name]: value
+      });
+    }
+
+    
+
+    // handleSaveItem = (id) => {
+    //   API.saveItem(id)
+    //   console.log("click")
+    //   .then(res =>
+    //     this.setState({ savedItems: res.data })
+    //   )
+    //       .catch((err) => {
+    //         console.log(err);
+    //       });
+    //   };
+
+      handleSaveItem = event => {
+        event.preventDefault();
+        console.log("CLICK")
+        if (this.state.item) {
+          API.saveItem({
+            item: this.state.item,
+            price: this.state.price,
+            url: this.state.url,
+            occasion: this.state.occasion,
+            comments: this.state.comments
+          })
+            .then(res => this.getSavedItems())
+            .catch(err => console.log(err));
+        }
+      };
+
+    handleURL = (event) => {
+      this.setState({ url: event.target.value });
+    }
+
+    handlePrice = (event) => {
+      this.setState({ price: event.target.value });
+    }
+
+    handleOccasion = (event) => {
+      this.setState({ occasion: event.target.value });
+    }
+
+    handleComments = (event) => {
+      this.setState({ comments: event.target.value });
+    }
+
+
 
 render() {
     return (
@@ -13,25 +90,25 @@ render() {
         <form>
               <div className="form-group">
                 <label htmlFor="topic"><h4 >Item</h4></label>
-                <input type="text" className="form-control" id="topic" aria-describedby="emailHelp" />
+                <input type="text" className="form-control" id="item" aria-describedby="emailHelp" />
               </div>
               <div className="form-group">
                 <label htmlFor="start-year"><h4 >Price</h4></label>
-                <input  type="text" className="form-control" id="start-year" />
+                <input  type="text" className="form-control" id="price" />
               </div>
               <div className="form-group">
                 <label htmlFor="end-year"><h4 >URL</h4></label>
-                <input type="text" className="form-control" id="end-year" />
+                <input type="text" className="form-control" id="url" />
               </div>
               <div className="form-group">
                 <label htmlFor="end-year"><h4 >Occasion</h4></label>
-                <input type="text" className="form-control" id="end-year" />
+                <input type="text" className="form-control" id="occasion" />
               </div>
               <div className="form-group">
                 <label htmlFor="end-year"><h4 >Comments</h4></label>
-                <input type="text" className="form-control" id="end-year" />
+                <input type="text" className="form-control" id="comments" />
               </div>
-              <button type="submit" className="btn btn-info">Add To Registry</button>
+              <button onClick={this.handleSaveItem} type="submit" className="btn btn-info">Add To Registry</button>
               <button type="submit" className="btn btn-danger">Share Registry</button>
 
             </form>
@@ -52,7 +129,7 @@ render() {
         <tbody>
           <Row 
             item={{
-              name: "basketball",
+              item: "basketball",
               price: 50,
               url: "www.google.com",
               occasion: "Christmas",
