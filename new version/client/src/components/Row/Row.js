@@ -1,22 +1,5 @@
 import React from "react";
 
-// The ...props means, spread all of the passed props onto this element
-// That way we don't have to define them all individually
-// const Row = props => (
-//     <tr>
-//         <th scope="row">{props}</th>
-//         <td>{props.price}</td>
-//         <td>{props.url}</td>
-//         <td>{props.occasion}</td>
-//         <td>{props.comments}</td>
-//         <td><button>Never Mind</button></td>
-//         onClick={() => props.deleteItem(props._id)}
-//     </tr>
-//     );
-
-// export default Row;
-
-
 const Row = props =>
     <div className="container text-center">
         <div className="card-body">
