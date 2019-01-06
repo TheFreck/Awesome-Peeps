@@ -38,50 +38,57 @@ module.exports = passport => {
         passReqToCallback: true
       },
       (req, email, account_key, done) => {
-        process.nextTick(function() {
+        process.nextTick(() => {
           // does the user already exist?
 
           db.User
             .findOne({
               profile: {
                 email: email
+                }
+              }, (err, user) => {
+                if(err) {
+                  return done(err);
+                }
+                if(!user) {
+                  return done(null, false, { message: "Incorrect username" });
+                }
+                if(!user.checkPassword(account_key)) {
+                  return done(null, false, { message: "Incorrect password" });
+                }
+                return done(null, user);
               }
-            })
-            .then((user, err) => {
-              if (err) {
-                console.log("err", err);
-                return done(err);
-              }
+            )
 
-              // is that email already taken?
-              if (user) {
-                console.log("signupMessage", "That email is already taken.");
-                return done(
-                  null,
-                  false,
-                  req.flash("signupMessage", "That email is already taken.")
-                );
-              } else {
-                // if not make a new user
-                db.User
-                  .create({
-                    name: req.body.name,
-                    email: req.body.email,
-                    account_key: db.User.generateHash(account_key)
-                  })
-                  .then(dbUser => {
-                    return done(null, dbUser);
-                  })
-                  .catch(function(err) {
-                    // handle error;
-                    console.log(err);
-                  });
-              }
-            });
+          // is that email already taken?
+          if (user) {
+            console.log("signupMessage", "That email is already taken.");
+            return done(
+              null,
+              false,
+              req.flash("signupMessage", "That email is already taken.")
+            );
+          } else {
+            // if not make a new user
+            db.User
+              .create({
+                name: req.body.name,
+                email: req.body.email,
+                account_key: db.User.generateHash(account_key)
+              })
+              .then(dbUser => {
+                return done(null, dbUser);
+              })
+              .catch(function(err) {
+                // handle error;
+                console.log(err);
+              });
+            }
         });
       }
     )
-  );
+  )
+  
 
   // =========================================================================
   // LOCAL LOGIN
@@ -100,14 +107,12 @@ module.exports = passport => {
         console.log("passport login hit");
         db.User
           .findOne({
-            where: {
-              email: req.body.email
-            }
+            profile: {
+              email: email
+              }
           })
           .then((user, err) => {
-            if (err) {
-              throw err;
-            }
+            if (err) throw err;
 
             if (!user) {
               console.log("no user found");
@@ -117,7 +122,7 @@ module.exports = passport => {
                 req.flash("loginMessage", "No user found.")
               );
             }
-
+            console.log("user.validPassword: ", user.validPassword(req.body.account_key));
             // if the user exists but fails password
             if (user && !user.validPassword(req.body.account_key)) {
               return done(

@@ -22,6 +22,10 @@ const itemSchema = new Schema({
     type: Date,
     required: true,
     default: Date.now
+  },
+  comments: {
+    type: String,
+    required: false,
   }
   
 })

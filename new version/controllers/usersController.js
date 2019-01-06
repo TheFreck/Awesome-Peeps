@@ -12,14 +12,19 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
   findById: (req, res) => {
-    console.log("controller find by id req.params.id: ", req.params.id);
+    console.log("controller username: ", req.body.username);
+    console.log("controller password: ", req.body.password);
     db.User
       .findOne({
         profile: {
-          email: req.params.id
+          email: req.body.username
         }
       })
-      .then(dbModel => res.json(dbModel))
+      .then(dbModel => {
+        console.log("dbModel: ", dbModel);
+        db.User.checkPassword(req.body.password)
+        res.json(dbModel)
+      })
       .catch(err => res.status(422).json(err));
   },
   create: (req, res) => {

@@ -110,18 +110,20 @@ class Start extends Component {
     console.log("login: ", event.target)
     console.log("this.state.user.profile.email: ", this.state.user.profile.email)
     console.log("this.state.user.login.account_key: ", this.state.user.login.account_key)
-    let userData = {
+
+    API.login({
       username: this.state.user.profile.email,
       password: this.state.user.login.account_key
-    }
-    API.login(userData)
+    })
     .then(res => {
       console.log("login response: ", res);
+      console.log("Start update user: ", this.props)
       if(Response.status === 200) {
         this.props.updateUser({
           loggedIn: true,
           username: Response.data.username
         })
+        console.log("Start update user: ", this.props)
         this.setState({
           redirectTo: "/"
         })

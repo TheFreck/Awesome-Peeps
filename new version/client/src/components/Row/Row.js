@@ -4,7 +4,7 @@ import React from "react";
 // That way we don't have to define them all individually
 const Row = props => (
     <tr>
-        <th scope="row">{props.item.name}</th>
+        <th scope="row">{props.item.item}</th>
         <td>{props.item.price}</td>
         <td>{props.item.url}</td>
         <td>{props.item.occasion}</td>

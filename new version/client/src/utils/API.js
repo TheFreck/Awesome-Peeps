@@ -19,8 +19,25 @@ export default {
     return axios.post("/api/users", userData);
   },
   login: userData => {
-    let userName = JSON.stringify(userData.username);
-    console.log("api login userName: ", userName);
+    let userName = userData.username;
+    userName = userName.replace(".", "-DOT-");
+    userName = userName.replace("@", "-AT-");
     return axios.post("/api/users/" + userName, userData);
+  },
+  getItems: () => {
+    return axios.get("/api/items");
+  },
+  getItem: id => {
+    return axios.get("/api/items/" + id);
+  },
+  // Deletes the book with the given id
+  deleteItem: id => {
+    return axios.delete("/api/items/" + id);
+  },
+  // Saves a book to the database
+  saveItem: itemData => {
+    console.log("API user data: ", itemData);
+    return axios.post("/api/items", itemData);
   }
+
 };
