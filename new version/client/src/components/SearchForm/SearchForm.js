@@ -15,7 +15,7 @@ const SearchForm = props => {
           id="search"
         />
         <button
-          onClick={props.handleFormSubmit(this)}
+          onClick={()=> props.handleFormSubmit(this)}
           className="btn btn-primary mt-3"
         >
           Search
