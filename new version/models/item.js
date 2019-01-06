@@ -23,7 +23,7 @@ const itemSchema = new Schema({
     required: true,
     default: Date.now
   },
-  comment: {
+  comments: {
     type: String,
     required: false,
   }

@@ -18,6 +18,12 @@ export default {
     // console.log("API user data: ", userData);
     return axios.post("/api/users", userData);
   },
+  login: userData => {
+    let userName = userData.username;
+    userName = userName.replace(".", "-DOT-");
+    userName = userName.replace("@", "-AT-");
+    return axios.post("/api/users/" + userName, userData);
+  },
   getItems: () => {
     return axios.get("/api/items");
   },

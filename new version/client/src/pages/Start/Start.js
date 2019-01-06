@@ -105,6 +105,33 @@ class Start extends Component {
     
   };
 
+  login = event => {
+    event.preventDefault();
+    console.log("login: ", event.target)
+    console.log("this.state.user.profile.email: ", this.state.user.profile.email)
+    console.log("this.state.user.login.account_key: ", this.state.user.login.account_key)
+
+    API.login({
+      username: this.state.user.profile.email,
+      password: this.state.user.login.account_key
+    })
+    .then(res => {
+      console.log("login response: ", res);
+      console.log("Start update user: ", this.props)
+      if(Response.status === 200) {
+        this.props.updateUser({
+          loggedIn: true,
+          username: Response.data.username
+        })
+        console.log("Start update user: ", this.props)
+        this.setState({
+          redirectTo: "/"
+        })
+      }
+    })
+    .catch(err => console.log("login err: ", err));
+  }
+
   toggleStart = () => {
     console.log("toggleStart: ", this.state.isUser);
     this.setState({ isUser: !this.state.isUser })
@@ -118,11 +145,10 @@ class Start extends Component {
         {this.state.isUser ? 
           <Container fluid>
             <Login 
-              signupAttempt={this.handleFormSubmit}
               state={this.state}
               handleChangeProfile={this.handleInputChangeProfile}
               handleChangeLogin={this.handleInputChangeLogin}
-              submit={this.handleFormSubmit}
+              submit={this.login}
             /> 
             <Button 
               click={this.toggleStart}

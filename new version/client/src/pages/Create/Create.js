@@ -60,7 +60,10 @@ class Create extends Component {
             occasion: this.state.occasion,
             comments: this.state.comments
           })
-            .then(res => this.getSavedItems())
+            .then(res => {
+              console.log("save item response: ", res);
+              this.getSavedItems();
+            })
             .catch(err => console.log(err));
         }
       };
@@ -88,28 +91,69 @@ render() {
       <div className="container bg-white">
         <h1 className="text-">Create Your Registry</h1>
         <form>
-              <div className="form-group">
-                <label htmlFor="topic"><h4 >Item</h4></label>
-                <input type="text" className="form-control" id="item" aria-describedby="emailHelp" />
+              <div 
+                className="form-group"
+              >
+                <label htmlFor="item"><h4 >Item</h4></label>
+                <input
+                  onChange={this.handleChange} 
+                  name="item" 
+                  value={this.state.item}
+                  type="text" 
+                  className="form-control" id="item" aria-describedby="emailHelp" 
+                />
               </div>
-              <div className="form-group">
-                <label htmlFor="start-year"><h4 >Price</h4></label>
-                <input  type="text" className="form-control" id="price" />
+              <div 
+                className="form-group"
+              >
+                <label htmlFor="price"><h4 >Price</h4></label>
+                <input
+                  onChange={this.handleChange} 
+                  name="price" 
+                  value={this.state.price}
+                  type="text" 
+                  className="form-control" id="price" 
+                />
               </div>
-              <div className="form-group">
-                <label htmlFor="end-year"><h4 >URL</h4></label>
-                <input type="text" className="form-control" id="url" />
+              <div 
+                className="form-group"
+              >
+                <label htmlFor="url"><h4 >URL</h4></label>
+                <input
+                  onChange={this.handleChange} 
+                  name="url" 
+                  value={this.state.url}
+                  type="text" 
+                  className="form-control" id="url" 
+                />
               </div>
-              <div className="form-group">
-                <label htmlFor="end-year"><h4 >Occasion</h4></label>
-                <input type="text" className="form-control" id="occasion" />
+              <div 
+                className="form-group"
+              >
+                <label htmlFor="occasion"><h4 >Occasion</h4></label>
+                <input
+                  onChange={this.handleChange} 
+                  name="occasion" 
+                  value={this.state.occasion}
+                  type="text" 
+                  className="form-control" id="occasion" 
+                />
               </div>
-              <div className="form-group">
-                <label htmlFor="end-year"><h4 >Comments</h4></label>
-                <input type="text" className="form-control" id="comments" />
+              <div 
+                className="form-group"
+              >
+                <label htmlFor="comments"><h4 >Comments</h4></label>
+                <input
+                  onChange={this.handleChange} 
+                  name="comments" 
+                  value={this.state.comments}
+                  type="text" 
+                  className="form-control" id="comments" 
+                />
               </div>
-              <button onClick={this.handleSaveItem} type="submit" className="btn btn-info">Add To Registry</button>
-              <button type="submit" className="btn btn-danger">Share Registry</button>
+              <button onClick={this.handleSaveItem} type="submit" 
+              className="btn btn-info">Add To Registry</button>
+              {/* <button type="submit" className="btn btn-danger">Share Registry</button> */}
 
             </form>
         <br></br>
