@@ -5,27 +5,26 @@ const Login = props => {
     <div>
       <h1>Login</h1>
       <form 
-        onSubmit={()=> props.loginAttempt}>
-        <label htmlFor="username">Email: </label>
+      >
+        <label htmlFor="email">Email: </label>
         <input 
           type="email"
-          name="username"
+          name="email"
           value={props.state.user.profile.email}
-          onChange={props.handleChange}
+          onChange={props.handleChangeProfile}
         />
-        <label htmlFor="password">Password: </label>
+        <label htmlFor="account_key">Password: </label>
         <input
-          type="text"
-          name="password"
+          type="password"
+          name="account_key"
           value={props.state.user.login.account_key}
-          onChange={props.handleChange}
+          onChange={props.handleChangeLogin}
         />
         <input 
           type="submit"
-          value="Login" />
+          value="Login"
+          onClick={props.submit} />
       </form>
-      <p>{props.state.username}</p>
-      <p>{props.state.password}</p>
     </div>
   )
 }

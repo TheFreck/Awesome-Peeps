@@ -17,5 +17,10 @@ export default {
   saveUser: userData => {
     // console.log("API user data: ", userData);
     return axios.post("/api/users", userData);
+  },
+  login: userData => {
+    let userName = JSON.stringify(userData.username);
+    console.log("api login userName: ", userName);
+    return axios.post("/api/users/" + userName, userData);
   }
 };
