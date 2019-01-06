@@ -6,7 +6,7 @@ import React, { Component } from "react";
 // import { Input, TextArea, FormBtn } from "../../components/Form";
 // import Button from "../../components/Button";
 // import SearchForm from "../../components/SearchForm";
-import { Col, Row, Container } from "../../components/Grid";
+import { /* Col, Row, */ Container } from "../../components/Grid";
 import API from "../../utils/API";
 // import Login from "../../components/Login";
 import Signup from "../../components/Signup";
@@ -23,7 +23,8 @@ class Start extends Component {
         name: "",
         pic: ""
       },
-      notes: ""
+      notes: "",
+      sessionId: ""
     }
   };
 
@@ -84,10 +85,25 @@ class Start extends Component {
   handleFormSubmit = event => {
     event.preventDefault();
     console.log("handleFormSubmit event.target: ", event.target);
+    console.log("handleFormSubmit this.state.user: ", this.state.user);
+    this.setState({
+      user: {
+        
+      }
+    })
     API.saveUser(this.state.user)
     .then(res=> {
-      console.log("submit res: ", res)})
-    .catch(err => console.log("submit err: ", err))
+      console.log("submit res: ", res);
+      if(res.data) {
+        this.setState({
+          user: res.data
+        })
+      }else{
+        console.log("signup error");
+      }
+      console.log("finished form submit", this.state.user);
+    })
+    .catch(err => console.log("signup server err: ", err))
   };
 
   buttonClick = input => {

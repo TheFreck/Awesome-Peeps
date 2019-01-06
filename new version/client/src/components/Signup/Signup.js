@@ -14,6 +14,7 @@ const Signup = props => {
           value={props.state.user.profile.name}
           onChange={props.handleChangeProfile}
         />
+        <br/>
         <label htmlFor="email">Email: </label>
         <input 
           type="email"
@@ -22,17 +23,19 @@ const Signup = props => {
           value={props.state.user.profile.email}
           onChange={props.handleChangeProfile}
         />
+        <br/>
         <label htmlFor="account_key">Password: </label>
         <input
-          type="text"
+          type="password"
           val="login"
           name="account_key"
           value={props.state.user.login.account_key}
           onChange={props.handleChangeLogin}
         />
+        <br/>
         <input 
           type="submit"
-          value="Login" 
+          value="Signup" 
           onClick={ props.submit}
         />
       </form>
