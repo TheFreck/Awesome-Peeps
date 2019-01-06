@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Row from "../../components/Row"
 import API from "../../utils/API"
+import RegistryHeader from "../../components/RegistryHeader"
 
 class Create extends Component {
     state = {
@@ -35,19 +36,6 @@ class Create extends Component {
         [name]: value
       });
     }
-
-    
-
-    // handleSaveItem = (id) => {
-    //   API.saveItem(id)
-    //   console.log("click")
-    //   .then(res =>
-    //     this.setState({ savedItems: res.data })
-    //   )
-    //       .catch((err) => {
-    //         console.log(err);
-    //       });
-    //   };
 
       handleSaveItem = event => {
         event.preventDefault();
@@ -84,6 +72,21 @@ class Create extends Component {
       this.setState({ comments: event.target.value });
     }
 
+    renderSaved = () => {
+      return this.state.savedItems.map(save => (
+        <Row
+          _id={save._id}
+          key={save._id}
+          item={save.item}
+          price={save.price}
+          url={save.url}
+          occasion={save.occasion}
+          comments={save.comments}
+          deleteItem={this.deleteItem}
+          getSavedArticles={this.getSavedArticles}
+        />
+      ))
+    }  
 
 
 render() {
@@ -157,11 +160,16 @@ render() {
 
             </form>
         <br></br>
-   <h1>This is what I want</h1>
-    <table className="table">
+    <RegistryHeader />
+    <div>
+    {this.renderSaved()}
+
+    </div>
+   
+   {/* <h1>This is what I want</h1> */}
+    {/* <table className="table">
         <thead>
             <tr>
-          
             <th scope="col">Item</th>
             <th scope="col">Price</th>
             <th scope="col">URL</th>
@@ -170,15 +178,16 @@ render() {
             <th scope="col">Never Mind</th>
             </tr>
         </thead>
-        <tbody>
-          <Row 
+        <tbody> */}
+          {/* <Row 
             item={{
-              item: "basketball",
-              price: 50,
-              url: "www.google.com",
-              occasion: "Christmas",
-              comments: "Get me a nice one"
-            }}
+              item: this.state.item,
+              price: this.state.price,
+              url: this.state.url,
+              occasion: this.state.occasion,
+              comments: this.state.comments
+            }} */}
+            {/* { {this.renderSaved()}
           />
             <tr>
             <th scope="row">item</th>
@@ -205,10 +214,10 @@ render() {
             <td><button>Never Mind</button></td>
             </tr>
         </tbody>
-    </table>
+    </table> */}
 </div>
-    );
+    ); }
   }
-}
+
 
 export default Create;
