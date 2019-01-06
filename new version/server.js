@@ -1,7 +1,8 @@
 const express = require("express");
 const session = require("express-session");
 const logger = require("morgan");
-const passport = require("./config/passport");
+const passportConfig = require("./config/passport");
+const passport = require("passport");
 const mongoose = require("mongoose");
 const routes = require("./routes");
 const app = express();
@@ -14,9 +15,9 @@ app.use(express.json());
 //sessions
 app.use(
   session({
-  secret: "emdki32;q;lf9xbml;LK", //pick a random string to make the hash that is generated secure
-  resave: false, //required
-  saveUninitialized: false //required
+    secret: "emdki32;q;lf9xbml;LK", //pick a random string to make the hash that is generated secure
+    resave: false, //required
+    saveUninitialized: false //required
   })
 )
 app.use( (req, res, next) => {
@@ -24,10 +25,13 @@ app.use( (req, res, next) => {
   return next();
 })
 app.post('/api/user', (req, res) => {
-  console.log('server user signup');
   req.session.username = req.body.username;
   res.end()
 })
+
+// Passport
+app.use(passport.initialize())
+app.use(passport.session()) // calls serializeUser and deserializeUser
 
 // Serve up static assets (usually on heroku)
 if (process.env.NODE_ENV === "production") {

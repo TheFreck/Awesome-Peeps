@@ -4,27 +4,28 @@ import React, { Component } from "react";
 // import { Link } from "react-router-dom";
 // import { List, ListItem } from "../../components/List";
 // import { Input, TextArea, FormBtn } from "../../components/Form";
-// import Button from "../../components/Button";
+import Button from "../../components/Button";
 // import SearchForm from "../../components/SearchForm";
 import { /* Col, Row, */ Container } from "../../components/Grid";
 import API from "../../utils/API";
-// import Login from "../../components/Login";
+import Login from "../../components/Login";
 import Signup from "../../components/Signup";
 
 class Start extends Component {
   state = {
+    isUser: false,
     user: {
       login: {
         uuid: "",
-        account_key: ""
+        account_key: "",
+        sessionId: ""
       },
       profile: {
         email: "",
         name: "",
         pic: ""
       },
-      notes: "",
-      sessionId: ""
+      notes: ""
     }
   };
 
@@ -82,15 +83,10 @@ class Start extends Component {
     });
   };
 
-  handleFormSubmit = event => {
+  signup = event => {
     event.preventDefault();
-    console.log("handleFormSubmit event.target: ", event.target);
-    console.log("handleFormSubmit this.state.user: ", this.state.user);
-    this.setState({
-      user: {
-        
-      }
-    })
+    console.log("signup event.target: ", event.target);
+    console.log("signup this.state.user: ", this.state.user);
     API.saveUser(this.state.user)
     .then(res=> {
       console.log("submit res: ", res);
@@ -98,31 +94,56 @@ class Start extends Component {
         this.setState({
           user: res.data
         })
+        console.log("finished form submit 1: ", this.state.user);
       }else{
         console.log("signup error");
+        console.log("finished form submit 2: ", this.state.user);
       }
-      console.log("finished form submit", this.state.user);
+      console.log("finished form submit 3:  ", this.state.user);
     })
     .catch(err => console.log("signup server err: ", err))
+    
   };
 
-  buttonClick = input => {
-    console.log("buttonClick input: ", input);
+  toggleStart = () => {
+    console.log("toggleStart: ", this.state.isUser);
+    this.setState({ isUser: !this.state.isUser })
   }
 
   
 
   render() {
     return (
-      <Container fluid>
-        <Signup 
-          signupAttempt={this.handleFormSubmit}
-          state={this.state}
-          handleChangeProfile={this.handleInputChangeProfile}
-          handleChangeLogin={this.handleInputChangeLogin}
-          submit={this.handleFormSubmit}
-        />
-      </Container>
+      <div>
+        {this.state.isUser ? 
+          <Container fluid>
+            <Login 
+              signupAttempt={this.handleFormSubmit}
+              state={this.state}
+              handleChangeProfile={this.handleInputChangeProfile}
+              handleChangeLogin={this.handleInputChangeLogin}
+              submit={this.handleFormSubmit}
+            /> 
+            <Button 
+              click={this.toggleStart}
+              name="Signup Instead" />
+          </Container>
+            : 
+          <Container fluid>
+            <Signup 
+              signupAttempt={this.signup}
+              state={this.state}
+              handleChangeProfile={this.handleInputChangeProfile}
+              handleChangeLogin={this.handleInputChangeLogin}
+              submit={this.signup}
+            />
+            <Button 
+              click={this.toggleStart}
+              name="Login Instead" />
+          </Container>
+        }
+      </div>
+        
     );
   }
 }

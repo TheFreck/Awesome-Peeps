@@ -1,5 +1,7 @@
 const db = require("../models");
 
+var uuidv1 = require("uuid/v1");
+
 // Defining methods for the UsersController
 module.exports = {
   findAll: function(req, res) {
@@ -16,6 +18,8 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
   create: function(req, res) {
+    req.body.login.sessionId = req.session.id;
+    req.body.login.uuid = uuidv1();
     db.User
       .create(req.body)
       .then(dbModel => res.json(dbModel))
