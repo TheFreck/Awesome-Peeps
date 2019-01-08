@@ -10,9 +10,13 @@ class Create extends Component {
     item: "",
     price: 0,
     url: "",
+    pic: "",
     occasion: "",
     comments: "",
     users: [],
+    shareWithMe: [],
+    shareWithOthers: [],
+    sharedUser: {},
     user: {
       login: {
         uuid: "",
@@ -74,7 +78,7 @@ class Create extends Component {
     console.log("CLICK")
     if (this.state.item) {
       API.saveItem({
-        name: this.state.user,
+        item: this.state.item,
         price: this.state.price,
         url: this.state.url,
         occasion: this.state.occasion,
@@ -88,21 +92,51 @@ class Create extends Component {
     }
   };
 
+
+
 //Share registry with another user
 shareRegistry = event => {
   event.preventDefault();
   console.log("Share with user")
-  
     API.getUsers({
-      name: this.state.user.profile.name
+      name: this.state.user.profile.name,
+      uuid: this.state.user.login.uuid
     })
       .then(res => {
         console.log("users data: ", res);
         this.getAllUsers();
       })
       .catch(err => console.log(err));
-  
 };
+
+
+
+// selectUser = event => {
+//   event.preventDefault();
+//   console.log("Shared with", event.target.value)
+//   console.log("User Selected")
+
+//     API.getUser({
+//       this.setState({ sharedUser: res.data }) 
+//     })
+// }
+
+
+selectUser = (event) => {
+  // console.log("This is data-id", event.target.getAttribute("data-id"))
+  console.log("This is uuid value", event.target.value)
+  // console.log("This is uuid name", event.target.name)
+  // console.log(this.state.user.login.uuid)
+  API.updateUser({
+      "login.uuid": event.target.value
+    })
+    .then(res =>
+      {console.log("Create: ", res)
+        this.setState({ shareWithOthers: res.data }) }
+    )
+    .catch(err => console.log(err));
+};
+
 
   //Value from URL input
   handleURL = (event) => {
@@ -143,11 +177,12 @@ shareRegistry = event => {
   renderUsers = () => {
     return this.state.users.map(save => (
       <UserList
-      
         _id={save._id}
         key={save._id}
         name={save.profile.name}
-      
+        uuid={save.login.uuid}
+        pic={save.login.pic}
+        selectUser={this.selectUser}
       />
     ))
   }

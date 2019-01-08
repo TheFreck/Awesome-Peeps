@@ -1,25 +1,31 @@
 import axios from "axios";
 
 export default {
-  // Gets all books
+  // Gets all users
   getUsers: () => {
     return axios.get("/api/users");
   },
-  // Gets the book with the given id
+  // Gets the user with the given id
   getUser: id => {
+    console.log("api get user: ", id);
     return axios.get("/api/users/" + id);
   },
-  // Deletes the book with the given id
+  // Deletes the user with the given id
   deleteUser: id => {
     return axios.delete("/api/users/" + id);
   },
-  // Saves a book to the database
+  // Saves a user to the database
   saveUser: userData => {
     // console.log("API user data: ", userData);
     return axios.post("/api/users", userData);
   },
+  //updates user profile with given id
+  updateUser: id => {
+    return axios.put("/api/users/" + id)
+  },
   login: userData => {
     let userName = userData.username;
+    console.log("api userData: ", userData);
     userName = userName.replace(".", "-DOT-");
     userName = userName.replace("@", "-AT-");
     return axios.post("/api/users/" + userName, userData);
@@ -30,11 +36,11 @@ export default {
   getItem: id => {
     return axios.get("/api/items/" + id);
   },
-  // Deletes the book with the given id
+  // Deletes the item with the given id
   deleteItem: id => {
     return axios.delete("/api/items/" + id);
   },
-  // Saves a book to the database
+  // Saves an item to the database
   saveItem: itemData => {
     console.log("API user data: ", itemData);
     return axios.post("/api/items", itemData);
