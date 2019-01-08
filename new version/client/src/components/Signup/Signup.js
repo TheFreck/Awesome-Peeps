@@ -34,6 +34,8 @@ const Signup = props => {
         />
         <br />
         <input type="submit" value="Signup" onClick={props.submit} />
+        <br />
+        <input type="submit" value="Signup" onClick={props.submit} />
       </form>
     </div>
   );
