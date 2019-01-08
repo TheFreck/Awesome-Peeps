@@ -6,6 +6,7 @@ import Start from "./pages/Start";
 import Create from "./pages/Create";
 
 const App = () => (
+
   <Router>
     <div>
       <Nav />

@@ -16,6 +16,7 @@ app.use(express.json());
 app.use(
   session({
     secret: "emdki32;q;lf9xbml;LK", //pick a random string to make the hash that is generated secure
+    // store: new MongoStore({ mongooseConnection: dbConnection }),
     resave: false, //required
     saveUninitialized: false //required
   })

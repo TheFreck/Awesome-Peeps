@@ -10,15 +10,15 @@ const Login = props => {
         <input 
           type="email"
           name="email"
-          value={props.state.user.profile.email}
-          onChange={props.handleChangeProfile}
+          value={props.state.user.email}
+          onChange={props.handleChange}
         />
         <label htmlFor="account_key">Password: </label>
         <input
           type="password"
           name="account_key"
-          value={props.state.user.login.account_key}
-          onChange={props.handleChangeLogin}
+          value={props.state.user.account_key}
+          onChange={props.handleChange}
         />
         <input 
           type="submit"
