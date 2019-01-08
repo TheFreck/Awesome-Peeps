@@ -17,7 +17,7 @@ const SignedInLinks = () => {
         <NavLink to="/Friends"> Friends List</NavLink>
       </li>
       <li>
-        <NavLink to="/" className="btn btn-floating yellow darken-2">
+        <NavLink to="/Profile" className="btn btn-floating yellow darken-2">
           GB
         </NavLink>
       </li>
