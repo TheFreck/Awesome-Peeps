@@ -35,6 +35,14 @@ const userSchema = new Schema({
       pic: {
         type: String,
         required: false
+      },
+      shareWithMe: {
+        type: Array,
+        required: false
+      },
+      shareWithOthers: {
+        type: Array,
+        required: false
       }
     }
   },

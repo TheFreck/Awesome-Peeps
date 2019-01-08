@@ -36,8 +36,9 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
   update: (req, res) => {
+    
     db.User
-      .findOneAndUpdate({ _id: req.params.id }, req.body)
+      .findOneAndUpdate({uuid: req.params.id }, req.body)
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
@@ -47,5 +48,8 @@ module.exports = {
       .then(dbModel => dbModel.remove())
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
+  },
+  grabInfoFromButton: (req, res) => {
+    console.log("grabbed it: ", req.body);
   }
 };
