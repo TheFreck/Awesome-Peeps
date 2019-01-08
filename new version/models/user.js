@@ -1,50 +1,43 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
-var uuidv1 = require("uuid/v1");
-var bcrypt = require("bcryptjs");
+const uuidv1 = require("uuid/v1");
+const bcrypt = require("bcryptjs");
+
 
 const userSchema = new Schema({
-  login: {
-    type: {
-      uuid: {
-        type: String,
-        required: false,
-        default: uuidv1()
-      },
-      account_key: {
-        type: String,
-        required: false
-      },
-      sessionId: {
-        type: String,
-        required: false,
-        default: "asdf"
-      }
-    }
+  uuid: {
+    type: String,
+    required: false,
+    default: uuidv1()
   },
-  profile: {
-    type: {
-      email: {
-        type: String,
-        required: false
-      },
-      name: {
-        type: String,
-        required: false
-      },
-      pic: {
-        type: String,
-        required: false
-      },
-      shareWithMe: {
-        type: Array,
-        required: false
-      },
-      shareWithOthers: {
-        type: Array,
-        required: false
-      }
-    }
+  account_key: {
+    type: String,
+    required: false
+  },
+  sessionId: {
+    type: String,
+    required: false,
+    default: "asdf"
+  },
+  email: {
+    type: String,
+    required: false
+  },
+  name: {
+    type: String,
+    required: false
+  },
+  pic: {
+    type: String,
+    required: false
+  },
+  shareWithMe: {
+    type: [],
+    required: false
+  },
+  shareWithOthers: {
+    type: [],
+    required: false
   },
   notes: {
     type: String,
@@ -53,9 +46,10 @@ const userSchema = new Schema({
 })
 
 userSchema.methods = {
-  checkPassword: inputPassword => {
-    console.log("this.login.account_key: ", this.login.account_key);
-    return bcrypt.compareSync(inputPassword, this.login.account_key)
+  checkPassword: (inputPassword, checkPassword) => {
+    console.log("inputPassword: ", inputPassword);
+    console.log("this.login.account_key: ", checkPassword);
+    return bcrypt.compareSync(inputPassword, checkPassword)
   },
   hashPassword: plainTextPassword => {
     return bcrypt.hashSync(plainTextPassword, 10)
@@ -64,12 +58,12 @@ userSchema.methods = {
 
 userSchema.pre('save', function (next) {
   // console.log("model this: ", this);
-  if (!this.login.account_key) {
+  if (!this.account_key) {
     console.log('models/user.js =======NO PASSWORD PROVIDED=======')
     next()
   } else {
     console.log('models/user.js hashPassword in pre save');
-    this.login.account_key = this.hashPassword(this.login.account_key)
+    this.account_key = this.hashPassword(this.account_key)
     console.log("model account_key: ", this);
     next()
   }

@@ -10,21 +10,22 @@ import { /* Col, Row, */ Container } from "../../components/Grid";
 import API from "../../utils/API";
 import Login from "../../components/Login";
 import Signup from "../../components/Signup";
+import Create from "../../pages/Create";
+import LogoutBtn from "../../components/LogoutBtn";
 
 class Start extends Component {
   state = {
     isUser: false,
     user: {
-      login: {
-        uuid: "",
-        account_key: "",
-        sessionId: ""
-      },
-      profile: {
-        email: "",
-        name: "",
-        pic: ""
-      },
+      uuid: "",
+      account_key: "",
+      sessionId: "",
+      verified: false,
+      email: "",
+      name: "",
+      pic: "",
+      shareWithMe: [],
+      shareWithOthers: [],
       notes: ""
     }
   };
@@ -57,31 +58,29 @@ class Start extends Component {
   // };
 
 
-  handleInputChangeLogin = (event) => {
+  handleInputChange = (event) => {
     const { name, value } = event.target;
     this.setState({
       user: {
-        ...this.state.user,
-        login: {
-          ...this.state.user.login,
+          ...this.state.user,
           [name]: value
         }
       }
-    });
+    );
   };
 
-  handleInputChangeProfile = (event) => {
-    const { name, value } = event.target;
-    this.setState({
-      user: {
-        ...this.state.user,
-        profile: {
-          ...this.state.user.profile,
-          [name]: value
-        }
-      }
-    });
-  };
+  // handleInputChangeProfile = (event) => {
+  //   const { name, value } = event.target;
+  //   this.setState({
+  //     user: {
+  //       ...this.state.user,
+  //       profile: {
+  //         ...this.state.user.profile,
+  //         [name]: value
+  //       }
+  //     }
+  //   });
+  // };
 
   signup = event => {
     event.preventDefault();
@@ -94,12 +93,12 @@ class Start extends Component {
         this.setState({
           user: res.data
         })
-        console.log("finished form submit 1: ", this.state.user);
+        console.log("finished form submit true: ", this.state.user);
       }else{
         console.log("signup error");
-        console.log("finished form submit 2: ", this.state.user);
+        console.log("finished form submit false: ", this.state.user);
       }
-      console.log("finished form submit 3:  ", this.state.user);
+      console.log("finished form submit anyway:  ", this.state.user);
     })
     .catch(err => console.log("signup server err: ", err))
     
@@ -108,28 +107,31 @@ class Start extends Component {
   login = event => {
     event.preventDefault();
     console.log("login: ", event.target)
-    console.log("this.state.user.profile.email: ", this.state.user.profile.email)
-    console.log("this.state.user.login.account_key: ", this.state.user.login.account_key)
+    console.log("this.state.user.email: ", this.state.user.email)
+    console.log("this.state.user.account_key: ", this.state.user.account_key)
 
     API.login({
-      username: this.state.user.profile.email,
-      password: this.state.user.login.account_key
+      username: this.state.user.email,
+      password: this.state.user.account_key
     })
     .then(res => {
-      console.log("login response: ", res);
-      console.log("Start update user: ", this.props)
-      if(Response.status === 200) {
-        this.props.updateUser({
-          loggedIn: true,
-          username: Response.data.username
-        })
-        console.log("Start update user: ", this.props)
+      if(res.data) {
         this.setState({
-          redirectTo: "/"
-        })
+          user: {
+            ...this.state.user,
+              verified: true
+            }
+          }
+        )
+      }else{
+        console.log("incorrect password")
       }
     })
-    .catch(err => console.log("login err: ", err));
+    .catch(err => console.log("login err err: ", err));
+  }
+
+  logout = event => {
+
   }
 
   toggleStart = () => {
@@ -140,37 +142,50 @@ class Start extends Component {
   
 
   render() {
-    return (
-      <div>
-        {this.state.isUser ? 
-          <Container fluid>
-            <Login 
-              state={this.state}
-              handleChangeProfile={this.handleInputChangeProfile}
-              handleChangeLogin={this.handleInputChangeLogin}
-              submit={this.login}
-            /> 
-            <Button 
-              click={this.toggleStart}
-              name="Signup Instead" />
-          </Container>
-            : 
-          <Container fluid>
-            <Signup 
-              signupAttempt={this.signup}
-              state={this.state}
-              handleChangeProfile={this.handleInputChangeProfile}
-              handleChangeLogin={this.handleInputChangeLogin}
-              submit={this.signup}
-            />
-            <Button 
-              click={this.toggleStart}
-              name="Login Instead" />
-          </Container>
-        }
-      </div>
-        
-    );
+    if(this.state.isUser && this.state.user.verified){
+      return (
+        <Container fluid>
+          <LogoutBtn
+            onClick={this.logout} 
+          />
+          <Create
+            state={this.state} 
+          />
+        </Container>
+      )
+    }else{
+      return (
+        <div>
+          {this.state.isUser ? 
+            <Container fluid>
+              <Login 
+                state={this.state}
+                handleChange={this.handleInputChange}
+                submit={this.login}
+              /> 
+              <Button 
+                click={this.toggleStart}
+                name="Signup Instead" 
+              />
+            </Container>
+              : 
+            <Container fluid>
+              <Signup 
+                signupAttempt={this.signup}
+                state={this.state}
+                handleChange={this.handleInputChange}
+                submit={this.signup}
+              />
+              <Button 
+                click={this.toggleStart}
+                name="Login Instead" 
+              />
+            </Container>
+          }
+        </div>
+          
+      );
+    }
   }
 }
 

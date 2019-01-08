@@ -7,6 +7,7 @@ import Create from "./pages/Create";
 import Share from "./pages/Share"
 
 const App = () => (
+
   <Router>
     <div>
       <Nav />
