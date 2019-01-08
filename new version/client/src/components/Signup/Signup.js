@@ -5,26 +5,25 @@ const Signup = props => {
   return (
     <div>
       <h1>Signup</h1>
-      <form 
-      >
+      <form>
         <label htmlFor="name">Screen Name: </label>
-        <input 
+        <input
           type="text"
           data-val="profile"
           name="name"
           value={props.state.user.profile.name}
           onChange={props.handleChangeProfile}
         />
-        <br/>
+        <br />
         <label htmlFor="email">Email: </label>
-        <input 
+        <input
           type="email"
           data-val="profile"
           name="email"
           value={props.state.user.profile.email}
           onChange={props.handleChangeProfile}
         />
-        <br/>
+        <br />
         <label htmlFor="account_key">Password: </label>
         <input
           type="password"
@@ -33,17 +32,11 @@ const Signup = props => {
           value={props.state.user.login.account_key}
           onChange={props.handleChangeLogin}
         />
-        <br/>
-        <input 
-          type="submit"
-          value="Signup" 
-          onClick={ props.submit}
-        />
+        <br />
+        <input type="submit" value="Signup" onClick={props.submit} />
       </form>
     </div>
-  )
-}
+  );
+};
 
 export default Signup;
-
-

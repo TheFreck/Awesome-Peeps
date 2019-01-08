@@ -4,10 +4,9 @@ const Login = props => {
   return (
     <div>
       <h1>Login</h1>
-      <form 
-      >
+      <form>
         <label htmlFor="email">Email: </label>
-        <input 
+        <input
           type="email"
           name="email"
           value={props.state.user.profile.email}
@@ -20,15 +19,10 @@ const Login = props => {
           value={props.state.user.login.account_key}
           onChange={props.handleChangeLogin}
         />
-        <input 
-          type="submit"
-          value="Login"
-          onClick={props.submit} />
+        <input type="submit" value="Login" onClick={props.submit} />
       </form>
     </div>
-  )
-}
+  );
+};
 
 export default Login;
-
-
