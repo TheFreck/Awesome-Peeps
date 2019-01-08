@@ -28,6 +28,7 @@ const itemSchema = new Schema({
     required: false,
   }
   
+  
 })
 
 const Item = mongoose.model("Item", itemSchema);
