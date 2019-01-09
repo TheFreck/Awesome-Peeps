@@ -6,19 +6,33 @@ const Signup = props => {
     <div>
       <h1>Signup</h1>
       <form>
-        <label htmlFor="name">Screen Name: </label>
+        <label htmlFor="screenName">Screen Name: </label>
         <input
           type="text"
-          data-val="profile"
-          name="name"
+          name="screenName"
           value={props.state.user.name}
+          onChange={props.handleChange}
+        />
+        <br />
+        <label htmlFor="firstName">First Name: </label>
+        <input
+          type="text"
+          name="firstName"
+          value={props.state.user.firstName}
+          onChange={props.handleChange}
+        />
+        <br />
+        <label htmlFor="lastName">Last Name: </label>
+        <input
+          type="text"
+          name="lastName"
+          value={props.state.user.lastName}
           onChange={props.handleChange}
         />
         <br />
         <label htmlFor="email">Email: </label>
         <input
           type="email"
-          data-val="profile"
           name="email"
           value={props.state.user.email}
           onChange={props.handleChange}
@@ -27,7 +41,6 @@ const Signup = props => {
         <label htmlFor="account_key">Password: </label>
         <input
           type="password"
-          val="login"
           name="account_key"
           value={props.state.user.account_key}
           onChange={props.handleChange}

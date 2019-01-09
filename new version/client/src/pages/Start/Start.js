@@ -13,50 +13,28 @@ import Signup from "../../components/Signup";
 import Create from "../../pages/Create";
 import LogoutBtn from "../../components/LogoutBtn";
 
+const initialState = {
+  isUser: false,
+  user: {
+    uuid: "",
+    account_key: "",
+    sessionId: "",
+    email: "",
+    firstName: "",
+    lastName: "",
+    pic: "",
+    shareWithMe: [],
+    shareWithOthers: [],
+    notes: ""
+  }
+};
+
 class Start extends Component {
-  state = {
-    isUser: false,
-    user: {
-      uuid: "",
-      account_key: "",
-      sessionId: "",
-      verified: false,
-      email: "",
-      name: "",
-      pic: "",
-      shareWithMe: [],
-      shareWithOthers: [],
-      notes: ""
-    }
-  };
+  state = initialState;
 
   componentDidMount() {
-    // this.loadUsers();
     console.log("mounted"); 
   }
-
-  // loadUsers = () => {
-  //   API.getUsers()
-  //     .then(res =>
-  //       this.setState({ user: {
-  //         login: {
-  //           account_key: "F4U4"
-  //         },
-  //         profile: {
-  //           email: "a@b.com",
-  //           name: "Howard"
-  //         }
-  //       } })
-  //     )
-  //     .catch(err => console.log(err));
-  // };
-
-  // deleteBook = id => {
-  //   API.deleteBook(id)
-  //     .then(res => this.loadUsers())
-  //     .catch(err => console.log(err));
-  // };
-
 
   handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -69,23 +47,11 @@ class Start extends Component {
     );
   };
 
-  // handleInputChangeProfile = (event) => {
-  //   const { name, value } = event.target;
-  //   this.setState({
-  //     user: {
-  //       ...this.state.user,
-  //       profile: {
-  //         ...this.state.user.profile,
-  //         [name]: value
-  //       }
-  //     }
-  //   });
-  // };
-
   signup = event => {
     event.preventDefault();
     console.log("signup event.target: ", event.target);
     console.log("signup this.state.user: ", this.state.user);
+
     API.saveUser(this.state.user)
     .then(res=> {
       console.log("submit res: ", res);
@@ -115,11 +81,12 @@ class Start extends Component {
       password: this.state.user.account_key
     })
     .then(res => {
+      console.log("Start res: ", res.data);
       if(res.data) {
         this.setState({
           user: {
             ...this.state.user,
-              verified: true
+            uuid: res.data.uuid
             }
           }
         )
@@ -131,7 +98,10 @@ class Start extends Component {
   }
 
   logout = event => {
-
+    event.preventDefault();
+    console.log("event.target: ", event.target);
+    this.setState(initialState)
+    console.log("this.state: ", this.state);
   }
 
   toggleStart = () => {
@@ -142,11 +112,11 @@ class Start extends Component {
   
 
   render() {
-    if(this.state.isUser && this.state.user.verified){
+    if(this.state.user.uuid){
       return (
         <Container fluid>
           <LogoutBtn
-            onClick={this.logout} 
+            logout={this.logout} 
           />
           <Create
             state={this.state} 

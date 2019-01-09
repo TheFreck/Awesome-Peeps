@@ -10,8 +10,6 @@ const UserList = props =>
         </div>
         <hr></hr>
     </div>
-    <hr />
-  </div>
-);
+
 
 export default UserList;
