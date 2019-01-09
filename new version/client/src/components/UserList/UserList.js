@@ -10,6 +10,8 @@ const UserList = props => (
         {props.name}{" "}
       </button>
     </div>
+  </div>
+);
   
 
 
