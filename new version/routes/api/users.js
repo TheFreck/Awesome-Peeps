@@ -10,6 +10,7 @@ router.route("/")
 router
   .route("/:id")
   .post(usersController.login)
+  .get(usersController.grabInfoFromButton)
   .put(usersController.update)
   .delete(usersController.remove);
 
