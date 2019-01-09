@@ -1,96 +1,88 @@
 import React, { Component } from "react";
 import UserList from "../../components/UserList"
-import DeleteBtn from "../../components/DeleteBtn";
 import Jumbotron from "../../components/Jumbotron";
 import API from "../../utils/API";
-import { Col, Row, Container } from "../../components/Grid";
+import Row from "../../components/Row";
+import Nav from "../../components/Nav";
+
 
 
 class Friends extends Component {
   state = {
-   //Set state for buttons that will be generated
-   FriendButtons = []
-  };
-
-  componentDidMount() {
-    this.getFriends();
+    users: [],
+    user: {
+      uuid: "",
+      account_key: "",
+      sessionId: "",
+      email: "",
+      name: "",
+      pic: "",
+      shareWithMe: [],
+      shareWithOthers: [],
+      myItems: [],
+      notes: ""
+    }
   }
 
-  //Fetch user information from the API 
-  getFriends = () => {
-    API.getFriends()
-      .then(res =>
-        this.setState({ savedItems: res.data})
-      )
-      .catch(err => console.log(err));
+  // componentDidMount() {
+  //   this.getUsers();
+  // }
+
+//Find saved users
+getAllUsers = () => {
+  API.getUsers()
+    .then(res =>
+      this.setState({ users: res.data }) 
+    )
+    .catch(err => console.log(err));
   };
 
-  selectUser = (event) => {
-    // console.log("This is data-id", event.target.getAttribute("data-id"))
-    console.log("This is uuid value", event.target.value)
-    // console.log("This is uuid name", event.target.name)
-    // console.log(this.state.user.login.uuid)
-    API.updateUser({
-        "login.uuid": event.target.value
-      })
-      .then(res =>
-        {console.log("Create: ", res)
-          this.setState({ shareWithOthers: res.data }) }
-      )
-      .catch(err => console.log(err));
+selectUser = (event) => {
+  // console.log("This is data-id", event.target.getAttribute("data-id"))
+  console.log("This is uuid value", event.target.value)
+  // console.log("This is uuid name", event.target.name)
+  // console.log(this.state.user.login.uuid)
+  API.updateUser({
+      "login.uuid": event.target.value
+    })
+    .then(res =>
+      {console.log("Create: ", res)
+        this.setState({ shareWithOthers: res.data }) }
+    )
+    .catch(err => console.log(err));
   };
-//Need onclick event 
 
-//Render components: Navbar, title, friends buttons, container?
-  render() {
-    return (
-      <Container fluid>
-        <Row>
-          <Col size="s-12">
-            <Jumbotron>
-              <h1>Greedy Bastard List</h1>
-              <p>Logo Goes Here</p>
-            </Jumbotron>
-          </Col>
-        </Row>
+renderUsers = () => {
+  return this.state.users.map(save => (
+    <UserList
+      _id={save._id}
+      key={save._id}
+      name={save.name}
+      uuid={save.uuid}
+      pic={save.pic}
+      selectUser={this.selectUser}
+    />
+  ))
+  }
 
-        <Row>
-          <Col size="s12">
-            <h2 class="center-align">WHICH GREEDY BASTARD DO YOU WANT TO BUY FOR?</h2>
-          </Col>
-        </Row>
-{/* Render User Buttons */}
-        <Row>
-        <UserList />
-          {/* <Col size="s12">
-            <button data-uuid={{uuid}} class="waves-effect waves-light btn-large red seeGifts">{{name}}</button>
-          </Col> */}
-        </Row> 
-      </Container>
+render() {
+  return (
+    <div className="container bg-white">
+      <div>
+        <h1 className="logo">Logo Goes Hereeeeee!</h1>
+      </div>
+      
+      <div> 
+        <h1>WHICH GREEDY BASTARD DO YOU WANT TO BUY FOR?</h1>
+      </div>
 
+      <div>
+        {this.renderUsers()}
+      </div>
+      
+    </div>
     );
   }
 }
 
-{/* <div class="container">
-  <div class="row">
-    <div class="col-12">
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col s12">
-      <h2 class="center-align">WHICH GREEDY BASTARD DO YOU WANT TO BUY FOR?</h2>
-      <br>
-      <div class="row">
-        <div class="col s12 center-align">
-          {{#each user}}
-          <button data-uuid={{uuid}} class="waves-effect waves-light btn-large red seeGifts">{{name}}</button>
-          {{/each}}
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-</div> */}
 export default Friends;

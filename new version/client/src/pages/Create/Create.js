@@ -259,7 +259,7 @@ selectUser = (event) => {
           {this.renderSaved()}
         </div>
         <h4>Who do you want to share your list with?</h4>
-        <UserList />
+          <UserList />
         <div>
           {this.renderUsers()}
         </div>
