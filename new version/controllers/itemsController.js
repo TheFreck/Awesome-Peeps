@@ -14,9 +14,18 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
   create: function(req, res) {
-    db.Item.create(req.body)
-      .then(dbModel => res.json(dbModel))
+    //create item then takes the item id and adds it to the users myItems column
+    db.Item
+      .create(req.body)
+      .then((dbModel) => {
+        db.User.findOneAndUpdate({_id: req.userId}, {$push: { myItems: dbModel._id}}, { new: true })
+        .then((dbModel) => {
+          res.json(dbModel)          
+        })
+        .catch(err => res.status(422).json(err));
+      })
       .catch(err => res.status(422).json(err));
+
   },
   update: function(req, res) {
     db.Item.findOneAndUpdate({ _id: req.params.id }, req.body)
