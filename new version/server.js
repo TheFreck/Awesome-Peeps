@@ -20,19 +20,19 @@ app.use(
     resave: false, //required
     saveUninitialized: false //required
   })
-)
-app.use( (req, res, next) => {
+);
+app.use((req, res, next) => {
   // console.log("\n*****\n\nreq.session: ", req.session.id + "\n*****\n");
   return next();
-})
-app.post('/api/user', (req, res) => {
+});
+app.post("/api/user", (req, res) => {
   req.session.username = req.body.username;
-  res.end()
-})
+  res.end();
+});
 
 // Passport
-app.use(passport.initialize())
-app.use(passport.session()) // calls serializeUser and deserializeUser
+app.use(passport.initialize());
+app.use(passport.session()); // calls serializeUser and deserializeUser
 
 // Serve up static assets (usually on heroku)
 if (process.env.NODE_ENV === "production") {
@@ -42,7 +42,9 @@ if (process.env.NODE_ENV === "production") {
 app.use(routes);
 
 // Connect to the Mongo DB
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/greedyBastages");
+mongoose.connect(
+  process.env.MONGODB_URI || "mongodb://localhost/greedyBastages"
+);
 
 // Start the API server
 app.listen(PORT, function() {
