@@ -3,33 +3,37 @@ const db = require("../models");
 // Defining methods for the ItemsController
 module.exports = {
   findAll: function(req, res) {
-    db.Item
-      .find(req.query)
+    db.Item.find(req.query)
       .sort({ date: -1 })
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
   findById: function(req, res) {
-    db.Item
-      .findById(req.params.id)
+    db.Item.findById(req.params.id)
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
   create: function(req, res) {
+    //create item then takes the item id and adds it to the users myItems column
     db.Item
       .create(req.body)
-      .then(dbModel => res.json(dbModel))
+      .then((dbModel) => {
+        db.User.findOneAndUpdate({_id: req.userId}, {$push: { myItems: dbModel._id}}, { new: true })
+        .then((dbModel) => {
+          res.json(dbModel)          
+        })
+        .catch(err => res.status(422).json(err));
+      })
       .catch(err => res.status(422).json(err));
+
   },
   update: function(req, res) {
-    db.Item
-      .findOneAndUpdate({ _id: req.params.id }, req.body)
+    db.Item.findOneAndUpdate({ _id: req.params.id }, req.body)
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
   remove: function(req, res) {
-    db.Item
-      .findById({ _id: req.params.id })
+    db.Item.findById({ _id: req.params.id })
       .then(dbModel => dbModel.remove())
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
