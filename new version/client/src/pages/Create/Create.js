@@ -174,7 +174,7 @@ selectUser = (event) => {
     return this.state.users.map(save => (
       <UserList
         _id={save._id}
-        key={save._id}
+        key={save._id}uninsta
         name={save.name}
         uuid={save.uuid}
         pic={save.pic}

@@ -2,8 +2,9 @@ import React, { Component } from "react";
 import UserList from "../../components/UserList"
 import Jumbotron from "../../components/Jumbotron";
 import API from "../../utils/API";
-import Row from "../../components/Row";
+import { Col, Row, Container } from "../../components/Grid";
 import Nav from "../../components/Nav";
+import MainLogo from "../../components/MainLogo";
 
 
 
@@ -67,19 +68,26 @@ renderUsers = () => {
 
 render() {
   return (
+  
     <div className="container bg-white">
-      <div>
-        <h1 className="logo">Logo Goes Hereeeeee!</h1>
+      <div class="Row">
+        <div class="col s12 center-align top:60px">
+          <MainLogo />
+        </div>
       </div>
-      
-      <div> 
-        <h1>WHICH GREEDY BASTARD DO YOU WANT TO BUY FOR?</h1>
+      <br></br>
+      <div class="Row">
+        <div class="col s12">
+          <h2 class="center-align">WHICH GREEDY BASTARD DO YOU WANT TO BUY FOR?</h2>
+        </div> 
+      </div>
+      <div class="Row">
+        <div class="col s12 center-align">
+          <h3>UsEr bUtToNs gO heRe</h3>
+          {this.renderUsers()}
+        </div>
       </div>
 
-      <div>
-        {this.renderUsers()}
-      </div>
-      
     </div>
     );
   }
