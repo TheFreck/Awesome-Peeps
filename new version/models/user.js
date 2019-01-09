@@ -31,14 +31,24 @@ const userSchema = new Schema({
     type: String,
     required: false
   },
-  shareWithMe: {
-    type: [],
-    required: false
-  },
-  shareWithOthers: {
-    type: [],
-    required: false
-  },
+  shareWithMe: [{
+    // Store ObjectIds in the array
+    type: Schema.Types.ObjectId,
+    // The ObjectIds will refer to the ids in the Note model
+    ref: "User"
+  }],
+  shareWithOthers: [{
+    // Store ObjectIds in the array
+    type: Schema.Types.ObjectId,
+    // The ObjectIds will refer to the ids in the Note model
+    ref: "User"
+  }],
+  myItems: [{
+    // Store ObjectIds in the array
+    type: Schema.Types.ObjectId,
+    // The ObjectIds will refer to the ids in the Note model
+    ref: "Item"
+  }],
   notes: {
     type: String,
     required: false
@@ -72,3 +82,8 @@ userSchema.pre('save', function (next) {
 const User = mongoose.model("User", userSchema);
 
 module.exports = User;
+
+
+// *********************************************************************************************
+// *********************************************************************************************
+
