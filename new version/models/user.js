@@ -23,7 +23,15 @@ const userSchema = new Schema({
     type: String,
     required: false
   },
-  name: {
+  screenName: {
+    type: String,
+    required: false
+  },
+  firstName: {
+    type: String,
+    required: false
+  },
+  lastName: {
     type: String,
     required: false
   },

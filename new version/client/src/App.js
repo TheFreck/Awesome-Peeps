@@ -2,11 +2,15 @@ import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import NoMatch from "./pages/NoMatch";
 import Nav from "./components/Nav/Nav";
-// import Start from "./pages/Start";
+import Start from "./pages/Start";
 import Create from "./pages/Create";
+<<<<<<< HEAD
 import Signup from "./components/Signup";
 import Login from "./components/Login";
 
+=======
+// import Profile from "./pages/Profile";
+>>>>>>> 7f18fffc45c65729c29a1ecd4de5d6d72ace6fea
 // import Share from "./pages/Share";
 
 //Navigation imports ***PENDING PAGES CREATION***
@@ -21,9 +25,15 @@ const App = () => (
       <Nav />
       <Switch>
         {/* <Route exact path="/Landing" component={Landing} /> */}
+<<<<<<< HEAD
         <Route exact path="/Create" component={Create} />
         <Route path="/Signup" component={Signup} />
         <Route path="/Signin" component={Login} />
+=======
+        <Route exact path="/" component={Start} />
+        <Route exact path="/create" component={Create} />
+        {/* <Route exact path="/profile" component={Profile} /> */}
+>>>>>>> 7f18fffc45c65729c29a1ecd4de5d6d72ace6fea
         {/* //Navigation imports ***PENDING PAGES CREATION*** */}
         {/* <Route exact path="/Shopping" component={Shopping} />
         <Route exact path="/Friends" component={Friends} />
