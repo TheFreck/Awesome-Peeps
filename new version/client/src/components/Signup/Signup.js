@@ -14,57 +14,56 @@ const Signup = props => {
             value={props.state.user.name}
             onChange={props.handleChange}
           />
-          <div className="input-field" />
-
-          <label htmlFor="firstName">First Name: </label>
-          <input
-            type="text"
-            name="firstName"
-            value={props.state.user.firstName}
-            onChange={props.handleChange}
-          />
           <div className="input-field">
-            <label htmlFor="lastName">Last Name: </label>
+            <label htmlFor="firstName">First Name: </label>
             <input
               type="text"
-              name="lastName"
-              value={props.state.user.lastName}
+              name="firstName"
+              value={props.state.user.firstName}
               onChange={props.handleChange}
             />
             <div className="input-field">
-              <label htmlFor="email">Email: </label>
+              <label htmlFor="lastName">Last Name: </label>
               <input
-                type="email"
-                name="email"
-                value={props.state.user.email}
+                type="text"
+                name="lastName"
+                value={props.state.user.lastName}
                 onChange={props.handleChange}
               />
               <div className="input-field">
-                <label htmlFor="account_key">Password: </label>
+                <label htmlFor="email">Email: </label>
                 <input
-                  type="password"
-                  name="account_key"
-                  value={props.state.user.account_key}
+                  type="email"
+                  name="email"
+                  value={props.state.user.email}
                   onChange={props.handleChange}
                 />
                 <div className="input-field">
-                  <label htmlFor="account_key">Confirm Password: </label>
+                  <label htmlFor="account_key">Password: </label>
                   <input
                     type="password"
-                    name="account_key2"
-                    value={props.state.user.account_key2}
+                    name="account_key"
+                    value={props.state.user.account_key}
                     onChange={props.handleChange}
                   />
-                  <button
-                    className="btn pink lighten-1 z-depth-0"
-                    input
-                    type="submit"
-                    value="Signup"
-                    onClick={props.submit}
-                  >
-                    Sign Up
-                  </button>
-                  <input type="submit" value="Signup" onClick={props.submit} />
+                  <div className="input-field">
+                    <label htmlFor="account_key">Confirm Password: </label>
+                    <input
+                      type="password"
+                      name="account_key2"
+                      value={props.state.user.account_key2}
+                      onChange={props.handleChange}
+                    />
+                    <button
+                      className="btn pink lighten-1 z-depth-0"
+                      input
+                      type="submit"
+                      value="Signup"
+                      onClick={props.submit}
+                    >
+                      Sign Up
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
