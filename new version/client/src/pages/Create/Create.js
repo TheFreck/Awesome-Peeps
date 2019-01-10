@@ -14,20 +14,16 @@ class Create extends Component {
     occasion: "",
     comments: "",
     users: [],
-    shareWithMe: [],
-    shareWithOthers: [],
-    sharedUser: {},
     user: {
-      login: {
-        uuid: "",
-        account_key: "",
-        sessionId: ""
-      },
-      profile: {
-        email: "",
-        name: "",
-        pic: ""
-      },
+      uuid: "",
+      account_key: "",
+      sessionId: "",
+      email: "",
+      name: "",
+      pic: "",
+      shareWithMe: [],
+      shareWithOthers: [],
+      myItems: [],
       notes: ""
     }
   }
@@ -99,8 +95,8 @@ shareRegistry = event => {
   event.preventDefault();
   console.log("Share with user")
     API.getUsers({
-      name: this.state.user.profile.name,
-      uuid: this.state.user.login.uuid
+      name: this.state.name,
+      uuid: this.state.uuid
     })
       .then(res => {
         console.log("users data: ", res);
@@ -179,9 +175,9 @@ selectUser = (event) => {
       <UserList
         _id={save._id}
         key={save._id}
-        name={save.profile.name}
-        uuid={save.login.uuid}
-        pic={save.login.pic}
+        name={save.name}
+        uuid={save.uuid}
+        pic={save.pic}
         selectUser={this.selectUser}
       />
     ))

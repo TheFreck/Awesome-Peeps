@@ -1,7 +1,7 @@
 import React from "react";
 
 const Signup = props => {
-  console.log("signup props: ", props);
+  // console.log("signup props: ", props);
   return (
     <div>
       <h1>Signup</h1>
@@ -46,7 +46,13 @@ const Signup = props => {
           onChange={props.handleChange}
         />
         <br />
-        <input type="submit" value="Signup" onClick={props.submit} />
+        <label htmlFor="account_key">Confirm Password: </label>
+        <input
+          type="password"
+          name="account_key2"
+          value={props.state.user.account_key2}
+          onChange={props.handleChange}
+        />
         <br />
         <input type="submit" value="Signup" onClick={props.submit} />
       </form>

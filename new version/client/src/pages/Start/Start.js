@@ -10,35 +10,42 @@ import { /* Col, Row, */ Container } from "../../components/Grid";
 import API from "../../utils/API";
 import Login from "../../components/Login";
 import Signup from "../../components/Signup";
-import Create from "../../pages/Create";
+import Create from "../Create";
 import LogoutBtn from "../../components/LogoutBtn";
+import Nav from "../../components/Nav";
+import Profile from "../../components/Profile";
 
 const initialState = {
-  isUser: false,
-  user: {
-    uuid: "",
-    account_key: "",
-    sessionId: "",
-    email: "",
-    firstName: "",
-    lastName: "",
-    pic: "",
-    shareWithMe: [],
-    shareWithOthers: [],
-    notes: ""
-  }
+  uuid: "",
+  account_key: "",
+  sessionId: "",
+  email: "",
+  firstName: "",
+  lastName: "",
+  screenName: "",
+  pic: "",
+  shareWithMe: [],
+  shareWithOthers: [],
+  notes: ""
 };
 
 class Start extends Component {
-  state = initialState;
-
+  state = {
+    resetPassword: false,
+    resetPswd: "",
+    viewProfile: false,
+    isUser: true,
+    user: initialState
+  }
   componentDidMount() {
     console.log("mounted"); 
   }
 
-  handleInputChange = (event) => {
+  handleChange = event => {
+    event.preventDefault();
     const { name, value } = event.target;
     this.setState({
+      ...this.state,
       user: {
           ...this.state.user,
           [name]: value
@@ -52,23 +59,38 @@ class Start extends Component {
     console.log("signup event.target: ", event.target);
     console.log("signup this.state.user: ", this.state.user);
 
-    API.saveUser(this.state.user)
-    .then(res=> {
-      console.log("submit res: ", res);
-      if(res.data) {
-        this.setState({
-          user: res.data
-        })
-        console.log("finished form submit true: ", this.state.user);
-      }else{
-        console.log("signup error");
-        console.log("finished form submit false: ", this.state.user);
-      }
-      console.log("finished form submit anyway:  ", this.state.user);
-    })
-    .catch(err => console.log("signup server err: ", err))
-    
+    if(this.state.account_key===this.state.account_key2){
+      API.saveUser(this.state.user)
+      .then(res=> {
+        console.log("submit res: ", res);
+        if(res.data) {
+          this.setState({
+            user: res.data
+          })
+          console.log("finished form submit true: ", this.state.user);
+        }else{
+          console.log("signup error");
+          console.log("finished form submit false: ", this.state.user);
+        }
+        console.log("finished form submit anyway:  ", this.state.user);
+      })
+      .catch(err => console.log("signup server err: ", err))
+    }else{
+      console.log("passwords don't match");
+    }
   };
+
+  // eventually make the fields read only until you click the button
+  // when you click the password update button you will have to type
+  // the current password to update it
+  updateProfile = event => {
+    event.preventDefault();
+    // save state to the database
+    API.updateUser(this.state.user)
+    .then(res=> {
+      console.log("updateProfile: ", res);
+    })
+  }
 
   login = event => {
     event.preventDefault();
@@ -86,7 +108,12 @@ class Start extends Component {
         this.setState({
           user: {
             ...this.state.user,
-            uuid: res.data.uuid
+            uuid: res.data.uuid,
+            screenName: res.data.screenName,
+            firstName: res.data.firstName,
+            lastName: res.data.lastName,
+            pic: res.data.pic,
+            notes: res.data.notes
             }
           }
         )
@@ -104,34 +131,70 @@ class Start extends Component {
     console.log("this.state: ", this.state);
   }
 
-  toggleStart = () => {
-    console.log("toggleStart: ", this.state.isUser);
-    this.setState({ isUser: !this.state.isUser })
+  toggleStart = () => this.setState({ isUser: !this.state.isUser });
+
+  viewProfile = () => this.setState({ viewProfile: !this.state.viewProfile });
+
+  resetPassword = event => {
+    event.preventDefault();
+    console.log("resetting password: ", event.target);
+    this.setState({
+      resetPassword: !this.state.resetPassword
+    })
   }
 
   
 
   render() {
+    // are you signed in?
     if(this.state.user.uuid){
+      // you are signed in
       return (
         <Container fluid>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+          <Button 
+            name="Profile"
+            click={this.viewProfile}
+          />
           <LogoutBtn
             logout={this.logout} 
           />
-          <Create
-            state={this.state} 
-          />
+          {this.state.viewProfile ?
+            <Profile
+              state={this.state}
+              handleChange={this.handleChange}
+              submit={this.updateProfile}
+            />
+              :
+            <Create
+              state={this.state} 
+            />
+          }
         </Container>
       )
     }else{
+      // not signed in
       return (
         <div>
           {this.state.isUser ? 
+          /* are you a user? */
+            /* check if resetPassword is true in state and show the reset page */
             <Container fluid>
               <Login 
                 state={this.state}
-                handleChange={this.handleInputChange}
+                handleChange={this.handleChange}
                 submit={this.login}
+                click={this.resetPassword}
+                reset={this.state.resetPassword}
               /> 
               <Button 
                 click={this.toggleStart}
@@ -139,11 +202,11 @@ class Start extends Component {
               />
             </Container>
               : 
+            // not a user so let's sign up
             <Container fluid>
               <Signup 
-                signupAttempt={this.signup}
                 state={this.state}
-                handleChange={this.handleInputChange}
+                handleChange={this.handleChange}
                 submit={this.signup}
               />
               <Button 

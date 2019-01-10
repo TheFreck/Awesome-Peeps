@@ -23,6 +23,10 @@ const userSchema = new Schema({
     type: String,
     required: false
   },
+  screenName: {
+    type: String,
+    required: false
+  },
   firstName: {
     type: String,
     required: false
@@ -86,8 +90,4 @@ userSchema.pre('save', function (next) {
 const User = mongoose.model("User", userSchema);
 
 module.exports = User;
-
-
-// *********************************************************************************************
-// *********************************************************************************************
 
