@@ -7,6 +7,7 @@ import Create from "./pages/Create";
 // import Profile from "./pages/Profile";
 // import Share from "./pages/Share";
 
+
 //Navigation imports ***PENDING PAGES CREATION***
 // import Landing from "./pages/Landing";
 // import Shopping from "./pages/Shopping";
@@ -18,6 +19,8 @@ const App = () => (
     <div>
       <Nav />
       <Switch>
+
+
         {/* <Route exact path="/Landing" component={Landing} /> */}
         <Route exact path="/" component={Start} />
         <Route exact path="/create" component={Create} />
@@ -26,6 +29,7 @@ const App = () => (
         {/* <Route exact path="/Shopping" component={Shopping} />
         <Route exact path="/Friends" component={Friends} />
         <Route exact path="/Profile" component={Profile} /> */}
+
         <Route component={NoMatch} />
       </Switch>
     </div>
