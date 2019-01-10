@@ -10,7 +10,7 @@ const UserList = props => (
         {props.name}{" "}
       </button>
     </div>
-  
-
+  </div>
+);
 
 export default UserList;
