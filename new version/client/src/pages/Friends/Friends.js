@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import UserList from "../../components/UserList"
 import API from "../../utils/API";
-import { Col, Row, Container } from "../../components/Grid";
 import MainLogo from "../../components/MainLogo";
 
 

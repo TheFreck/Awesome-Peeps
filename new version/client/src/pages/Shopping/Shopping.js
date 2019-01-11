@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import API from "../../utils/API";
-import Nav from "../../components/Nav";
+// import Nav from "../../components/Nav";
 import MainLogo from "../../components/MainLogo";
-import DeleteBtn from "../../components/DeleteBtn";
+// import DeleteBtn from "../../components/DeleteBtn";
 
 class Shopping extends Component {
   state = {

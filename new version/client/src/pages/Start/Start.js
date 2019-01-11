@@ -12,8 +12,8 @@ import Login from "../../components/Login";
 import Signup from "../../components/Signup";
 import Create from "../Create";
 import LogoutBtn from "../../components/LogoutBtn";
-import Nav from "../../components/Nav";
-import Profile from "../../components/Profile";
+// import Nav from "../../components/Nav";
+import Profile from "../../pages/Profile";
 
 const initialState = {
   uuid: "",
@@ -29,10 +29,11 @@ const initialState = {
   notes: ""
 };
 
+
 class Start extends Component {
   state = {
-    resetPassword: false,
-    resetPswd: "",
+    resetPasswordBoolean: false,
+    resetPswdText: "",
     viewProfile: false,
     isUser: true,
     user: initialState
@@ -128,17 +129,29 @@ class Start extends Component {
     console.log("this.state: ", this.state);
   };
 
-  toggleStart = () => this.setState({ isUser: !this.state.isUser });
+  toggleStart = () => {
+    console.log("does it hit?")
+    this.setState({ 
+      ...this.state,
+      resetPasswordBoolean: false,
+      isUser: !this.state.isUser
+    })
+  }
 
   viewProfile = () => this.setState({ viewProfile: !this.state.viewProfile });
 
-  resetPassword = event => {
-    event.preventDefault();
-    console.log("resetting password: ", event.target);
+  resetPasswordBoolean = event => {
+    // event.preventDefault();
+    console.log("resetting password: ");
     this.setState({
-      resetPassword: !this.state.resetPassword
-    });
-  };
+      resetPasswordBoolean: !this.state.resetPasswordBoolean
+    })
+  }
+
+  sendResetEmail = () => {
+    console.log("send reset email");
+  }
+  
 
   render() {
     // are you signed in?
@@ -174,15 +187,18 @@ class Start extends Component {
       return (
         <div>
           {this.state.isUser ? (
-            /* are you a user? */
-            /* check if resetPassword is true in state and show the reset page */
+          /* are you a user? */
+            /* pass functionality to reset password into the Login page */
             <Container fluid>
               <Login
                 state={this.state}
                 handleChange={this.handleChange}
                 submit={this.login}
-                click={this.resetPassword}
-                reset={this.state.resetPassword}
+                click={this.resetPasswordBoolean}
+              /> 
+              <Button 
+                click={this.toggleStart}
+                name="Signup Instead" 
               />
               <Button click={this.toggleStart} name="Signup Instead" />
             </Container>

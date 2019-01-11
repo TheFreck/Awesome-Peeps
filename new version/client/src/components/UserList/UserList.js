@@ -11,5 +11,4 @@ const UserList = props => (
   </div>
 );
 
-
 export default UserList;

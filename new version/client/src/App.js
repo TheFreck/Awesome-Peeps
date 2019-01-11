@@ -6,13 +6,17 @@ import Create from "./pages/Create";
 import Friends from "./pages/Friends";
 import FriendRegistry from "./pages/FriendRegistry";
 
+// import Signup from "./components/Signup";
+// import Login from "./components/Login";
 // import Share from "./pages/Share";
+import Start from "./pages/Start";
 
 //Navigation imports ***PENDING PAGES CREATION***
 // import Landing from "./pages/Landing";
 import Shopping from "./pages/Shopping";
 // import FriendRegistry from "./pages/FriendRegistry"
 // import Profile from "./pages/Profile";
+import ResetPswd from "./components/ResetPswd";
 
 const App = () => (
   <Router>
@@ -20,15 +24,23 @@ const App = () => (
       <Nav />
       <Switch>
         {/* <Route exact path="/Landing" component={Landing} /> */}
+        <Route exact path="/" component={Start} />
+        <Route exact path="/create" component={Create} />
+        <Route exact path="/ResetPswd" component={ResetPswd} />
+        {/* <Route exact path="/profile" component={Profile} /> */}
         <Route exact path="/Create" component={Create} />
         <Route exact path="/Friends" component={Friends} />
         <Route exact path="/FriendRegistry" component={FriendRegistry} />
 
         {/* //Navigation imports ***PENDING PAGES CREATION*** */}
-
+        {/* <Route exact path="/Shopping" component={Shopping} />
+        
+        <Route path="/Signup" component={Signup} />
+        <Route path="/Login" component={Login} />
+        {/* //Navigation imports ***PENDING PAGES CREATION*** */}
         <Route exact path="/Shopping" component={Shopping} />
-        {/* <Route exact path="/Landing" component={Landing} /> */}
-        {/* <Route exact path="/Profile" component={Profile} /> */}
+        {/* <Route exact path="/Friends" component={Friends} />
+        <Route exact path="/Profile" component={Profile} /> */}
 
         <Route component={NoMatch} />
       </Switch>
