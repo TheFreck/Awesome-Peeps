@@ -13,7 +13,7 @@ import Signup from "../../components/Signup";
 import Create from "../Create";
 import LogoutBtn from "../../components/LogoutBtn";
 // import Nav from "../../components/Nav";
-import Profile from "../../components/Profile";
+import Profile from "../../pages/Profile";
 
 const initialState = {
   uuid: "",
@@ -28,6 +28,7 @@ const initialState = {
   shareWithOthers: [],
   notes: ""
 };
+
 
 class Start extends Component {
   state = {
@@ -114,6 +115,8 @@ class Start extends Component {
               notes: res.data.notes
             }
           });
+          res.redirect("/landing");
+          console.log("res: ", res);
         } else {
           console.log("incorrect password");
         }
@@ -151,9 +154,6 @@ class Start extends Component {
     console.log("send reset email");
   }
   
-      resetPassword: !this.state.resetPassword
-    });
-  };
 
   render() {
     // are you signed in?
@@ -188,12 +188,9 @@ class Start extends Component {
       // not signed in
       return (
         <div>
-          {this.state.isUser ? 
+          {this.state.isUser ? (
           /* are you a user? */
             /* pass functionality to reset password into the Login page */
-          {this.state.isUser ? (
-            /* are you a user? */
-            /* check if resetPassword is true in state and show the reset page */
             <Container fluid>
               <Login
                 state={this.state}
@@ -207,7 +204,6 @@ class Start extends Component {
                 click={this.resetPassword}
                 reset={this.state.resetPassword}
               />
-              <Button click={this.toggleStart} name="Signup Instead" />
             </Container>
           ) : (
             // not a user so let's sign up
