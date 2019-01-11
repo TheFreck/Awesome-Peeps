@@ -12,7 +12,7 @@ import Login from "../../components/Login";
 import Signup from "../../components/Signup";
 import Create from "../Create";
 import LogoutBtn from "../../components/LogoutBtn";
-import Nav from "../../components/Nav";
+// import Nav from "../../components/Nav";
 import Profile from "../../components/Profile";
 
 const initialState = {

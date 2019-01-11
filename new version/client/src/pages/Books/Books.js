@@ -6,8 +6,6 @@ import { Link } from "react-router-dom";
 import { Col, Row, Container } from "../../components/Grid";
 import { List, ListItem } from "../../components/List";
 import { Input, TextArea, FormBtn } from "../../components/Form";
-import Button from "../../components/Button";
-import SearchForm from "../../components/SearchForm";
 
 class Books extends Component {
   state = {
@@ -42,9 +40,8 @@ class Books extends Component {
     });
   };
 
-  handleFormSubmit = (message, event) => {
-    // event.preventDefault();
-    console.log("handleFormSubmit event: ", message);
+  handleFormSubmit = event => {
+    event.preventDefault();
     if (this.state.title && this.state.author) {
       API.saveBook({
         title: this.state.title,
@@ -56,12 +53,6 @@ class Books extends Component {
     }
   };
 
-  buttonClick = input => {
-    console.log("buttonClick input: ", input);
-  }
-
-  
-
   render() {
     return (
       <Container fluid>
@@ -69,14 +60,6 @@ class Books extends Component {
           <Col size="md-6">
             <Jumbotron>
               <h1>What Books Should I Read?</h1>
-              <Button 
-                name="Click Me!"
-                click={this.buttonClick}/>
-              <SearchForm
-                input={this.state.input}
-                handleFormSubmit={this.handleFormSubmit}
-                handleInputChange={this.handleInputChange}
-              />
             </Jumbotron>
             <form>
               <Input

@@ -1,27 +1,27 @@
-// // import React from "react";
+import React from "react";
 
-// // const ResetPswd = props => {
-// //   return (
-// //     <div className="list-overflow-container">
-// //       <form>
-// //         <label htmlFor="resetPswdText">Email Address: </label>
-// //         <input 
-// //           type="text"
-// //           name="resetPswdText"
-// //           value={props.pword}
-// //           onChange={props.handleChange}
-// //         />
-// //         <input
-// //           type="submit"
-// //           onClick={props.click}
-// //         />
-// //       </form>
-// //     </div>
-// //   );
-// // };
+const ResetPswd = props => {
+  return (
+    <div className="list-overflow-container">
+      <form>
+        <label htmlFor="resetPswdText">Email Address: </label>
+        <input 
+          type="text"
+          name="resetPswdText"
+          value={props.pword}
+          onChange={props.handleChange}
+        />
+        <input
+          type="submit"
+          onClick={props.click}
+        />
+      </form>
+    </div>
+  );
+};
 
 
-// // export default ResetPswd;
+export default ResetPswd;
 
 // import React, { Component } from 'react';
 // // import TextField from '@material-ui/core/TextField';
