@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import NoMatch from "./pages/NoMatch";
 import Nav from "./components/Nav/Nav";
 import Create from "./pages/Create";
+import Shopping from "./pages/Shopping";
 import Signup from "./components/Signup";
 import Login from "./components/Login";
 // import Share from "./pages/Share";
@@ -23,8 +24,8 @@ const App = () => (
         <Route path="/Signup" component={Signup} />
         <Route path="/Login" component={Login} />
         {/* //Navigation imports ***PENDING PAGES CREATION*** */}
-        {/* <Route exact path="/Shopping" component={Shopping} />
-        <Route exact path="/Friends" component={Friends} />
+        <Route exact path="/Shopping" component={Shopping} />
+        {/* <Route exact path="/Friends" component={Friends} />
         <Route exact path="/Profile" component={Profile} /> */}
 
         <Route component={NoMatch} />
