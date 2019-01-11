@@ -21,7 +21,7 @@ const App = () => (
         {/* <Route exact path="/Landing" component={Landing} /> */}
         <Route exact path="/Create" component={Create} />
         <Route path="/Signup" component={Signup} />
-        <Route path="/Login" component={Login} />
+        <Route path="/Signin" component={Login} />
         {/* //Navigation imports ***PENDING PAGES CREATION*** */}
         {/* <Route exact path="/Shopping" component={Shopping} />
         <Route exact path="/Friends" component={Friends} />
