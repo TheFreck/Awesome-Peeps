@@ -14,24 +14,42 @@ class Create extends Component {
     occasion: "",
     comments: "",
     users: [],
-    user: {
-      uuid: "",
-      account_key: "",
-      sessionId: "",
-      email: "",
-      name: "",
-      pic: "",
-      shareWithMe: [],
-      shareWithOthers: [],
-      myItems: [],
-      notes: ""
-    }
+    uuid: "",
+    account_key: "",
+    sessionId: "",
+    email: "",
+    name: "",
+    shareWithMe: [],
+    shareWithOthers: [],
+    myItems: [],
+    notes: ""
+    
   }
 
   componentDidMount() {
     this.getSavedItems();
+
+    this.setState({ uuid: this.props.state.user.uuid })
+    console.log("props from create.js", this.props.state.user.uuid)
     // this.getAllUsers();
   }
+
+
+
+userAndItems = (uuid) => {
+  API.getUserandItems()
+  .then(res =>
+    this.setState({ savedItems: res.data })
+  )
+  .catch(err => console.log(err));
+};
+  // getSavedItems = () => {
+  //   API.getItems()
+  //     .then(res =>
+  //       this.setState({ savedItems: res.data })
+  //     )
+  //     .catch(err => console.log(err));
+  // };
 
   getSavedItems = () => {
     API.getItems()
@@ -40,6 +58,10 @@ class Create extends Component {
       )
       .catch(err => console.log(err));
   };
+
+
+
+  
 
   //Find saved users
   getAllUsers = () => {
@@ -71,6 +93,7 @@ class Create extends Component {
 //Saves item to registry
   handleSaveItem = event => {
     event.preventDefault();
+    console.log(this.state.uuid, "")
     console.log("CLICK")
     if (this.state.item) {
       API.saveItem({
@@ -78,7 +101,8 @@ class Create extends Component {
         price: this.state.price,
         url: this.state.url,
         occasion: this.state.occasion,
-        comments: this.state.comments
+        comments: this.state.comments,
+        uuid: this.state.uuid
       })
         .then(res => {
           console.log("save item response: ", res);
@@ -88,6 +112,8 @@ class Create extends Component {
     }
   };
 
+
+  
 
 
 //Share registry with another user
@@ -105,17 +131,6 @@ shareRegistry = event => {
       .catch(err => console.log(err));
 };
 
-
-
-// selectUser = event => {
-//   event.preventDefault();
-//   console.log("Shared with", event.target.value)
-//   console.log("User Selected")
-
-//     API.getUser({
-//       this.setState({ sharedUser: res.data }) 
-//     })
-// }
 
 
 selectUser = (event) => {

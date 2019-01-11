@@ -116,10 +116,12 @@ class Start extends Component {
     })
     .then(res => {
       if(res.data) {
+        // console.log(res.data)
         this.setState({
           user: {
             ...this.state.user,
-              verified: true
+            uuid: res.data.uuid,
+            verified: true
             }
           }
         )

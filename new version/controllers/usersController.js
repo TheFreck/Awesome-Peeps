@@ -61,7 +61,22 @@ module.exports = {
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
-  grabInfoFromButton: (req, res) => {
-    console.log("grabbed it: ", req.body);
+  // grabInfoFromButton: (req, res) => {
+  //   console.log("grabbed it: ", req.body);
+  // },
+  findUserAndItems: (req, res) => {
+    console.log("i am running now ahhhhhh")
+    console.log(req.session, "this is the user")
+    db.User.findOne({uuid: req.session.id})
+    .populate("myItems")
+    .then((data) =>{
+      res.json(data)
+    })
   }
 };
+
+
+// loggedIn: (req, res) => {
+//   db.User.findById({ uuid: req.body.uuid })
+//   .then
+// }
