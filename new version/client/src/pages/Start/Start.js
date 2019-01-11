@@ -36,9 +36,9 @@ class Start extends Component {
     viewProfile: false,
     isUser: true,
     user: initialState
-  }
+  };
   componentDidMount() {
-    console.log("mounted"); 
+    console.log("mounted");
   }
 
   handleChange = event => {
@@ -47,11 +47,10 @@ class Start extends Component {
     this.setState({
       ...this.state,
       user: {
-          ...this.state.user,
-          [name]: value
-        }
+        ...this.state.user,
+        [name]: value
       }
-    );
+    });
   };
 
   signup = event => {
@@ -59,23 +58,23 @@ class Start extends Component {
     console.log("signup event.target: ", event.target);
     console.log("signup this.state.user: ", this.state.user);
 
-    if(this.state.account_key===this.state.account_key2){
+    if (this.state.account_key === this.state.account_key2) {
       API.saveUser(this.state.user)
-      .then(res=> {
-        console.log("submit res: ", res);
-        if(res.data) {
-          this.setState({
-            user: res.data
-          })
-          console.log("finished form submit true: ", this.state.user);
-        }else{
-          console.log("signup error");
-          console.log("finished form submit false: ", this.state.user);
-        }
-        console.log("finished form submit anyway:  ", this.state.user);
-      })
-      .catch(err => console.log("signup server err: ", err))
-    }else{
+        .then(res => {
+          console.log("submit res: ", res);
+          if (res.data) {
+            this.setState({
+              user: res.data
+            });
+            console.log("finished form submit true: ", this.state.user);
+          } else {
+            console.log("signup error");
+            console.log("finished form submit false: ", this.state.user);
+          }
+          console.log("finished form submit anyway:  ", this.state.user);
+        })
+        .catch(err => console.log("signup server err: ", err));
+    } else {
       console.log("passwords don't match");
     }
   };
@@ -86,50 +85,48 @@ class Start extends Component {
   updateProfile = event => {
     event.preventDefault();
     // save state to the database
-    API.updateUser(this.state.user)
-    .then(res=> {
+    API.updateUser(this.state.user).then(res => {
       console.log("updateProfile: ", res);
-    })
-  }
+    });
+  };
 
   login = event => {
     event.preventDefault();
-    console.log("login: ", event.target)
-    console.log("this.state.user.email: ", this.state.user.email)
-    console.log("this.state.user.account_key: ", this.state.user.account_key)
+    console.log("login: ", event.target);
+    console.log("this.state.user.email: ", this.state.user.email);
+    console.log("this.state.user.account_key: ", this.state.user.account_key);
 
     API.login({
       username: this.state.user.email,
       password: this.state.user.account_key
     })
-    .then(res => {
-      console.log("Start res: ", res.data);
-      if(res.data) {
-        this.setState({
-          user: {
-            ...this.state.user,
-            uuid: res.data.uuid,
-            screenName: res.data.screenName,
-            firstName: res.data.firstName,
-            lastName: res.data.lastName,
-            pic: res.data.pic,
-            notes: res.data.notes
+      .then(res => {
+        console.log("Start res: ", res.data);
+        if (res.data) {
+          this.setState({
+            user: {
+              ...this.state.user,
+              uuid: res.data.uuid,
+              screenName: res.data.screenName,
+              firstName: res.data.firstName,
+              lastName: res.data.lastName,
+              pic: res.data.pic,
+              notes: res.data.notes
             }
-          }
-        )
-      }else{
-        console.log("incorrect password")
-      }
-    })
-    .catch(err => console.log("login err err: ", err));
-  }
+          });
+        } else {
+          console.log("incorrect password");
+        }
+      })
+      .catch(err => console.log("login err err: ", err));
+  };
 
   logout = event => {
     event.preventDefault();
     console.log("event.target: ", event.target);
-    this.setState(initialState)
+    this.setState(initialState);
     console.log("this.state: ", this.state);
-  }
+  };
 
   toggleStart = () => {
     console.log("does it hit?")
@@ -154,52 +151,51 @@ class Start extends Component {
     console.log("send reset email");
   }
   
+      resetPassword: !this.state.resetPassword
+    });
+  };
 
   render() {
     // are you signed in?
-    if(this.state.user.uuid){
+    if (this.state.user.uuid) {
       // you are signed in
       return (
         <Container fluid>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-          <Button 
-            name="Profile"
-            click={this.viewProfile}
-          />
-          <LogoutBtn
-            logout={this.logout} 
-          />
-          {this.state.viewProfile ?
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <Button name="Profile" click={this.viewProfile} />
+          <LogoutBtn logout={this.logout} />
+          {this.state.viewProfile ? (
             <Profile
               state={this.state}
               handleChange={this.handleChange}
               submit={this.updateProfile}
             />
-              :
-            <Create
-              state={this.state} 
-            />
-          }
+          ) : (
+            <Create state={this.state} />
+          )}
         </Container>
-      )
-    }else{
+      );
+    } else {
       // not signed in
       return (
         <div>
           {this.state.isUser ? 
           /* are you a user? */
             /* pass functionality to reset password into the Login page */
+          {this.state.isUser ? (
+            /* are you a user? */
+            /* check if resetPassword is true in state and show the reset page */
             <Container fluid>
-              <Login 
+              <Login
                 state={this.state}
                 handleChange={this.handleChange}
                 submit={this.login}
@@ -208,24 +204,23 @@ class Start extends Component {
               <Button 
                 click={this.toggleStart}
                 name="Signup Instead" 
+                click={this.resetPassword}
+                reset={this.state.resetPassword}
               />
+              <Button click={this.toggleStart} name="Signup Instead" />
             </Container>
-              : 
+          ) : (
             // not a user so let's sign up
             <Container fluid>
-              <Signup 
+              <Signup
                 state={this.state}
                 handleChange={this.handleChange}
                 submit={this.signup}
               />
-              <Button 
-                click={this.toggleStart}
-                name="Login Instead" 
-              />
+              <Button click={this.toggleStart} name="Login Instead" />
             </Container>
-          }
+          )}
         </div>
-          
       );
     }
   }
