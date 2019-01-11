@@ -10,10 +10,5 @@ const UserList = props => (
     </div>
   </div>
 );
-<<<<<<< HEAD
-  
-
-=======
->>>>>>> 027f03cd0914fd7548dd126a4490cfbb479237b0
 
 export default UserList;

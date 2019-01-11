@@ -1,19 +1,18 @@
 import React, { Component } from "react";
 import API from "../../utils/API";
-import Nav from "../../components/Nav";
 import MainLogo from "../../components/MainLogo";
-import DeleteBtn from "../../components/DeleteBtn";
 
 class Shopping extends Component {
   state = {
     items: [],
+    users: [],
     item: "",
     price: "",
-    
   };
 
   componentDidMount() {
-    this.getItems();
+    this.getItems()
+    this.getPerson();
   }
 
   getItems = () => {
@@ -24,6 +23,14 @@ class Shopping extends Component {
       .catch(err => console.log(err));
   };
 
+  getPerson = () => {
+      API.getUsers()
+      .then(res =>
+        this.setState({ users: res.data, firstName: ""})
+      )
+        .catch(err => console.log(err));
+  }
+
   deleteItem = id => {
     API.deleteItem(id)
       .then(res => this.getItems())
@@ -33,26 +40,38 @@ class Shopping extends Component {
   render() {
     return (
       <div> 
-        <MainLogo />
+        <div class="col s12 center-align top:60px">
+          <MainLogo />
+        </div>
         <thead>
             <tr>
               <th>GREEDY BASTARD</th>
               <th>ITEM</th>
               <th>PRICE</th>
               <th>OCCASION</th>
-              <th>DATE ADDED</th>
+              <th>COMMENTS</th>
             </tr>
           </thead>
           <tbody>
             {this.state.items.map(item => (
               <tr key={item._id}>
                 <td>
-                  {item.item} {item.price} occasion:{item.occasion} comments:{item.comments}
-                  <button onClick={() => this.deleteItem(item._id)}>Delete</button>
-                  <button onClick={() => this.deleteItem(item._id)}>Buy it!</button>
+                  {item.name} 
                 </td>
+                <td>{item.item}</td>
+                <td>{item.price}</td>
+                <td>{item.occasion}</td>
+                <td>{item.comments}</td>
+                <td><button onClick={() => this.deleteItem(item._id)}>Delete</button>
+                  <button onClick={() => this.deleteItem(item._id)}>Buy it!</button></td>         
               </tr>
           ))}
+            {/* {this.state.users.map(user =>(
+               <tr key={user._id}>
+               <td>
+               </td>
+               </tr> 
+            ))} */}
           </tbody>
       </div>
     );
