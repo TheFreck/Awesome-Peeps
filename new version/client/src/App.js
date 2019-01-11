@@ -5,6 +5,7 @@ import Nav from "./components/Nav/Nav";
 // import Start from "./pages/Start";
 import Create from "./pages/Create";
 import Friends from "./pages/Friends";
+import FriendRegistry from "./pages/FriendRegistry";
 
 // import Share from "./pages/Share";
 
@@ -12,7 +13,7 @@ import Friends from "./pages/Friends";
 //Navigation imports ***PENDING PAGES CREATION***
 // import Landing from "./pages/Landing";
 // import Shopping from "./pages/Shopping";
-
+// import FriendRegistry from "./pages/FriendRegistry"
 // import Profile from "./pages/Profile";
 
 const App = () => (
@@ -25,6 +26,8 @@ const App = () => (
         {/* <Route exact path="/Landing" component={Landing} /> */}
         <Route exact path="/Create" component={Create} />
         <Route exact path="/Friends" component={Friends} />
+        <Route exact path="/FriendRegistry" component={FriendRegistry} />
+
         {/* //Navigation imports ***PENDING PAGES CREATION*** */}
         {/* <Route exact path="/Shopping" component={Shopping} />
         
