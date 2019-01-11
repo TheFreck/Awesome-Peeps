@@ -29,6 +29,7 @@ const initialState = {
   notes: ""
 };
 
+
 class Start extends Component {
   state = {
     resetPasswordBoolean: false,
