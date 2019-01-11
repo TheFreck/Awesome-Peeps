@@ -31,8 +31,8 @@ const initialState = {
 
 class Start extends Component {
   state = {
-    resetPassword: false,
-    resetPswd: "",
+    resetPasswordBoolean: false,
+    resetPswdText: "",
     viewProfile: false,
     isUser: true,
     user: initialState
@@ -131,18 +131,28 @@ class Start extends Component {
     console.log("this.state: ", this.state);
   }
 
-  toggleStart = () => this.setState({ isUser: !this.state.isUser });
-
-  viewProfile = () => this.setState({ viewProfile: !this.state.viewProfile });
-
-  resetPassword = event => {
-    event.preventDefault();
-    console.log("resetting password: ", event.target);
-    this.setState({
-      resetPassword: !this.state.resetPassword
+  toggleStart = () => {
+    console.log("does it hit?")
+    this.setState({ 
+      ...this.state,
+      resetPasswordBoolean: false,
+      isUser: !this.state.isUser
     })
   }
 
+  viewProfile = () => this.setState({ viewProfile: !this.state.viewProfile });
+
+  resetPasswordBoolean = event => {
+    // event.preventDefault();
+    console.log("resetting password: ");
+    this.setState({
+      resetPasswordBoolean: !this.state.resetPasswordBoolean
+    })
+  }
+
+  sendResetEmail = () => {
+    console.log("send reset email");
+  }
   
 
   render() {
@@ -187,14 +197,13 @@ class Start extends Component {
         <div>
           {this.state.isUser ? 
           /* are you a user? */
-            /* check if resetPassword is true in state and show the reset page */
+            /* pass functionality to reset password into the Login page */
             <Container fluid>
               <Login 
                 state={this.state}
                 handleChange={this.handleChange}
                 submit={this.login}
-                click={this.resetPassword}
-                reset={this.state.resetPassword}
+                click={this.resetPasswordBoolean}
               /> 
               <Button 
                 click={this.toggleStart}

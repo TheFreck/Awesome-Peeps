@@ -12,6 +12,7 @@ import Create from "./pages/Create";
 // import Shopping from "./pages/Shopping";
 // import Friends from "./pages/Friends";
 // import Profile from "./pages/Profile";
+import ResetPswd from "./components/ResetPswd";
 
 const App = () => (
   <Router>
@@ -21,6 +22,7 @@ const App = () => (
         {/* <Route exact path="/Landing" component={Landing} /> */}
         <Route exact path="/" component={Start} />
         <Route exact path="/create" component={Create} />
+        <Route exact path="/ResetPswd" component={ResetPswd} />
         {/* <Route exact path="/profile" component={Profile} /> */}
         {/* //Navigation imports ***PENDING PAGES CREATION*** */}
         {/* <Route exact path="/Shopping" component={Shopping} />

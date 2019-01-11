@@ -5,7 +5,7 @@ import ResetPswd from "../ResetPswd";
 const Login = props => {
   return (
     <div>
-      {props.reset ? 
+      {props.state.resetPasswordBoolean ? 
         <ResetPswd
           handleChange={props.handleChange}
           click={props.click}
@@ -31,11 +31,11 @@ const Login = props => {
             <Button
               name="forgot password"
               click={props.click}
-              pword={props.state.resetPswd}
+              pword={props.state.resetPswdText}
             />
             <input 
               type="submit" 
-              value="Login" 
+              value="Login"
               onClick={props.submit} 
             />
           </form>
