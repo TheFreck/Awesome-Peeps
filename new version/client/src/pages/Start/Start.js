@@ -13,7 +13,7 @@ import Signup from "../../components/Signup";
 import Create from "../Create";
 import LogoutBtn from "../../components/LogoutBtn";
 // import Nav from "../../components/Nav";
-import Profile from "../../components/Profile";
+import Profile from "../../pages/Profile";
 
 const initialState = {
   uuid: "",
