@@ -16,7 +16,7 @@ const Login = props => {
               <input
                 type="email"
                 name="email"
-                value={props.state.user.email}
+                // value={props.state.user.email}
                 onChange={props.handleChange}
               />
               <div className="input-field">
@@ -24,7 +24,7 @@ const Login = props => {
                 <input
                   type="password"
                   name="account_key"
-                  value={props.state.user.account_key}
+                  // value={props.state.user.account_key}
                   onChange={props.handleChange}
                 />
                 <button
