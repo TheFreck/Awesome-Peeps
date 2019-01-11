@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import Row from "../../components/Row"
-import API from "../../utils/API"
-import RegistryHeader from "../../components/RegistryHeader"
-import UserList from "../../components/UserList"
+import Row from "../../components/Row";
+import API from "../../utils/API";
+import RegistryHeader from "../../components/RegistryHeader";
+import UserList from "../../components/UserList";
 
 class Create extends Component {
   state = {
@@ -53,9 +53,7 @@ userAndItems = (uuid) => {
 
   getSavedItems = () => {
     API.getItems()
-      .then(res =>
-        this.setState({ savedItems: res.data })
-      )
+      .then(res => this.setState({ savedItems: res.data }))
       .catch(err => console.log(err));
   };
 
@@ -66,31 +64,27 @@ userAndItems = (uuid) => {
   //Find saved users
   getAllUsers = () => {
     API.getUsers()
-      .then(res =>
-        this.setState({ users: res.data }) 
-      )
+      .then(res => this.setState({ users: res.data }))
       .catch(err => console.log(err));
   };
 
- //Delete item from registry
-  deleteItem = (id) => {
+  //Delete item from registry
+  deleteItem = id => {
     API.deleteItem(id)
-      .then(res =>
-        this.getSavedItems())
-      .catch((err) => {
+      .then(res => this.getSavedItems())
+      .catch(err => {
         console.log(err);
       });
   };
 
-  handleChange = (event) => {
+  handleChange = event => {
     const { name, value } = event.target;
     this.setState({
       [name]: value
     });
-  }
+  };
 
-  
-//Saves item to registry
+  //Saves item to registry
   handleSaveItem = event => {
     event.preventDefault();
     console.log(this.state.uuid, "")
@@ -112,14 +106,10 @@ userAndItems = (uuid) => {
     }
   };
 
-
-  
-
-
-//Share registry with another user
-shareRegistry = event => {
-  event.preventDefault();
-  console.log("Share with user")
+  //Share registry with another user
+  shareRegistry = event => {
+    event.preventDefault();
+    console.log("Share with user");
     API.getUsers({
       name: this.state.name,
       uuid: this.state.uuid
@@ -129,45 +119,52 @@ shareRegistry = event => {
         this.getAllUsers();
       })
       .catch(err => console.log(err));
-};
+  };
 
+  // selectUser = event => {
+  //   event.preventDefault();
+  //   console.log("Shared with", event.target.value)
+  //   console.log("User Selected")
 
+  //     API.getUser({
+  //       this.setState({ sharedUser: res.data })
+  //     })
+  // }
 
-selectUser = (event) => {
-  // console.log("This is data-id", event.target.getAttribute("data-id"))
-  console.log("This is uuid value", event.target.value)
-  // console.log("This is uuid name", event.target.name)
-  // console.log(this.state.user.login.uuid)
-  API.updateUser({
+  selectUser = event => {
+    // console.log("This is data-id", event.target.getAttribute("data-id"))
+    console.log("This is uuid value", event.target.value);
+    // console.log("This is uuid name", event.target.name)
+    // console.log(this.state.user.login.uuid)
+    API.updateUser({
       "login.uuid": event.target.value
     })
-    .then(res =>
-      {console.log("Create: ", res)
-        this.setState({ shareWithOthers: res.data }) }
-    )
-    .catch(err => console.log(err));
-};
-
+      .then(res => {
+        console.log("Create: ", res);
+        this.setState({ shareWithOthers: res.data });
+      })
+      .catch(err => console.log(err));
+  };
 
   //Value from URL input
-  handleURL = (event) => {
+  handleURL = event => {
     this.setState({ url: event.target.value });
-  }
+  };
 
   //Value from Price input
-  handlePrice = (event) => {
+  handlePrice = event => {
     this.setState({ price: event.target.value });
-  }
+  };
 
   //Value from Occasion input
-  handleOccasion = (event) => {
+  handleOccasion = event => {
     this.setState({ occasion: event.target.value });
-  }
+  };
 
   //Value from Comments input
-  handleComments = (event) => {
+  handleComments = event => {
     this.setState({ comments: event.target.value });
-  }
+  };
 
   renderSaved = () => {
     return this.state.savedItems.map(save => (
@@ -182,106 +179,118 @@ selectUser = (event) => {
         deleteItem={this.deleteItem}
         getSavedArticles={this.getSavedArticles}
       />
-    ))
-  }
+    ));
+  };
 
   renderUsers = () => {
     return this.state.users.map(save => (
       <UserList
         _id={save._id}
         key={save._id}
+        uninsta
         name={save.name}
         uuid={save.uuid}
         pic={save.pic}
         selectUser={this.selectUser}
       />
-    ))
-  }
+    ));
+  };
 
   render() {
     return (
       <div className="container bg-white">
         <h1 className="text-">Create Your Registry</h1>
         <form>
-          <div
-            className="form-group"
-          >
-            <label htmlFor="item"><h4 >Item</h4></label>
+          <div className="form-group">
+            <label htmlFor="item">
+              <h4>Item</h4>
+            </label>
             <input
               onChange={this.handleChange}
               name="item"
               value={this.state.item}
               type="text"
-              className="form-control" id="item" aria-describedby="emailHelp"
+              className="form-control"
+              id="item"
+              aria-describedby="emailHelp"
             />
           </div>
-          <div
-            className="form-group"
-          >
-            <label htmlFor="price"><h4 >Price</h4></label>
+          <div className="form-group">
+            <label htmlFor="price">
+              <h4>Price</h4>
+            </label>
             <input
               onChange={this.handleChange}
               name="price"
               value={this.state.price}
               type="text"
-              className="form-control" id="price"
+              className="form-control"
+              id="price"
             />
           </div>
-          <div
-            className="form-group"
-          >
-            <label htmlFor="url"><h4 >URL</h4></label>
+          <div className="form-group">
+            <label htmlFor="url">
+              <h4>URL</h4>
+            </label>
             <input
               onChange={this.handleChange}
               name="url"
               value={this.state.url}
               type="text"
-              className="form-control" id="url"
+              className="form-control"
+              id="url"
             />
           </div>
-          <div
-            className="form-group"
-          >
-            <label htmlFor="occasion"><h4 >Occasion</h4></label>
+          <div className="form-group">
+            <label htmlFor="occasion">
+              <h4>Occasion</h4>
+            </label>
             <input
               onChange={this.handleChange}
               name="occasion"
               value={this.state.occasion}
               type="text"
-              className="form-control" id="occasion"
+              className="form-control"
+              id="occasion"
             />
           </div>
-          <div
-            className="form-group"
-          >
-            <label htmlFor="comments"><h4 >Comments</h4></label>
+          <div className="form-group">
+            <label htmlFor="comments">
+              <h4>Comments</h4>
+            </label>
             <input
               onChange={this.handleChange}
               name="comments"
               value={this.state.comments}
               type="text"
-              className="form-control" id="comments"
+              className="form-control"
+              id="comments"
             />
           </div>
-          <button onClick={this.handleSaveItem} type="submit"
-            className="btn btn-info">Add To Registry</button>
-          <button onClick={this.shareRegistry} type="submit"
-            className="btn btn-info">Share Registry</button>
+          <button
+            onClick={this.handleSaveItem}
+            type="submit"
+            className="btn btn-info"
+          >
+            Add To Registry
+          </button>
+          <button
+            onClick={this.shareRegistry}
+            type="submit"
+            className="btn btn-info"
+          >
+            Share Registry
+          </button>
         </form>
-        <br></br>
+        <br />
         <RegistryHeader />
-        <div>
-          {this.renderSaved()}
-        </div>
+        <div>{this.renderSaved()}</div>
         <h4>Who do you want to share your list with?</h4>
         <UserList />
-        <div>
-          {this.renderUsers()}
-        </div>
+        <div>{this.renderUsers()}</div>
       </div>
     );
   }
 }
-
 
 export default Create;

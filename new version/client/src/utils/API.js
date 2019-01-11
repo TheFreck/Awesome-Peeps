@@ -24,7 +24,8 @@ export default {
   },
   //updates user profile with given id
   updateUser: id => {
-    return axios.put("/api/users/" + id)
+    console.log("updateUser id: ", id);
+    return axios.put("/api/users", id)
   },
   login: userData => {
     let userName = userData.username;
