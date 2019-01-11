@@ -25,6 +25,7 @@ const App = () => (
         <Route exact path="/FriendRegistry" component={FriendRegistry} />
 
         {/* //Navigation imports ***PENDING PAGES CREATION*** */}
+
         <Route exact path="/Shopping" component={Shopping} />
         {/* <Route exact path="/Landing" component={Landing} /> */}
         {/* <Route exact path="/Profile" component={Profile} /> */}
