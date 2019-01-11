@@ -1,13 +1,17 @@
 import React, { Component } from "react";
 import UserList from "../../components/UserList";
-import Jumbotron from "../../components/Jumbotron";
 import API from "../../utils/API";
-import { Col, Row, Container } from "../../components/Grid";
-import Nav from "../../components/Nav";
 import MainLogo from "../../components/MainLogo";
 
 class Friends extends Component {
   state = {
+    savedItems: [],
+    item: "",
+    price: 0,
+    url: "",
+    pic: "",
+    occasion: "",
+    comments: "",
     users: [],
     user: {
       uuid: "",
@@ -27,24 +31,17 @@ class Friends extends Component {
   //   this.getUsers();
   // }
 
-  //Find saved users
-  getAllUsers = () => {
-    API.getUsers()
-      .then(res => this.setState({ users: res.data }))
-      .catch(err => console.log(err));
-  };
-
-  selectUser = event => {
-    // console.log("This is data-id", event.target.getAttribute("data-id"))
-    console.log("This is uuid value", event.target.value);
-    // console.log("This is uuid name", event.target.name)
-    // console.log(this.state.user.login.uuid)
-    API.updateUser({
-      "login.uuid": event.target.value
+  //Share registry with another user
+  populateUsers = event => {
+    event.preventDefault();
+    console.log("Share with user");
+    API.getUsers({
+      name: this.state.name,
+      uuid: this.state.uuid
     })
       .then(res => {
-        console.log("Create: ", res);
-        this.setState({ shareWithOthers: res.data });
+        console.log("users data: ", res);
+        this.getAllUsers();
       })
       .catch(err => console.log(err));
   };
@@ -54,6 +51,7 @@ class Friends extends Component {
       <UserList
         _id={save._id}
         key={save._id}
+        uninsta
         name={save.name}
         uuid={save.uuid}
         pic={save.pic}
@@ -64,7 +62,7 @@ class Friends extends Component {
 
   render() {
     return (
-      <div className="container bg-white">
+      <div className="container">
         <div class="Row">
           <div class="col s12 center-align top:60px">
             <MainLogo />
@@ -80,8 +78,8 @@ class Friends extends Component {
         </div>
         <div class="Row">
           <div class="col s12 center-align">
-            <h3>UsEr bUtToNs gO heRe</h3>
-            {this.renderUsers()}
+            <UserList />
+            {/* <button class="waves-effect waves-light btn-large red seeGifts">{this.populateUsers}</button> */}
           </div>
         </div>
       </div>

@@ -56,7 +56,6 @@ const Signup = props => {
                     />
                     <button
                       className="btn pink lighten-1 z-depth-0"
-                      input
                       type="submit"
                       value="Signup"
                       onClick={props.submit}

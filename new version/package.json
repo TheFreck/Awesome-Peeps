@@ -1,7 +1,6 @@
 {
   "name": "mern",
   "version": "1.0.0",
-  "description": "",
   "main": "server.js",
   "proxy": "http://localhost:3001",
   "scripts": {
@@ -34,5 +33,7 @@
     "react-materialize": "^2.6.0",
     "react-router-dom": "^4.3.1",
     "uuid": "^3.3.2"
-  }
+  },
+  "keywords": [],
+  "description": ""
 }
