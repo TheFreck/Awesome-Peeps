@@ -6,7 +6,6 @@ import Create from "./pages/Create";
 import Friends from "./pages/Friends";
 import FriendRegistry from "./pages/FriendRegistry";
 
-import Shopping from "./pages/Shopping";
 // import Signup from "./components/Signup";
 // import Login from "./components/Login";
 // import Share from "./pages/Share";
@@ -14,7 +13,7 @@ import Start from "./pages/Start";
 
 //Navigation imports ***PENDING PAGES CREATION***
 // import Landing from "./pages/Landing";
-// import Shopping from "./pages/Shopping";
+import Shopping from "./pages/Shopping";
 // import FriendRegistry from "./pages/FriendRegistry"
 // import Profile from "./pages/Profile";
 import ResetPswd from "./components/ResetPswd";
