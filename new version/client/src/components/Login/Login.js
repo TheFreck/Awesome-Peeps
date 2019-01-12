@@ -13,7 +13,7 @@ const Login = props => {
       :
         <div>
           <h5 className="grey-text text-darken-3">Login</h5>
-          <form onSubmit={this.handleSubmit} className="white">
+          <form onSubmit={props.handleSubmit} className="white">
             <div className="input-field">
               <label htmlFor="email">Email: </label>
               <input

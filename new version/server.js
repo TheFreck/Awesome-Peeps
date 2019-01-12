@@ -15,14 +15,14 @@ app.use(express.json());
 //sessions
 app.use(
   session({
-    secret: "emdki32;q;lf9xbml;LK", //pick a random string to make the hash that is generated secure
-    // store: new MongoStore({ mongooseConnection: dbConnection }),
+    secret: "muscle bound brute", //pick a random string to make the hash that is generated secure
+    store: process.env.MONGODB_URI,
     resave: false, //required
     saveUninitialized: false //required
   })
 );
 app.use((req, res, next) => {
-  // console.log("\n*****\n\nreq.session: ", req.session.id + "\n*****\n");
+  console.log("\n*****\n\nreq.session: ", req.session.id + "\n*****\n");
   return next();
 });
 app.post("/api/user", (req, res) => {
