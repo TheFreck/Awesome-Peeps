@@ -5,6 +5,7 @@ import React, { Component } from "react";
 // import { List, ListItem } from "../../components/List";
 // import { Input, TextArea, FormBtn } from "../../components/Form";
 // import SearchForm from "../../components/SearchForm";
+import { Redirect } from "react-router-dom";
 import Button from "../../components/Button";
 import { Container } from "../../components/Grid";
 import API from "../../utils/API";
@@ -30,16 +31,13 @@ const initialState = {
 };
 
 class Start extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      resetPasswordBoolean: false,
-      resetPswdText: "",
-      viewProfile: false,
-      isUser: true,
-      user: props.state
-    };
-  }
+  state = {
+    resetPasswordBoolean: false,
+    resetPswdText: "",
+    viewProfile: false,
+    isUser: true,
+    user: this.props.state
+  };
   componentDidMount() {
     console.log("state: ", this.props);
   }
@@ -109,16 +107,6 @@ class Start extends Component {
       username: this.state.user.email,
       password: this.state.user.account_key
     })
-<<<<<<< HEAD
-    .then(res => {
-      if(res.data) {
-        // console.log(res.data)
-        this.setState({
-          user: {
-            ...this.state.user,
-            uuid: res.data.uuid,
-            verified: true
-=======
       .then(res => {
         console.log("Start res: ", res.data);
         if (res.data) {
@@ -131,13 +119,12 @@ class Start extends Component {
               lastName: res.data.lastName,
               pic: res.data.pic,
               notes: res.data.notes
->>>>>>> master
             }
           }
           console.log("user: ", user.user);
           this.setState(user);
           this.props.update(user.user)
-          res.redirect("/landing");
+          
           console.log("res: ", res);
         } else {
           console.log("incorrect password");
@@ -204,7 +191,7 @@ class Start extends Component {
               submit={this.updateProfile}
             />
           ) : (
-            <Create state={this.state} />
+            <Redirect push to="/landing" />
           )}
         </Container>
       );
