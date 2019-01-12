@@ -10,8 +10,9 @@ export default {
     console.log("api get user: ", id);
     return axios.get("/api/users/" + id);
   },
+  //codes this need to have /items on it?
   getUserandItems: id => {
-    return axios.get("/api/users/items/" + id);
+    return axios.get("/api/users/" + id);
   },
   // Deletes the user with the given id
   deleteUser: id => {
@@ -24,8 +25,7 @@ export default {
   },
   //updates user profile with given id
   updateUser: id => {
-    console.log("updateUser id: ", id);
-    return axios.put("/api/users", id)
+    return axios.put("/api/users/" + id)
   },
   login: userData => {
     let userName = userData.username;
@@ -34,8 +34,11 @@ export default {
     userName = userName.replace("@", "-AT-");
     return axios.post("/api/users/" + userName, userData);
   },
-  getItems: () => {
-    return axios.get("/api/items");
+  getItems: (id) => {
+    console.log("THIS IS ID FROM API", id)
+    return axios.get("/api/items" + id);
+
+    // return axios.get("/api/items" + id);
   },
   getItem: id => {
     return axios.get("/api/items/" + id);

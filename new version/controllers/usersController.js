@@ -21,6 +21,7 @@ module.exports = {
       },
       (err, user) => {
         console.log("controller user: ", user);
+        req.session.user = user
         if (err) throw err;
         if (!user) return res.json("incorrect username");
         return user.checkPassword(req.body.password, user.account_key);
@@ -48,7 +49,11 @@ module.exports = {
     console.log("req.session.id: ", req.session.id);
     req.body.uuid = uuidv1();
     db.User.create(req.body)
-      .then(dbModel => res.json(dbModel))
+      .then((dbModel) => {
+        console.log("", dbModel)
+        req.session.user = dbModel;
+        res.json(dbModel)
+      })
       .catch(err => res.status(422).json(err));
   },
   update: (req, res) => {
@@ -68,10 +73,12 @@ module.exports = {
   // },
   findUserAndItems: (req, res) => {
     console.log("i am running now ahhhhhh")
-    console.log(req.session, "this is the user")
-    db.User.findOne({uuid: req.session.id})
+    console.log("this is our req.session", req.session)
+    console.log("this is req. params", req.params)
+    db.User.findOne({uuid: req.session.user.uuid})
     .populate("myItems")
     .then((data) =>{
+      console.log(data)
       res.json(data)
     })
   }

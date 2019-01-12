@@ -32,6 +32,7 @@ module.exports = {
         console.log("controller req:", req.body.uuid  )
         db.User.findOneAndUpdate({uuid: req.body.uuid}, {$push: { myItems: dbModel._id}}, { new: true })
         .then((dbModel) => {
+          console.log(dbModel)
           res.json(dbModel)          
         })
         .catch(err => res.status(422).json(err));

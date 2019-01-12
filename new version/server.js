@@ -20,17 +20,12 @@ app.use(
     resave: false, //required
     saveUninitialized: false //required
   })
-<<<<<<< HEAD
 )
-app.use( (req, res, next) => {
-  console.log("\n*****\n\nreq.session: ", req.session.id + "\n*****\n");
-=======
-);
-app.use((req, res, next) => {
-  // console.log("\n*****\n\nreq.session: ", req.session.id + "\n*****\n");
->>>>>>> master
-  return next();
-});
+// app.use( (req, res, next) => {
+//   console.log("\n*****\n\nreq.session: ", req.session.id + "\n*****\n");
+//   return next();
+// });
+
 app.post("/api/user", (req, res) => {
   req.session.username = req.body.username;
   res.end();
