@@ -13,7 +13,7 @@ const Login = props => {
       :
         <div>
           <h5 className="grey-text text-darken-3">Login</h5>
-          <form onSubmit={this.handleSubmit} className="white">
+          <form onSubmit={props.handleSubmit} className="white">
             <div className="input-field">
               <label htmlFor="email">Email: </label>
               <input
@@ -30,26 +30,21 @@ const Login = props => {
                   // value={props.state.user.account_key}
                   onChange={props.handleChange}
                 />
-                <button
+                <input
                   className="btn pink lighten-1 z-depth-0"
-                  input
+                  type="submit"
+                  value="Signup"
+                  onClick={props.submit}
+                />
+                <input
+                  className="btn pink lighten-1 z-depth-0"
+                  name="forgot password"
                   type="submit"
                   value="Forgot Password"
                   pword={props.state.resetPswd}
                   onClick={props.click}
-                >
-                  Forgot Password
-                </button>
+                />
 
-                <button
-                  className="btn pink lighten-1 z-depth-0"
-                  input
-                  type="submit"
-                  value="Signup"
-                  onClick={props.submit}
-                >
-                  Login
-                </button>
               </div>
             </div>
           </form>

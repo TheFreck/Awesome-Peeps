@@ -3,6 +3,7 @@ import React from "react";
 const ResetPswd = props => {
   return (
     <div className="list-overflow-container">
+      <h1>Enter your email to reset your password</h1>
       <form>
         <label htmlFor="resetPswdText">Email Address: </label>
         <input 
@@ -13,7 +14,7 @@ const ResetPswd = props => {
         />
         <input
           type="submit"
-          onClick={props.click}
+          submit={props.click}
         />
       </form>
     </div>
