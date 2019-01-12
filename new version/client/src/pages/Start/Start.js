@@ -107,6 +107,16 @@ class Start extends Component {
       username: this.state.user.email,
       password: this.state.user.account_key
     })
+<<<<<<< HEAD
+    .then(res => {
+      if(res.data) {
+        // console.log(res.data)
+        this.setState({
+          user: {
+            ...this.state.user,
+            uuid: res.data.uuid,
+            verified: true
+=======
       .then(res => {
         console.log("Start res: ", res.data);
         if (res.data) {
@@ -119,6 +129,7 @@ class Start extends Component {
               lastName: res.data.lastName,
               pic: res.data.pic,
               notes: res.data.notes
+>>>>>>> master
             }
           }
           console.log("user: ", user.user);
