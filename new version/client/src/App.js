@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import NoMatch from "./pages/NoMatch";
 import Nav from "./components/Nav/Nav";
@@ -18,34 +18,78 @@ import Shopping from "./pages/Shopping";
 // import Profile from "./pages/Profile";
 import ResetPswd from "./components/ResetPswd";
 
-const App = () => (
-  <Router>
-    <div>
-      <Nav />
-      <Switch>
-        {/* <Route exact path="/Landing" component={Landing} /> */}
-        <Route exact path="/" component={Start} />
-        <Route exact path="/create" component={Create} />
-        <Route exact path="/ResetPswd" component={ResetPswd} />
-        {/* <Route exact path="/profile" component={Profile} /> */}
-        <Route exact path="/Create" component={Create} />
-        <Route exact path="/Friends" component={Friends} />
-        <Route exact path="/FriendRegistry" component={FriendRegistry} />
+const initialState = {
+  uuid: "",
+  account_key: "",
+  sessionId: "",
+  email: "",
+  firstName: "",
+  lastName: "",
+  screenName: "",
+  pic: "",
+  shareWithMe: [],
+  shareWithOthers: [],
+  notes: ""
+};
 
-        {/* //Navigation imports ***PENDING PAGES CREATION*** */}
-        {/* <Route exact path="/Shopping" component={Shopping} />
-        
-        <Route path="/Signup" component={Signup} />
-        <Route path="/Login" component={Login} />
-        {/* //Navigation imports ***PENDING PAGES CREATION*** */}
-        <Route exact path="/Shopping" component={Shopping} />
-        {/* <Route exact path="/Friends" component={Friends} />
-        <Route exact path="/Profile" component={Profile} /> */}
+class App extends Component {
+  state = initialState;
 
-        <Route component={NoMatch} />
-      </Switch>
-    </div>
-  </Router>
-);
+  updateState = updates => {
+    this.setState({
+      ...this.state,
+      [updates.key]: updates.value
+    })
+  }
+
+  render(){
+    return(
+      <Router>
+        <div>
+          <Nav />
+          <Switch>
+            {/* <Route exact path="/Landing" component={Landing} /> */}
+            <Route 
+              exact path="/"
+              render={() => <Start update={this.updateState} state={this.state} />}
+            />
+            <Route 
+              exact path="/landing"
+              render={() => <Create state={this.state} />}
+            />
+            <Route 
+              exact path="/create"
+              render={() => <Create state={this.state} />}
+            />
+            <Route
+              exact path="/reset"
+              render={() => <ResetPswd state={this.state} />}
+            />
+            <Route
+              exact path="/friends"
+              render={() => <Friends state={this.state} />}
+            />
+            <Route 
+              exact path="/friend-registry"
+              render={() => <FriendRegistry state={this.state} />}
+            />
+
+            {/* //Navigation imports ***PENDING PAGES CREATION*** */}
+            {/* <Route exact path="/Shopping" component={Shopping} />
+            
+            <Route path="/Signup" component={Signup} />
+            <Route path="/Login" component={Login} />
+            {/* //Navigation imports ***PENDING PAGES CREATION*** */}
+            <Route exact path="/shopping" component={Shopping} />
+            {/* <Route exact path="/Friends" component={Friends} />
+            <Route exact path="/Profile" component={Profile} /> */}
+
+            <Route component={NoMatch} />
+          </Switch>
+        </div>
+      </Router>
+    )
+  }
+}
 
 export default App;

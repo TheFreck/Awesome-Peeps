@@ -4,9 +4,9 @@ import React, { Component } from "react";
 // import { Link } from "react-router-dom";
 // import { List, ListItem } from "../../components/List";
 // import { Input, TextArea, FormBtn } from "../../components/Form";
-import Button from "../../components/Button";
 // import SearchForm from "../../components/SearchForm";
-import { /* Col, Row, */ Container } from "../../components/Grid";
+import Button from "../../components/Button";
+import { Container } from "../../components/Grid";
 import API from "../../utils/API";
 import Login from "../../components/Login";
 import Signup from "../../components/Signup";
@@ -29,17 +29,19 @@ const initialState = {
   notes: ""
 };
 
-
 class Start extends Component {
-  state = {
-    resetPasswordBoolean: false,
-    resetPswdText: "",
-    viewProfile: false,
-    isUser: true,
-    user: initialState
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      resetPasswordBoolean: false,
+      resetPswdText: "",
+      viewProfile: false,
+      isUser: true,
+      user: props.state
+    };
+  }
   componentDidMount() {
-    console.log("mounted");
+    console.log("state: ", this.props);
   }
 
   handleChange = event => {
@@ -52,6 +54,10 @@ class Start extends Component {
         [name]: value
       }
     });
+    this.props.update({
+      key: name,
+      value: value
+    })
   };
 
   signup = event => {
@@ -67,6 +73,8 @@ class Start extends Component {
             this.setState({
               user: res.data
             });
+            this.props.update(res.data);
+            
             console.log("finished form submit true: ", this.state.user);
           } else {
             console.log("signup error");
@@ -114,7 +122,7 @@ class Start extends Component {
       .then(res => {
         console.log("Start res: ", res.data);
         if (res.data) {
-          this.setState({
+          let user = {
             user: {
               ...this.state.user,
               uuid: res.data.uuid,
@@ -125,7 +133,12 @@ class Start extends Component {
               notes: res.data.notes
 >>>>>>> master
             }
-          });
+          }
+          console.log("user: ", user.user);
+          this.setState(user);
+          this.props.update(user.user)
+          res.redirect("/landing");
+          console.log("res: ", res);
         } else {
           console.log("incorrect password");
         }
@@ -137,16 +150,18 @@ class Start extends Component {
     event.preventDefault();
     console.log("event.target: ", event.target);
     this.setState(initialState);
+    this.props.update(initialState)
     console.log("this.state: ", this.state);
   };
 
   toggleStart = () => {
-    console.log("does it hit?")
+    console.log("does it hit?", this.state);
     this.setState({ 
       ...this.state,
       resetPasswordBoolean: false,
       isUser: !this.state.isUser
     })
+    
   }
 
   viewProfile = () => this.setState({ viewProfile: !this.state.viewProfile });
@@ -166,7 +181,7 @@ class Start extends Component {
 
   render() {
     // are you signed in?
-    if (this.state.user.uuid) {
+    if (this.props.state.uuid) {
       // you are signed in
       return (
         <Container fluid>
@@ -211,7 +226,6 @@ class Start extends Component {
                 click={this.toggleStart}
                 name="Signup Instead" 
               />
-              <Button click={this.toggleStart} name="Signup Instead" />
             </Container>
           ) : (
             // not a user so let's sign up
