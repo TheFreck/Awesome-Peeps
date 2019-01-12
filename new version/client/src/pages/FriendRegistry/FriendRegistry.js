@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Row from "../../components/Row"
 import API from "../../utils/API"
-import RegistryHeader from "../../components/RegistryHeader"
+// import RegistryHeader from "../../components/RegistryHeader"
 import UserList from "../../components/UserList"
 import MainLogo from "../../components/MainLogo"
 

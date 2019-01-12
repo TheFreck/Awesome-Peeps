@@ -1,10 +1,12 @@
 import React, { Component } from "react";
 import API from "../../utils/API";
+// import Nav from "../../components/Nav";
 import MainLogo from "../../components/MainLogo";
+// import DeleteBtn from "../../components/DeleteBtn";
 
 class Shopping extends Component {
   state = {
-    items: [],
+    stuff: [],
     users: [],
     item: "",
     price: "",
@@ -18,7 +20,7 @@ class Shopping extends Component {
   getItems = () => {
     API.getItems()
       .then(res =>
-        this.setState({ items: res.data, item: "", price: "" })
+        this.setState({ stuff: res.data, item: "", price: "" })
       )
       .catch(err => console.log(err));
   };
@@ -53,25 +55,26 @@ class Shopping extends Component {
             </tr>
           </thead>
           <tbody>
-            {this.state.items.map(item => (
+            {this.state.stuff.map(item => (
               <tr key={item._id}>
-                <td>
-                  {item.name} 
-                </td>
+                <td>{item.name} </td>
                 <td>{item.item}</td>
                 <td>{item.price}</td>
                 <td>{item.occasion}</td>
                 <td>{item.comments}</td>
-                <td><button onClick={() => this.deleteItem(item._id)}>Delete</button>
-                  <button onClick={() => this.deleteItem(item._id)}>Buy it!</button></td>         
+                <td>
+                  <button onClick={() => this.deleteItem(item._id)}>Delete</button>
+                  <button onClick={() => this.deleteItem(item._id)}>Buy it!</button>
+                </td>         
               </tr>
           ))}
-            {/* {this.state.users.map(user =>(
+            {this.state.users.map(user =>(
                <tr key={user._id}>
                <td>
+                 {user.firstName}
                </td>
                </tr> 
-            ))} */}
+            ))}
           </tbody>
       </div>
     );

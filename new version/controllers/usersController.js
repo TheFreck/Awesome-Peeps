@@ -45,6 +45,7 @@ module.exports = {
   },
   create: (req, res) => {
     req.body.sessionId = req.session.id;
+    console.log("req.session.id: ", req.session.id);
     req.body.uuid = uuidv1();
     db.User.create(req.body)
       .then(dbModel => res.json(dbModel))

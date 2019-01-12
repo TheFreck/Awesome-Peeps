@@ -1,13 +1,16 @@
 import React from "react";
-// import Button from "../Button";
+import Button from "../Button";
 import ResetPswd from "../ResetPswd";
 
 const Login = props => {
   return (
-    <div className="container">
-      {props.reset ? (
-        <ResetPswd handleChange={props.handleChange} click={props.click} />
-      ) : (
+    <div>
+      {props.state.resetPasswordBoolean ? 
+        <ResetPswd
+          handleChange={props.handleChange}
+          click={props.click}
+        />
+      :
         <div>
           <h5 className="grey-text text-darken-3">Login</h5>
           <form onSubmit={this.handleSubmit} className="white">
@@ -16,7 +19,7 @@ const Login = props => {
               <input
                 type="email"
                 name="email"
-                value={props.state.user.email}
+                // value={props.state.user.email}
                 onChange={props.handleChange}
               />
               <div className="input-field">
@@ -24,7 +27,7 @@ const Login = props => {
                 <input
                   type="password"
                   name="account_key"
-                  value={props.state.user.account_key}
+                  // value={props.state.user.account_key}
                   onChange={props.handleChange}
                 />
                 <button
@@ -51,7 +54,7 @@ const Login = props => {
             </div>
           </form>
         </div>
-      )}
+      }
     </div>
   );
 };
