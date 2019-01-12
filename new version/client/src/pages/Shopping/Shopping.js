@@ -6,23 +6,32 @@ import MainLogo from "../../components/MainLogo";
 
 class Shopping extends Component {
   state = {
-    items: [],
+    stuff: [],
+    users: [],
     item: "",
     price: "",
-    
   };
 
   componentDidMount() {
-    this.getItems();
+    this.getItems()
+    this.getPerson();
   }
 
   getItems = () => {
     API.getItems()
       .then(res =>
-        this.setState({ items: res.data, item: "", price: "" })
+        this.setState({ stuff: res.data, item: "", price: "" })
       )
       .catch(err => console.log(err));
   };
+
+  getPerson = () => {
+      API.getUsers()
+      .then(res =>
+        this.setState({ users: res.data, firstName: ""})
+      )
+        .catch(err => console.log(err));
+  }
 
   deleteItem = id => {
     API.deleteItem(id)
@@ -33,26 +42,39 @@ class Shopping extends Component {
   render() {
     return (
       <div> 
-        <MainLogo />
+        <div class="col s12 center-align top:60px">
+          <MainLogo />
+        </div>
         <thead>
             <tr>
               <th>GREEDY BASTARD</th>
               <th>ITEM</th>
               <th>PRICE</th>
               <th>OCCASION</th>
-              <th>DATE ADDED</th>
+              <th>COMMENTS</th>
             </tr>
           </thead>
           <tbody>
-            {this.state.items.map(item => (
+            {this.state.stuff.map(item => (
               <tr key={item._id}>
+                <td>{item.name} </td>
+                <td>{item.item}</td>
+                <td>{item.price}</td>
+                <td>{item.occasion}</td>
+                <td>{item.comments}</td>
                 <td>
-                  {item.item} {item.price} occasion:{item.occasion} comments:{item.comments}
                   <button onClick={() => this.deleteItem(item._id)}>Delete</button>
                   <button onClick={() => this.deleteItem(item._id)}>Buy it!</button>
-                </td>
+                </td>         
               </tr>
           ))}
+            {this.state.users.map(user =>(
+               <tr key={user._id}>
+               <td>
+                 {user.firstName}
+               </td>
+               </tr> 
+            ))}
           </tbody>
       </div>
     );
