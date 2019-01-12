@@ -38,7 +38,12 @@ class App extends Component {
   updateState = updates => {
     this.setState({
       ...this.state,
-      [updates.key]: updates.value
+      uuid: updates.uuid,
+      screenName: updates.screenName,
+      firstName: updates.firstName,
+      lastName: updates.lastName,
+      pic: updates.pic,
+      notes: updates.notes
     })
   }
 
@@ -48,41 +53,36 @@ class App extends Component {
         <div>
           <Nav />
           <Switch>
-            {/* <Route exact path="/Landing" component={Landing} /> */}
             <Route 
               exact path="/"
               render={() => <Start update={this.updateState} state={this.state} />}
             />
             <Route 
               exact path="/landing"
-              render={() => <Create state={this.state} />}
+              render={() => <Create update={this.updateState} state={this.state} />}
             />
             <Route 
               exact path="/create"
-              render={() => <Create state={this.state} />}
+              render={() => <Create update={this.updateState} state={this.state} />}
             />
             <Route
               exact path="/reset"
-              render={() => <ResetPswd state={this.state} />}
+              render={() => <ResetPswd update={this.updateState} state={this.state} />}
             />
             <Route
               exact path="/friends"
-              render={() => <Friends state={this.state} />}
+              render={() => <Friends update={this.updateState} state={this.state} />}
             />
             <Route 
               exact path="/friend-registry"
-              render={() => <FriendRegistry state={this.state} />}
+              render={() => <FriendRegistry update={this.updateState} state={this.state} />}
+            />
+            <Route 
+              exact path="/shopping"
+              render={() => <Shopping update={this.updateState} state={this.state} />}
             />
 
             {/* //Navigation imports ***PENDING PAGES CREATION*** */}
-            {/* <Route exact path="/Shopping" component={Shopping} />
-            
-            <Route path="/Signup" component={Signup} />
-            <Route path="/Login" component={Login} />
-            {/* //Navigation imports ***PENDING PAGES CREATION*** */}
-            <Route exact path="/shopping" component={Shopping} />
-            {/* <Route exact path="/Friends" component={Friends} />
-            <Route exact path="/Profile" component={Profile} /> */}
 
             <Route component={NoMatch} />
           </Switch>

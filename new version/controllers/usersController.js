@@ -12,6 +12,7 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
   login: (req, res) => {
+    console.log("req.session: ", req.session);
     console.log("controller username: ", req.body.username);
     console.log("controller password: ", req.body.password);
     console.log("controller req.body: ", req.body);
@@ -25,16 +26,16 @@ module.exports = {
         if (!user) return res.json("incorrect username");
         return user.checkPassword(req.body.password, user.account_key);
 
-        if (!user.checkPassword(req.body.password, user.account_key)) {
-          console.log("failed!!!", user);
-          res.json(false);
-        }
-        if (user.checkPassword(req.body.password, user.account_key)) {
-          console.log("passed!!!", user);
-          req.body.sessionId = req.session.id;
-          res.json(true);
-        }
-        return null, user;
+        // if (!user.checkPassword(req.body.password, user.account_key)) {
+        //   console.log("failed!!!", user);
+        //   res.json(false);
+        // }
+        // if (user.checkPassword(req.body.password, user.account_key)) {
+        //   console.log("passed!!!", user);
+        //   req.body.sessionId = req.session.id;
+        //   res.json(true);
+        // }
+        // return null, user;
       }
     )
       .then(dbModel => {
