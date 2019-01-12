@@ -9,32 +9,19 @@ class Create extends Component {
     savedItems: [],
     item: "",
     price: 0,
-    url: "",
-    // pic: "",
+    url: "",`
     occasion: "",
     comments: "",
     users: [],
-    // uuid: "",
-    // account_key: "",
-    // sessionId: "",
-    // email: "",
-    name: "",
-    // shareWithMe: [],
-    // shareWithOthers: [],
     myItems: [],
-    notes: "",
     user: this.props.state
-    
   }
 
   componentDidMount() {
-    // this.getSavedItems();
-   
-    this.setState({ uuid: this.state.user.uuid })
-    this.userAndItems(this.state.user.uuid);
-    // console.log("props from create.js", this.props.state.uuid)
-    // console.log("json", this.state.myItems)
-    // this.getSavedItems();
+    this.getSavedItems();
+
+    // this.setState({ uuid: this.props.state.user.uuid })
+    // console.log("props from create.js", this.props.state.user.uuid)
     // this.getAllUsers();
   }
 
