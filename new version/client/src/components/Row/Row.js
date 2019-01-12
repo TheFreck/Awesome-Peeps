@@ -3,9 +3,9 @@ import React from "react";
 const Row = props => (
 
 
-  <div className="popover">
-  <button className="btn btn-primary">{props.item}</button>
-  <div className="popover-container">
+  <div>
+  {/* <div className="btn btn-primary">{props.item}</div> */}
+  <div className="container">
     <div className="card">
       <div className="card-header">
        {props.item}
