@@ -82,7 +82,19 @@ module.exports = {
       console.log(data)
       res.json(data)
     })
-  }
+  },
+
+  findUser: (req, res) => {
+    console.log("findUser running")
+    console.log("this is our req.session", req.session)
+    console.log("this is req. params", req.params)
+    db.User.findOne({name: req.session.user.name})
+    .populate("myUsers")
+    .then((data) =>{
+      console.log(data)
+      res.json(data)
+    })
+  },
 };
 
 

@@ -9,7 +9,7 @@ class Create extends Component {
     savedItems: [],
     item: "",
     price: 0,
-    url: "",`
+    url: "",
     occasion: "",
     comments: "",
     users: [],
@@ -18,10 +18,10 @@ class Create extends Component {
   }
 
   componentDidMount() {
-    this.getSavedItems();
+    // this.getSavedItems();
 
-    // this.setState({ uuid: this.props.state.user.uuid })
-    // console.log("props from create.js", this.props.state.user.uuid)
+    this.setState({ uuid: this.props.state.uuid })
+    console.log("props from create.js", this.props.state.uuid)
     // this.getAllUsers();
   }
 

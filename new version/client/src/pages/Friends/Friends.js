@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import UserList from "../../components/UserList"
+import FriendBtn from "../../components/FriendBtn";
 import API from "../../utils/API";
 import MainLogo from "../../components/MainLogo";
 
@@ -11,55 +11,41 @@ class Friends extends Component {
     item: "",
     price: 0,
     url: "",
-    pic: "",
     occasion: "",
     comments: "",
     users: [],
-    user: {
-      uuid: "",
-      account_key: "",
-      sessionId: "",
-      email: "",
-      name: "",
-      pic: "",
-      shareWithMe: [],
-      shareWithOthers: [],
-      myItems: [],
-      notes: ""
-    }
+    name: "",
+    myItems: [],
+    notes: "",
+    user: this.props.state
+    
   }
 
-  // componentDidMount() {
-  //   this.getUsers();
-  // }
+  componentDidMount() {
+    // this.setState({ uuid: this.state.uuid })
+    // this.userAndItems(this.state.uuid);
+  }
 
-  //Share registry with another user
-populateUsers = event => {
-  event.preventDefault();
-  console.log("Share with user")
-    API.getUsers({
-      name: this.state.name,
-      uuid: this.state.uuid
-    })
-      .then(res => {
-        console.log("users data: ", res);
-        this.getAllUsers();
-      })
-      .catch(err => console.log(err));
-};
+  User = (id) => {
+    API.getUser(id)
+    .then(res =>{
+      console.log("this is our res fron userctrl", res)
+      this.setState({ myUsers: res.data.myUsers })
+    }
+
+    )
+    .catch(err => console.log(err));
+  };
 
   renderUsers = () => {
-    return this.state.users.map(save => (
-      <UserList
-        _id={save._id}
-        key={save._id}uninsta
+    return this.state.User.map(save => (
+      <FriendBtn
         name={save.name}
-        uuid={save.uuid}
-        pic={save.pic}
         selectUser={this.selectUser}
       />
-    ))
-  }
+    ));
+  };
+
 
 render() {
   return (
@@ -78,8 +64,8 @@ render() {
       </div>
       <div class="Row">
         <div class="col s12 center-align">
-          <UserList />
-          {/* <button class="waves-effect waves-light btn-large red seeGifts">{this.populateUsers}</button> */}
+          <FriendBtn />
+          {/* <button data-uuid={this.state.uuid} class="waves-effect waves-light btn-large red seeGifts">{this.}</button> */}
         </div>
       </div>
 

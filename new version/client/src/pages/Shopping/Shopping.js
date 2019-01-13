@@ -20,7 +20,7 @@ class Shopping extends Component {
   getItems = () => {
     API.getItems()
       .then(res =>
-        this.setState({ stuff: res.data, item: "", price: "" })
+        this.setState({ myItems: res.data.myItems})
       )
       .catch(err => console.log(err));
   };
