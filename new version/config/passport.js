@@ -104,11 +104,8 @@ module.exports = passport => {
       (req, email, account_key, done) => {
         // does this user already exist?
         console.log("passport login hit");
-        db.User.findOne({
-          profile: {
-            email: email
-          }
-        }).then((user, err) => {
+        db.User.findOne({email: email})
+        .then((user, err) => {
           if (err) throw err;
 
           if (!user) {

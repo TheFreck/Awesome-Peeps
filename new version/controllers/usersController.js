@@ -12,37 +12,29 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
   login: (req, res) => {
-    console.log("req.session: ", req.session);
-    console.log("controller username: ", req.body.username);
-    console.log("controller password: ", req.body.password);
-    console.log("controller req.body: ", req.body);
     db.User.findOne(
       {
         email: req.body.username
       },
       (err, user) => {
         console.log("controller user: ", user);
-        if (err) throw err;
-        if (!user) return res.json("incorrect username");
-        return user.checkPassword(req.body.password, user.account_key);
-
-        // if (!user.checkPassword(req.body.password, user.account_key)) {
-        //   console.log("failed!!!", user);
-        //   res.json(false);
-        // }
-        // if (user.checkPassword(req.body.password, user.account_key)) {
-        //   console.log("passed!!!", user);
-        //   req.body.sessionId = req.session.id;
-        //   res.json(true);
-        // }
-        // return null, user;
+        if(err) return err;
+        if(!user) return res.json("incorrect username");
+        const pwrdCheck = user.checkPassword(req.body.password, user.account_key);
+        if(!pwrdCheck) {
+          console.log("failed!!!");
+          // res.redirect("/");
+          return res.json(false);
+        }
+        if(pwrdCheck) {
+          console.log("passed!!!", user);
+          req.body.sessionId = req.session.id;
+          // res.redirect("/landing")
+          return user;
+        }
+        return null, user;
       }
     )
-      .then(dbModel => {
-        console.log("dbModel: ", dbModel);
-        res.json(dbModel);
-      })
-      .catch(err => res.status(422).json(err));
   },
   create: (req, res) => {
     req.body.sessionId = req.session.id;

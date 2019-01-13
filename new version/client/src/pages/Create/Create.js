@@ -20,8 +20,8 @@ class Create extends Component {
   componentDidMount() {
     this.getSavedItems();
 
-    // this.setState({ uuid: this.props.state.user.uuid })
-    // console.log("props from create.js", this.props.state.user.uuid)
+    this.setState({ uuid: this.props.state.user.uuid })
+    console.log("props from create.js", this.props.state.user.uuid)
     // this.getAllUsers();
   }
 

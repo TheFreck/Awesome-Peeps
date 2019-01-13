@@ -44,7 +44,7 @@ class Start extends Component {
 
   handleChange = event => {
     event.preventDefault();
-    console.log("handleChange: ", event.target);
+    // console.log("handleChange: ", event.target);
     const { name, value } = event.target;
     this.setState({
       ...this.state,
@@ -122,30 +122,30 @@ class Start extends Component {
       username: this.state.user.email,
       password: this.state.user.account_key
     })
-      .then(res => {
-        console.log("Start res: ", res.data);
-        if (res.data) {
-          let user = {
-            user: {
-              ...this.state.user,
-              uuid: res.data.uuid,
-              screenName: res.data.screenName,
-              firstName: res.data.firstName,
-              lastName: res.data.lastName,
-              pic: res.data.pic,
-              notes: res.data.notes
-            }
+    .then(res => {
+      console.log("Start res: ", res.data);
+      if (res.data) {
+        let user = {
+          user: {
+            ...this.state.user,
+            uuid: res.data.uuid,
+            screenName: res.data.screenName,
+            firstName: res.data.firstName,
+            lastName: res.data.lastName,
+            pic: res.data.pic,
+            notes: res.data.notes
           }
-          console.log("user: ", user.user);
-          this.setState(user);
-          this.props.updateStateItem(user.user)
-          
-          console.log("res: ", res);
-        } else {
-          console.log("incorrect password");
         }
-      })
-      .catch(err => console.log("login err err: ", err));
+        console.log("user: ", user.user);   
+        this.setState(user);
+        this.props.updateStateItem(user.user)
+        
+        console.log("res: ", res);
+      } else {
+        console.log("incorrect password");
+      }
+    })
+    .catch(err => console.log("login err err: ", err));
   };
 
   logout = event => {

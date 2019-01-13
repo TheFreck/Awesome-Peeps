@@ -36,7 +36,7 @@ class App extends Component {
   state = initialState;
 
   updateStateItem = updates => {
-    console.log("updateStateItem: ", updates);
+    // console.log("updateStateItem: ", updates);
     this.setState({
       ...this.state,
       uuid: updates.uuid,
@@ -49,7 +49,7 @@ class App extends Component {
   }
   
   updateState = updates => {
-    console.log("updateState: ", updates);
+    // console.log("updateState: ", updates);
     this.setState({
       ...this.state,
       [updates.key]: updates.value

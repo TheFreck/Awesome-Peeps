@@ -1,4 +1,5 @@
 import React from "react";
+import Button from "../Button";
 
 const ResetPswd = props => {
   return (
@@ -15,6 +16,10 @@ const ResetPswd = props => {
         <input
           type="submit"
           submit={props.click}
+        />
+        <Button 
+          name="just kidding"
+          click={props.click}
         />
       </form>
     </div>

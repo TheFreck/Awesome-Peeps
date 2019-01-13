@@ -33,7 +33,7 @@ const Login = props => {
                 <input
                   className="btn pink lighten-1 z-depth-0"
                   type="submit"
-                  value="Signup"
+                  value="Login"
                   onClick={props.submit}
                 />
                 <input
