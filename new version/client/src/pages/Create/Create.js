@@ -17,64 +17,51 @@ class Create extends Component {
     user: this.props.state
   }
 
-  componentDidMount() {
-    this.getSavedItems();
-
-    this.setState({ uuid: this.props.state.user.uuid })
-    console.log("props from create.js", this.props.state.user.uuid)
+  componentDidMount() {   
+    this.setState({ uuid: this.state.user.uuid })
+    this.userAndItems(this.state.user.uuid);
+    // this.getSavedItems();
     // this.getAllUsers();
   }
 
+  userAndItems = (id) => {
+    API.getUserandItems(id)
+    .then(res =>{
+      console.log("this is our res fron userctrl", res)
+      this.setState({ myItems: res.data.myItems })
+    }
 
-
-userAndItems = (uuid) => {
-  API.getUserandItems()
-  .then(res =>
-    this.setState({ savedItems: res.data })
-  )
-  .catch(err => console.log(err));
-};
-  // getSavedItems = () => {
-  //   API.getItems()
-  //     .then(res =>
-  //       this.setState({ savedItems: res.data })
-  //     )
-  //     .catch(err => console.log(err));
-  // };
-
-  getSavedItems = () => {
-    API.getItems()
-      .then(res => this.setState({ savedItems: res.data }))
-      .catch(err => console.log(err));
+    )
+    .catch(err => console.log(err));
   };
-
-
-
   
-
   //Find saved users
   getAllUsers = () => {
     API.getUsers()
-      .then(res => this.setState({ users: res.data }))
-      .catch(err => console.log(err));
+    .then(res => this.setState({ users: res.data }))
+    .catch(err => console.log(err));
   };
-
+  
+  
+  
   //Delete item from registry
   deleteItem = id => {
     API.deleteItem(id)
-      .then(res => this.getSavedItems())
-      .catch(err => {
-        console.log(err);
-      });
-  };
+    // .then(res => this.getSavedItems())
+    .then(res => this.userAndItems())
 
+    .catch(err => {
+      console.log(err);
+    });
+  };
+  
   handleChange = event => {
     const { name, value } = event.target;
     this.setState({
       [name]: value
     });
   };
-
+  
   //Saves item to registry
   handleSaveItem = event => {
     event.preventDefault();
@@ -90,13 +77,15 @@ userAndItems = (uuid) => {
         uuid: this.state.uuid
       })
         .then(res => {
-          console.log("save item response: ", res);
-          this.getSavedItems();
+          // console.log("save item response: ", res);
+          this.userAndItems();
+
         })
         .catch(err => console.log(err));
-    }
-  };
-
+      }
+    };
+    
+    
   //Share registry with another user
   shareRegistry = event => {
     event.preventDefault();
@@ -112,21 +101,8 @@ userAndItems = (uuid) => {
       .catch(err => console.log(err));
   };
 
-  // selectUser = event => {
-  //   event.preventDefault();
-  //   console.log("Shared with", event.target.value)
-  //   console.log("User Selected")
-
-  //     API.getUser({
-  //       this.setState({ sharedUser: res.data })
-  //     })
-  // }
-
   selectUser = event => {
-    // console.log("This is data-id", event.target.getAttribute("data-id"))
-    console.log("This is uuid value", event.target.value);
-    // console.log("This is uuid name", event.target.name)
-    // console.log(this.state.user.login.uuid)
+   
     API.updateUser({
       "login.uuid": event.target.value
     })
@@ -158,7 +134,7 @@ userAndItems = (uuid) => {
   };
 
   renderSaved = () => {
-    return this.state.savedItems.map(save => (
+    return this.state.myItems.map(save => (
       <Row
         _id={save._id}
         key={save._id}
@@ -168,7 +144,7 @@ userAndItems = (uuid) => {
         occasion={save.occasion}
         comments={save.comments}
         deleteItem={this.deleteItem}
-        getSavedArticles={this.getSavedArticles}
+        userAndItems={this.userAndItems}
       />
     ));
   };
@@ -178,7 +154,6 @@ userAndItems = (uuid) => {
       <UserList
         _id={save._id}
         key={save._id}
-        uninsta
         name={save.name}
         uuid={save.uuid}
         pic={save.pic}

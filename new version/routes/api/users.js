@@ -8,15 +8,15 @@ router
   .post(usersController.create)
   .put(usersController.update);
 
-// Matches with "/api/books/:id"
+// Matches with "/api/items/:id"
 router
   .route("/:id")
   .post(usersController.login)
-  // .get(usersController.grabInfoFromButton)
+  .get(usersController.findUserAndItems)
   .put(usersController.update)
   .delete(usersController.remove);
 
-  router.route("/items")
-  .get(usersController.findUserAndItems)
+  // router.route("/items/")
+  // .get(usersController.findUserAndItems)
 
 module.exports = router;
