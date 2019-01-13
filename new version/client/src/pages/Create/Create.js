@@ -17,11 +17,10 @@ class Create extends Component {
     user: this.props.state
   }
 
-  componentDidMount() {
-    this.getSavedItems();
-
-    // this.setState({ uuid: this.props.state.user.uuid })
-    // console.log("props from create.js", this.props.state.user.uuid)
+  componentDidMount() {   
+    this.setState({ uuid: this.state.user.uuid })
+    this.userAndItems(this.state.user.uuid);
+    // this.getSavedItems();
     // this.getAllUsers();
   }
 
@@ -30,20 +29,11 @@ class Create extends Component {
     .then(res =>{
       console.log("this is our res fron userctrl", res)
       this.setState({ myItems: res.data.myItems })
-      //should above be res.data?
     }
 
     )
     .catch(err => console.log(err));
   };
-  // getSavedItems = () => {
-  //   API.getItems()
-  //     .then(res =>
-  //       this.setState({ savedItems: res.data })
-  //     )
-  //     .catch(err => console.log(err));
-  // };
-
   
   //Find saved users
   getAllUsers = () => {
@@ -87,8 +77,7 @@ class Create extends Component {
         uuid: this.state.uuid
       })
         .then(res => {
-          console.log("save item response: ", res);
-          // this.getSavedItems();
+          // console.log("save item response: ", res);
           this.userAndItems();
 
         })
@@ -96,15 +85,7 @@ class Create extends Component {
       }
     };
     
-    // getSavedItems = () => {
-    //   API.getItems()
-    //     .then(res => this.setState({ savedItems: res.data }))
-    //     .catch(err => console.log(err));
-    // };
-
-
-
-
+    
   //Share registry with another user
   shareRegistry = event => {
     event.preventDefault();
@@ -121,10 +102,7 @@ class Create extends Component {
   };
 
   selectUser = event => {
-    // console.log("This is data-id", event.target.getAttribute("data-id"))
-    console.log("This is uuid value", event.target.value);
-    // console.log("This is uuid name", event.target.name)
-    // console.log(this.state.user.login.uuid)
+   
     API.updateUser({
       "login.uuid": event.target.value
     })

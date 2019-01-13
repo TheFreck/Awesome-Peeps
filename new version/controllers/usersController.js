@@ -84,9 +84,3 @@ module.exports = {
     })
   }
 };
-
-
-// loggedIn: (req, res) => {
-//   db.User.findById({ uuid: req.body.uuid })
-//   .then
-// }
