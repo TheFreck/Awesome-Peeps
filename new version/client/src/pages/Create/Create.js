@@ -9,22 +9,12 @@ class Create extends Component {
     savedItems: [],
     item: "",
     price: 0,
-    url: "",
-    // pic: "",
+    url: "",`
     occasion: "",
     comments: "",
     users: [],
-    // uuid: "",
-    // account_key: "",
-    // sessionId: "",
-    // email: "",
-    name: "",
-    // shareWithMe: [],
-    // shareWithOthers: [],
     myItems: [],
-    notes: "",
     user: this.props.state
-    
   }
 
   componentDidMount() {   
