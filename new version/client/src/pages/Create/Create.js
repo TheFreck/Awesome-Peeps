@@ -3,40 +3,27 @@ import Row from "../../components/Row";
 import API from "../../utils/API";
 import RegistryHeader from "../../components/RegistryHeader";
 import UserList from "../../components/UserList";
-
 class Create extends Component {
   state = {
     savedItems: [],
     item: "",
     price: 0,
-    url: "",`
+    url: "",
     occasion: "",
     comments: "",
     users: [],
     search: "",
-    // uuid: "",
-    // account_key: "",
-    // sessionId: "",
-    // email: "",
     name: "",
-    // shareWithMe: [],
-    // shareWithOthers: [],
     myItems: [],
     notes: "",
     user: this.props.state,
     shared: []
   }
-
-
   //These load whent the page loads
   componentDidMount() {   
     this.setState({ uuid: this.state.user.uuid })
     this.userAndItems(this.state.user.uuid);
-    // this.getSavedItems();
-    // this.getAllUsers();
   }
-
-
   //This identifies who is logged in and populates their list with the items they want
   userAndItems = (id) => {
     API.getUserandItems(id)
@@ -46,7 +33,6 @@ class Create extends Component {
     })
     .catch(err => console.log(err));
   };
-
   //Find all users
   getAllUsers = () => {
     API.getUsers()
@@ -73,8 +59,6 @@ class Create extends Component {
       [name]: value
     });
   };
-
-
   
   //Saves item to registry
   handleSaveItem = event => {
@@ -90,7 +74,6 @@ class Create extends Component {
       })
         .then(res => {
         this.userAndItems();
-
         })
         .catch(err => console.log(err));
       }
@@ -111,16 +94,14 @@ class Create extends Component {
       })
       .catch(err => console.log(err));
   };
-
-  selectUser = id => {
-    console.log("THIS IS ID", id)
+  selectUser = userdata => {
+    console.log("THIS IS ID", userdata.uuid)
     // event.preventDefault();
     // this.setState({ shared: event.target.value}) 
     API.updateUser({
-      uuid: this.state.uuid,
-      name: this.state.user.firstName,
-      sharedwithMe: this.state.user.sharedwithMe
-      // uuid: event.target.value
+      uuid: userdata.uuid,
+      firstName: userdata.firstName,
+      
     })
       .then(res => {
         console.log("Create: ");
@@ -128,62 +109,51 @@ class Create extends Component {
       })
       .catch(err => console.log(err));
   };
-
   //Value from URL input
   handleURL = event => {
     this.setState({ url: event.target.value });
   };
-
   //Value from Price input
   handlePrice = event => {
     this.setState({ price: event.target.value });
   };
-
   //Value from Occasion input
   handleOccasion = event => {
     this.setState({ occasion: event.target.value });
   };
-
   //Value from Comments input
   handleComments = event => {
     this.setState({ comments: event.target.value });
   };
-
   //updates search state to current value in search bar
   updateSearch(event) {
     this.setState({ search: event.target.value.substr(0, 20)});
   }
-
-
-  handleUser = (event) => {
-    this.setState({ shared: event.target.value });
-    this.selectUser();
-  };
-  
-
-
+ 
   renderSaved = () => {
-    return this.state.myItems.map(save => (
-      <Row
-        _id={save._id}
-        key={save._id}
-        item={save.item}
-        price={save.price}
-        url={save.url}
-        occasion={save.occasion}
-        comments={save.comments}
-        deleteItem={this.deleteItem}
-        userAndItems={this.userAndItems}
-      />
-    ));
+    
+    if( this.state.myItems ){
+      return this.state.myItems.map(save => (
+        <Row
+          _id={save._id}
+          key={save._id}
+          item={save.item}
+          price={save.price}
+          url={save.url}
+          occasion={save.occasion}
+          comments={save.comments}
+          deleteItem={this.deleteItem}
+          userAndItems={this.userAndItems}
+        />
+      ));
+    }
   };
-
   renderUsers = () => {
     return this.state.users.map(save => (
       <UserList
         _id={save._id}
         key={save._id}
-        name={save.screenName}
+        firstName={save.firstName}
         uuid={save.uuid}
         pic={save.pic}
         sharewithMe={save.sharewithMe}
@@ -191,28 +161,7 @@ class Create extends Component {
       />
     ));
   };
-
-
-
-  // renderUsers = () => {
-  //   let filteredUser = this.state.users.filter(
-  //     (user) => {
-  //       return user.name.indexOf(this.state.search) !== -1;
-  //     }
-  //   )
-  //   return this.state.users.map(save => (
-  //     <UserList
-  //       _id={save._id}
-  //       key={save._id}
-  //       name={save.screenName}
-  //       uuid={save.uuid}
-  //       pic={save.pic}
-  //       selectUser={this.selectUser}
-  //     />
-  //   ));
-  // };
-
-
+  
   render() {
     return (
       <div className="container bg-white">
@@ -318,5 +267,5 @@ class Create extends Component {
     );
   }
 }
-
 export default Create;
+
