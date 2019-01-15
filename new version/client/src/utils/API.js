@@ -24,8 +24,8 @@ export default {
     return axios.post("/api/users", userData);
   },
   //updates user profile with given id
-  updateUser: id => {
-    return axios.put("/api/users/" + id)
+  updateUser: userData => {
+    return axios.put("/api/share/" + userData.uuid, userData)
   },
   login: userData => {
     let userName = userData.username;

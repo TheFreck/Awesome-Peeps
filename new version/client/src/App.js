@@ -44,7 +44,7 @@ class App extends Component {
       firstName: updates.firstName,
       lastName: updates.lastName,
       pic: updates.pic,
-      notes: updates.notes
+      notes: updates.notes,
     })
   }
   

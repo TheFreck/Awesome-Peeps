@@ -11,6 +11,7 @@ module.exports = {
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
+  
   login: (req, res) => {
     db.User.findOne(
       {
@@ -54,6 +55,28 @@ module.exports = {
     //   .then(dbModel => res.json(dbModel))
     //   .catch(err => res.status(422).json(err));
   },
+
+
+
+updateUser: (req, res) => {
+    //create item then takes the item id and adds it to the users myItems column
+    db.User.findByIdAndUpdate({uuid: "8f5bf630-16d3-11e9-9c3c-3de35eaba832"}
+    ,{$push: {shareWithMe: "8f5bf630-16d3-11e9-9c3c-3de35eaba832"}})
+  
+    .then((dbModel) => {
+        console.log("SLDKJFKLSDJF", dbModel)
+    })
+      .then((dbModel) => {
+          
+          console.log("ZZZZZZZZZZZZZZ", dbModel)
+          res.json(dbModel)          
+        })
+      .catch(err => res.status(422).json(err)
+    );
+  },
+  
+
+
   remove: (req, res) => {
     db.User.findById({ _id: req.params.id })
       .then(dbModel => dbModel.remove())
