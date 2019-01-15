@@ -13,7 +13,7 @@ router
   .route("/:id")
   .post(usersController.login)
   .get(usersController.findUserAndItems)
-  .put(usersController.update)
+  .put(usersController.updateUser)
   .delete(usersController.remove);
 
   // router.route("/items/")
