@@ -28,20 +28,22 @@ module.exports = {
   },
   update: (req, res) => {
     console.log("hit the update: ", req.body);
-    // db.User.findOneAndUpdate({ uuid: req.params.id }, req.body)
-    //   .then(dbModel => res.json(dbModel))
-    //   .catch(err => res.status(422).json(err));
   },
 
 
 
 updateUser: function(req, res) {
+  console.log('this is update user sesison', req.session);
     //create item then takes the item id and adds it to the users myItems column
-    db.User.findOneAndUpdate({uuid: "6b26db90-16d3-11e9-9c3c-3de35eaba832"}, {$push: { sharedWithOthers: "6b26db90-16d3-11e9-9c3c-3de35eaba832" }}, { new: true})
+    db.User.findOneAndUpdate({uuid: req.params.id}, {$push: { shareWithMe: req.session.user._id }}, { new: true})
         .then((dbModel) => {
+          console.log(dbModel);
           res.json(dbModel)          
         })
-      .catch(err => res.status(422).json(err));
+      .catch(err => {
+        console.log(err);  
+        res.status(422).json(err)
+      });
   },
 
   remove: (req, res) => {
@@ -50,8 +52,4 @@ updateUser: function(req, res) {
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
-  // grabInfoFromButton: (req, res) => {
-  //   console.log("grabbed it: ", req.body);
-  // },
-  
 };
