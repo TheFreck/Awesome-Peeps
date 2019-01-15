@@ -90,6 +90,10 @@ class App extends Component {
               exact path="/shopping"
               render={() => <Shopping update={this.updateState} state={this.state} />}
             />
+            <Route 
+              exact path="/reset/:token"
+              render={props => <ResetPswd {...props} />}
+            />
 
             {/* //Navigation imports ***PENDING PAGES CREATION*** */}
 
