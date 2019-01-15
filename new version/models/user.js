@@ -35,6 +35,10 @@ const userSchema = new Schema({
     type: String,
     required: false
   },
+  name: {
+    type: String, 
+    required: false
+  },
   pic: {
     type: String,
     required: false
