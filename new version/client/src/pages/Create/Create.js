@@ -9,8 +9,7 @@ class Create extends Component {
     savedItems: [],
     item: "",
     price: 0,
-    url: "",
-    // pic: "",
+    url: "",`
     occasion: "",
     comments: "",
     users: [],

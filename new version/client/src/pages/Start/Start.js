@@ -44,6 +44,7 @@ class Start extends Component {
 
   handleChange = event => {
     event.preventDefault();
+    console.log("handleChange: ", event.target);
     const { name, value } = event.target;
     this.setState({
       ...this.state,
@@ -51,12 +52,27 @@ class Start extends Component {
         ...this.state.user,
         [name]: value
       }
-    });
-    this.props.update({
+    })
+    this.props.updateState({
+      ...this.state,
       key: name,
       value: value
     })
-  };
+  }
+
+  // handleInputChange = input => {
+  //   // event.preventDefault();
+  //   console.log("handleInputChange target: ", event.target);
+  //   const { name, value } = event.target;
+  //   // this.setState({
+  //   //   ...this.state,
+  //   //   user: {
+  //   //     ...this.state.user,
+  //   //     [name]: value
+  //   //   }
+  //   // });
+  //   this.props.updateStateItem(input);
+  // };
 
   signup = event => {
     event.preventDefault();
@@ -66,14 +82,13 @@ class Start extends Component {
     if (this.state.account_key === this.state.account_key2) {
       API.saveUser(this.state.user)
         .then(res => {
-          console.log("submit res: ", res);
+          console.log("submit res.data: ", res.date);
           if (res.data) {
-            this.setState({
-              user: res.data
-            });
-            this.props.update(res.data);
-            
-            console.log("finished form submit true: ", this.state.user);
+            // this.setState({
+            //   ...this.state,
+            //   user: res.data
+            // });
+            this.props.updateStateItem(res.data);
           } else {
             console.log("signup error");
             console.log("finished form submit false: ", this.state.user);
@@ -123,7 +138,7 @@ class Start extends Component {
           }
           console.log("user: ", user.user);
           this.setState(user);
-          this.props.update(user.user)
+          this.props.updateStateItem(user.user)
           
           console.log("res: ", res);
         } else {
@@ -137,7 +152,7 @@ class Start extends Component {
     event.preventDefault();
     console.log("event.target: ", event.target);
     this.setState(initialState);
-    this.props.update(initialState)
+    this.props.updateStateItem(initialState)
     console.log("this.state: ", this.state);
   };
 

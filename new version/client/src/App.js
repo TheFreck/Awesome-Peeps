@@ -35,7 +35,8 @@ const initialState = {
 class App extends Component {
   state = initialState;
 
-  updateState = updates => {
+  updateStateItem = updates => {
+    console.log("updateStateItem: ", updates);
     this.setState({
       ...this.state,
       uuid: updates.uuid,
@@ -44,6 +45,14 @@ class App extends Component {
       lastName: updates.lastName,
       pic: updates.pic,
       notes: updates.notes,
+    })
+  }
+  
+  updateState = updates => {
+    console.log("updateState: ", updates);
+    this.setState({
+      ...this.state,
+      [updates.key]: updates.value
     })
   }
 
@@ -55,7 +64,7 @@ class App extends Component {
           <Switch>
             <Route 
               exact path="/"
-              render={() => <Start update={this.updateState} state={this.state} />}
+              render={() => <Start updateState={this.updateState} updateStateItem={this.updateStateItem} state={this.state} />}
             />
             <Route 
               exact path="/landing"
