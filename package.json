@@ -1,5 +1,6 @@
 {
   "dependencies": {
-    "mailgun-js": "^0.22.0"
+    "mailgun-js": "^0.22.0",
+    "yarn": "^1.13.0"
   }
 }
