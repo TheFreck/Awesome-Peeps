@@ -2,7 +2,6 @@ import React from "react";
 import { Container } from "../../components/Grid";
 
 const Profile = props => {
-
   return (
     <Container fluid>
       <h1>Profile Page</h1>
@@ -47,14 +46,10 @@ const Profile = props => {
           onChange={props.handleChange}
         />
         <br />
-        <input 
-          type="submit" 
-          value="Update" 
-          onSubmit={props.submit} 
-        />
+        <input type="submit" value="Update" onSubmit={props.submit} />
       </form>
     </Container>
-  )
-}
+  );
+};
 
 export default Profile;
