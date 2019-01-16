@@ -15,9 +15,9 @@ router
   .get(usersController.findUserAndItems)
   .put(usersController.updateUser)
   .delete(usersController.remove);
-
-  router
-  .route("/itmesToBuy", usersController.findUserAndSharedItems)
+ router 
+  .route("/friends/:id")
+  .get(usersController.findFriendsAndItems)
 
   // router.route("/items/")
   // .get(usersController.findUserAndItems)

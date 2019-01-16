@@ -5,9 +5,6 @@ export default {
   getUsers: () => {
     return axios.get("/api/users");
   },
-  getUserAndSharedItems: () => {
-    return axios.get("/api/users");
-  },
   // Gets the user with the given id
   getUser: id => {
     console.log("api get user: ", id);
@@ -16,6 +13,9 @@ export default {
   //codes this need to have /items on it?
   getUserandItems: id => {
     return axios.get("/api/users/" + id);
+  },
+  getFriendsandItems: id => {
+    return axios.get("/api/users/friends/" + id);
   },
   // Deletes the user with the given id
   deleteUser: id => {
