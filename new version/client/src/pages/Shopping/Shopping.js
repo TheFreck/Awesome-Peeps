@@ -18,11 +18,13 @@ class Shopping extends React.Component {
 		this.getPerson();
 	}
 
-	getItems = () => {
-		API.getItems()
-			.then((res) => this.setState({ items: res.data, item: '', price: '' }))
-			.catch((err) => console.log(err));
-	};
+  getItems = () => {
+    API.getItems()
+      .then(res =>
+        this.setState({ myItems: res.data.myItems})
+      )
+      .catch(err => console.log(err));
+  };
 
 	getPerson = () => {
 		API.getUsers()
