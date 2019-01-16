@@ -106,12 +106,10 @@ class App extends Component {
               )}
             />
             <Route
-              exact
-              path="/FriendRegistry"
-              render={() => (
-                <FriendRegistry update={this.updateState} state={this.state} />
-              )}
-            />
+							exact
+							path="/FriendRegistry/:userId"
+							render={(props) => <FriendRegistry {...props} update={this.updateState} state={this.state} />}
+						/>
             <Route
               exact
               path="/Shopping"

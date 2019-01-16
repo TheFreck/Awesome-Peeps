@@ -106,13 +106,12 @@ updateUser: (req, res) => {
       res.json(data)
     })
   },
-  findUserAndSharedItems: (req, res) => {
+  findFriendsAndItems: (req, res) => {
     console.log("i am running now ahhhhhh")
     console.log("this is our req.session", req.session)
     console.log("this is req. params", req.params)
-    db.User.findOne({uuid: req.session.user.uuid})
-    //the pupulate should be the array of shared items you want to buy
-    .populate("itrms i want to buy forfriens")
+    db.User.findOne({_id: req.params.id})
+    .populate("myItems")
     .then((data) =>{
       console.log(data)
       res.json(data)
