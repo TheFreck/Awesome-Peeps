@@ -2,15 +2,10 @@ html {
   min-height: 100%;
 }
 
-/* @font-face {
-  font-family: main;
-  src: url(https://fonts.googleapis.com/css?family=ABeeZee);
-} */
-
 body {
   margin: 0;
   padding: 0;
-  font-family: "Comfortaa", cursive;
+  font-family: "ABeeZee", sans-serif;
   background: url(./Images/background.jpg);
   background-size: 100%;
   background-position: bottom;
@@ -49,7 +44,6 @@ textarea.materialize-textarea:focus:not([readonly]) {
 
 .main-header {
   background: url(../dist/Images/landingpg.jpg) no-repeat;
-  /* background-size: cover; */
   background-position: center;
   min-height: 550px;
 }
@@ -60,7 +54,6 @@ textarea.materialize-textarea:focus:not([readonly]) {
   background-color: #ec1f64;
   border-radius: 15px;
   box-shadow: 0 0 0 5px white;
-  /* border: solid white; */
   font-family: "Permanent Marker", cursive;
   color: white;
   font-weight: bold;
