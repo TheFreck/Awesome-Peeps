@@ -3,6 +3,8 @@ import Row from "../../components/Row";
 import API from "../../utils/API";
 import RegistryHeader from "../../components/RegistryHeader";
 import UserList from "../../components/UserList";
+import { Redirect } from "react-router-dom";
+
 class Create extends Component {
   state = {
     savedItems: [],
