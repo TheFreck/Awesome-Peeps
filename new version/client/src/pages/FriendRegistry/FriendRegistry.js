@@ -18,9 +18,7 @@ class FriendRegistry extends Component {
     API.getFriendsandItems(this.props.match.params.userId).then((friendData)=>{
       console.log(friendData)
       //set to state
-      this.setState({ 
-        myItems: this.state.user.friendData });
-
+      
     })
 
   }
@@ -43,20 +41,20 @@ class FriendRegistry extends Component {
     return (
       
       <div className="container">
-      <div className="Row">
-        <div className="col s12 center-align top:60px">
+      <div class="Row">
+        <div class="col s12 center-align top:60px">
           <MainLogo />
         </div>
       </div>
       <br></br>
-      <div className="container">
-       <div className="tableContainer">
-        <div className="row">
-          <div className="col-s12">
-            <table className="centered responsive-table z-depth-5">
+      <div class="container">
+       <div class="tableContainer">
+        <div class="row">
+          <div class="col-s12">
+            <table class="centered responsive-table z-depth-5">
               <thead>
               <br></br>
-                <h3 className="center-align" id="greedy">I'M A GREEDY BASTARD - HERE IS MY LIST</h3>
+                <h3 class="center-align" id="greedy">I'M A GREEDY BASTARD - HERE IS MY LIST</h3>
               <br></br>
               <tr>
                 <th>ITEM</th>
@@ -68,18 +66,18 @@ class FriendRegistry extends Component {
               </thead>
                 <tbody>
                   <tr>
-                   {/* {this.props.myItems.map(myItems => (
-                     <tr key={myItems._id}> */}
-                      {/* <td>{myItems.name}</td>
-                      <td>{myItems.price}</td>
-                      <td>{myItems.comments}</td>
-                      <td><button>Add</button></td> 
-                      <td><form action="http://www.google.com/search" method="get">
+                   {/* {this.state.user.myItems.map(item => (
+                     <tr key={item._id}>
+                      <td>{item.name}</td>
+                      <td>{item.price}</td>
+                      <td>{item.comments}</td>
+                      <td><button>Add</button></td> */}
+                      {/* <td><form action="http://www.google.com/search" method="get">
                       <input type="text" class="itemInput" name="q" value= {this.props.item} />
                       <input type="submit" id="online" target="_blank" value="Find Me Online" />
-                      </form></td> */}
-                      {/* </tr> */}
-                   ))}
+                      </form></td>
+                      </tr>
+                   ))} */} 
                 </tr> 
                 </tbody>
             </table>
