@@ -11,38 +11,51 @@ module.exports = {
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
+  
   login: (req, res) => {
-    console.log("controller login req.body: ", req.body);
+    console.log("req.session: ", req.session);
+    console.log("controller username: ", req.body.username);
+    console.log("controller password: ", req.body.password);
+    console.log("controller req.body: ", req.body);
     db.User.findOne(
       {
         email: req.body.username
       },
       (err, user) => {
         console.log("controller user: ", user);
-        if(err) return err;
-        if(!user) return res.json("incorrect username");
-        const pwrdCheck = user.checkPassword(req.body.password, user.account_key);
-        if(!pwrdCheck) {
-          console.log("failed!!!");
-          // res.redirect("/");
-          return res.json(false);
-        }
-        if(pwrdCheck) {
-          console.log("passed!!!", user);
-          req.body.sessionId = req.session.id;
-          // res.redirect("/landing")
-          return res.json(user);
-        }
-        return null, user;
+        req.session.user = user
+        if (err) throw err;
+        if (!user) return res.json("incorrect username");
+        return user.checkPassword(req.body.password, user.account_key);
+
+        // if (!user.checkPassword(req.body.password, user.account_key)) {
+        //   console.log("failed!!!", user);
+        //   res.json(false);
+        // }
+        // if (user.checkPassword(req.body.password, user.account_key)) {
+        //   console.log("passed!!!", user);
+        //   req.body.sessionId = req.session.id;
+        //   res.json(true);
+        // }
+        // return null, user;
       }
     )
+      .then(dbModel => {
+        console.log("dbModel: ", dbModel);
+        res.json(dbModel);
+      })
+      .catch(err => res.status(422).json(err));
   },
   create: (req, res) => {
     req.body.sessionId = req.session.id;
     console.log("req.session.id: ", req.session.id);
     req.body.uuid = uuidv1();
     db.User.create(req.body)
-      .then(dbModel => res.json(dbModel))
+      .then((dbModel) => {
+        console.log("", dbModel)
+        req.session.user = dbModel;
+        res.json(dbModel)
+      })
       .catch(err => res.status(422).json(err));
   },
   update: (req, res) => {
@@ -51,6 +64,28 @@ module.exports = {
     //   .then(dbModel => res.json(dbModel))
     //   .catch(err => res.status(422).json(err));
   },
+
+
+
+updateUser: (req, res) => {
+    //create item then takes the item id and adds it to the users myItems column
+    db.User.findByIdAndUpdate({uuid: "8f5bf630-16d3-11e9-9c3c-3de35eaba832"}
+    ,{$push: {shareWithMe: "8f5bf630-16d3-11e9-9c3c-3de35eaba832"}})
+  
+    .then((dbModel) => {
+        console.log("SLDKJFKLSDJF", dbModel)
+    })
+      .then((dbModel) => {
+          
+          console.log("ZZZZZZZZZZZZZZ", dbModel)
+          res.json(dbModel)          
+        })
+      .catch(err => res.status(422).json(err)
+    );
+  },
+  
+
+
   remove: (req, res) => {
     db.User.findById({ _id: req.params.id })
       .then(dbModel => dbModel.remove())
@@ -62,17 +97,13 @@ module.exports = {
   // },
   findUserAndItems: (req, res) => {
     console.log("i am running now ahhhhhh")
-    console.log(req.session, "this is the user")
-    db.User.findOne({uuid: req.session.id})
+    console.log("this is our req.session", req.session)
+    console.log("this is req. params", req.params)
+    db.User.findOne({uuid: req.session.user.uuid})
     .populate("myItems")
     .then((data) =>{
+      console.log(data)
       res.json(data)
     })
   }
 };
-
-
-// loggedIn: (req, res) => {
-//   db.User.findById({ uuid: req.body.uuid })
-//   .then
-// }

@@ -25,28 +25,6 @@ class Friends extends React.Component {
         this.setState({ users: res.data, firstName:"", lastName:""}))
   }
 
-<<<<<<< HEAD:client/src/pages/Friends/Friends.js
-render() {
-  return (
-  
-    <div className="container">
-      <div className="Row">
-        <div className="col s12 center-align top:60px">
-          <MainLogo />
-        </div>
-      </div>
-      <br></br>
-      <div className="Row">
-        <div className="col s12">
-          <h2 className="center-align">WHICH GREEDY BASTARD DO YOU WANT TO BUY FOR?</h2>
-        </div> 
-      </div>
-      <div className="Row">
-        <div className="col s12 center-align">
-          <UserList />
-          {/* <button className="waves-effect waves-light btn-large red seeGifts">{this.populateUsers}</button> */}
-        </div>
-=======
   nextPath(path) {
     // this.state.users(path);
   }
@@ -67,7 +45,6 @@ render() {
       
       
       
->>>>>>> 63379b7bfc793dc7804a6334c2b879ac55a438c2:new version/client/src/pages/Friends/Friends.js
       </div>
       </div>
       </div>

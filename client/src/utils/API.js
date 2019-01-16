@@ -10,8 +10,9 @@ export default {
     console.log("api get user: ", id);
     return axios.get("/api/users/" + id);
   },
+  //codes this need to have /items on it?
   getUserandItems: id => {
-    return axios.get("/api/users/items/" + id);
+    return axios.get("/api/users/" + id);
   },
   // Deletes the user with the given id
   deleteUser: id => {
@@ -23,20 +24,21 @@ export default {
     return axios.post("/api/users", userData);
   },
   //updates user profile with given id
-  updateUser: id => {
-    console.log("updateUser id: ", id);
-    return axios.put("/api/users", id)
+  updateUser: userData => {
+    return axios.put("/api/share/" + userData.uuid, userData)
   },
   login: userData => {
     let userName = userData.username;
     console.log("api userData: ", userData);
     userName = userName.replace(".", "-DOT-");
     userName = userName.replace("@", "-AT-");
-    console.log("api userName: ", userName);
     return axios.post("/api/users/" + userName, userData);
   },
-  getItems: () => {
-    return axios.get("/api/items");
+  getItems: (id) => {
+    console.log("THIS IS ID FROM API", id)
+    return axios.get("/api/items" + id);
+
+    // return axios.get("/api/items" + id);
   },
   getItem: id => {
     return axios.get("/api/items/" + id);
@@ -49,19 +51,6 @@ export default {
   saveItem: itemData => {
     console.log("API user data: ", itemData);
     return axios.post("/api/items", itemData);
-  },
-  forgotPassword: email => {
-    console.log("api email: ", email);
-    //route can be diff but it need to call the forgot method inside of resetPasswordCtrl aka: resetPasswordCtrl.forgot()
-    return axios.post(`/api/users/forgotPassword/${email}`)
-  },
-  checkResetToken: token => {
-    //route can be diff but it need to call the checkToken method inside of resetPasswordCtrl aka: resetPasswordCtrl.checkToken()
-    return axios.post(`/api/users/checkResetToken/${token}`)
-  },
-  resetPassword: emailAndPass => {
-    //route can be diff but it need to call the resetPassword method inside of resetPasswordCtrl aka: resetPasswordCtrl.resetPassword()
-    return axios.post(`/api/users/resetPassword`, emailAndPass)
   }
 
 };

@@ -17,7 +17,7 @@ const Login = props => {
                 type="email"
                 id="email"
                 name="email"
-                value={props.state.user.email}
+                // value={props.state.user.email}
                 onChange={props.handleChange}
               />
               <div className="input-field">
@@ -26,7 +26,7 @@ const Login = props => {
                   type="password"
                   id="password"
                   name="account_key"
-                  value={props.state.user.account_key}
+                  // value={props.state.user.account_key}
                   onChange={props.handleChange}
                 />
                 <input
@@ -38,7 +38,7 @@ const Login = props => {
                 <input
                   className="btn pink lighten-1 z-depth-2"
                   name="forgot password"
-                  type="button"
+                  type="submit"
                   value="Forgot Password"
                   pword={props.state.resetPswd}
                   onClick={props.click}
