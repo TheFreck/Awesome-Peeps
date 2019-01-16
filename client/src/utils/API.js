@@ -5,6 +5,9 @@ export default {
   getUsers: () => {
     return axios.get("/api/users");
   },
+  getUserAndSharedItems: () => {
+    return axios.get("/api/users");
+  },
   // Gets the user with the given id
   getUser: id => {
     console.log("api get user: ", id);

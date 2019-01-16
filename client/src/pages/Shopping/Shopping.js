@@ -1,19 +1,22 @@
 import React, { Component } from 'react';
 import API from '../../utils/API';
 // import Nav from "../../components/Nav";
-// import MainLogo from '../../components/MainLogo';
+import MainLogo from '../../components/MainLogo';
 // import DeleteBtn from "../../components/DeleteBtn";
 
 class Shopping extends Component {
 	state = {
 		stuff: [],
 		users: [],
+		user: {
+			sharedItems: []
+		},
 		item: '',
 		price: ''
 	};
 
 	componentDidMount() {
-		this.getItems();
+		// this.getItems();
 		this.getPerson();
 	}
 
@@ -24,9 +27,33 @@ class Shopping extends Component {
 	};
 
 	getPerson = () => {
-		API.getUsers()
-			.then((res) => this.setState({ users: res.data, firstName: '' }))
-			.catch((err) => console.log(err));
+		// API.getUserAndSharedItems()
+		// 	.then((res) => {
+				// this.setState({ user: res.data, firstName: '' })
+				this.setState({
+					user: {
+						name: "benny",
+						sharedItems: [
+							{
+								_id: "23jm4h5v2kj3g45",
+								name: "glove",
+								price: 2,
+								ocassion: "baseball",
+								comments: "yo"
+							},
+							{
+								_id: "23jqkjdhgfa8i73g45",
+								name: "bat",
+								price: 20,
+								ocassion: "baseball",
+								comments: "best bat ever brah"
+							}
+						]
+					}
+				});
+			// })
+			// .then((res) => this.state.users.map((user) => console.log(user.myItems)))
+			// .catch((err) => console.log(err));
 	};
 
 	deleteItem = (id) => {
@@ -34,8 +61,12 @@ class Shopping extends Component {
 	};
 
 	render() {
+		console.log(this.state.users.length)
 		return (
 			<div>
+				<div class="col s12 center-align top:60px">
+          			<MainLogo />
+        		</div>
 				<div className="container">
 					<form className="white">
 						<h5 className="grey-text text-darken-3">Shopping List</h5>
@@ -49,7 +80,7 @@ class Shopping extends Component {
 							</tr>
 						</thead>
 						<tbody>
-							{this.state.stuff.map((item) => (
+							{this.state.user.sharedItems.map((item) => (
 								<tr key={item._id}>
 									<td>{item.name} </td>
 									<td>{item.item}</td>
@@ -57,14 +88,14 @@ class Shopping extends Component {
 									<td>{item.occasion}</td>
 									<td>{item.comments}</td>
 									<td>
-										<button onClick={() => this.deleteItem(item._id)}>Delete</button>
-										<button onClick={() => this.deleteItem(item._id)}>Buy it!</button>
+										<button value={item._id} onClick={() => this.deleteItem(item._id)}>Buy it!</button>
 									</td>
 								</tr>
 							))}
 							{this.state.users.map((user) => (
 								<tr key={user._id}>
 									<td>{user.firstName}</td>
+									<td>{user.myItems}</td>
 								</tr>
 							))}
 						</tbody>
