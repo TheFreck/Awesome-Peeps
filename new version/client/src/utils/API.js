@@ -14,6 +14,9 @@ export default {
   getUserandItems: id => {
     return axios.get("/api/users/" + id);
   },
+  getFriendsandItems: id => {
+    return axios.get("/api/users/friends/" + id);
+  },
   // Deletes the user with the given id
   deleteUser: id => {
     return axios.delete("/api/users/" + id);

@@ -41,7 +41,7 @@ class Friends extends React.Component {
         <h3>WHICH GREEDY BASTARD DO YOU WANT TO BUY FOR?</h3>
       </div>
       <div>
-      {users.map(users => <button type="submit" className="btn btn-info"><Link to={"/users/" + users._id}>{users.firstName + users.lastName}</Link></button>)}
+      {users.map(users => <button type="submit" className="btn btn-info"><Link to={"/FriendRegistry/" + users._id}>{users.firstName + users.lastName}</Link></button>)}
       
       
       
