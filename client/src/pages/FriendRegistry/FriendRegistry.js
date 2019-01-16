@@ -39,20 +39,40 @@ class FriendRegistry extends Component {
 
   render() {
     return (
-      <div class="container">
-        <div class="tableContainer">
-          <div class="row">
-            <div class="col-12">
-                  <br></br>
-                    <h3 class="center-align" id="greedy">I'M A GREEDY BASTARD - HERE IS MY LIST</h3>
-                  <br></br>
-              </div>
-          </div>      
-        </div>   
-        </div>
-    );
-  }
-}
+      <div className="col-12">
+        <h3 class="center-align" id="greedy">I'M A GREEDY BASTARD - HERE IS MY LIST</h3>
+  
+      <div className="container">
+        <div className="card">
+          <div className="card-header">
+            {/* {props.item} */}
+            <p>stink bombs</p>
+            </div>
+            <div className="card-body">
+              <p>$5.99</p>
+              <p>Comments go here</p>
+              {/* {props.url}
+              {props.price} */}
+              
+            </div>
+            <div className="card-footer">
+              <span>
+                <button
+                className="btn btn-info ml-1">
+                {/* onClick={() => props.deleteItem(props._id)}> */}
+                  Add
+                </button>
 
-
+                <button
+                className="btn btn-info ml-1">
+                {/* onClick={() => props.deleteItem(props._id)}> */}
+                  Find Online
+                </button>
+            </span>
+            </div>
+      </div>
+    </div>
+  </div>
+    )};
+    }
 export default FriendRegistry;
