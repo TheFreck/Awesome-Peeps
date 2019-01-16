@@ -1,10 +1,10 @@
 const express = require("express");
 const session = require("express-session");
 const logger = require("morgan");
-const passportConfig = require("../config/passport");
+const passportConfig = require("./config/passport");
 const passport = require("passport");
 const mongoose = require("mongoose");
-const routes = require("../routes");
+const routes = require("./routes");
 const app = express();
 const PORT = process.env.PORT || 3001;
 
