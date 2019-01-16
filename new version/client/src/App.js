@@ -4,7 +4,11 @@ import NoMatch from "./pages/NoMatch";
 import Nav from "./components/Nav/Nav";
 import Create from "./pages/Create";
 import Friends from "./pages/Friends";
+import Profile from "./pages/Profile";
+import Landing from "./pages/Landing";
 import FriendRegistry from "./pages/FriendRegistry";
+import Signup from "./components/Signup";
+import Login from "./components/Login";
 
 // import Signup from "./components/Signup";
 // import Login from "./components/Login";
@@ -44,64 +48,99 @@ class App extends Component {
       firstName: updates.firstName,
       lastName: updates.lastName,
       pic: updates.pic,
-      notes: updates.notes,
-    })
-  }
-  
+      notes: updates.notes
+    });
+  };
+
   updateState = updates => {
     // console.log("updateState: ", updates);
     this.setState({
       ...this.state,
       [updates.key]: updates.value
-    })
-  }
+    });
+  };
 
-  render(){
-    return(
+  render() {
+    return (
       <Router>
         <div>
           <Nav />
           <Switch>
-            <Route 
-              exact path="/"
-              render={() => <Start updateState={this.updateState} updateStateItem={this.updateStateItem} state={this.state} />}
-            />
-            <Route 
-              exact path="/landing"
-              render={() => <Create update={this.updateState} state={this.state} />}
-            />
-            <Route 
-              exact path="/create"
-              render={() => <Create update={this.updateState} state={this.state} />}
+            <Route
+              exact
+              path="/"
+              render={() => (
+                <Start
+                  updateState={this.updateState}
+                  updateStateItem={this.updateStateItem}
+                  state={this.state}
+                />
+              )}
             />
             <Route
-              exact path="/reset"
-              render={() => <ResetPswd update={this.updateState} state={this.state} />}
+              exact
+              path="/Landing"
+              render={() => (
+                <Landing update={this.updateState} state={this.state} />
+              )}
             />
             <Route
-              exact path="/friends"
-              render={() => <Friends update={this.updateState} state={this.state} />}
+              exact
+              path="/create"
+              render={() => (
+                <Create update={this.updateState} state={this.state} />
+              )}
             />
-            <Route 
-              exact path="/friend-registry"
-              render={() => <FriendRegistry update={this.updateState} state={this.state} />}
+            <Route
+              exact
+              path="/reset"
+              render={() => (
+                <ResetPswd update={this.updateState} state={this.state} />
+              )}
             />
-            <Route 
-              exact path="/shopping"
-              render={() => <Shopping update={this.updateState} state={this.state} />}
+            <Route
+              exact
+              path="/friends"
+              render={() => (
+                <Friends update={this.updateState} state={this.state} />
+              )}
             />
+            <Route
+              exact
+              path="/FriendRegistry"
+              render={() => (
+                <FriendRegistry update={this.updateState} state={this.state} />
+              )}
+            />
+            <Route
+              exact
+              path="/Shopping"
+              render={() => (
+                <Shopping update={this.updateState} state={this.state} />
+              )}
+            />
+            <Route
+              exact
+              path="/Profile"
+              render={() => (
+                <Profile update={this.updateState} state={this.state} />
+              )}
+            />
+<<<<<<< HEAD
             <Route 
               exact path="/reset/:token"
               render={props => <ResetPswd {...props} />}
             />
 
+=======
+>>>>>>> 63379b7bfc793dc7804a6334c2b879ac55a438c2
             {/* //Navigation imports ***PENDING PAGES CREATION*** */}
 
             <Route component={NoMatch} />
           </Switch>
         </div>
       </Router>
-    )
+    );
   }
 }
 

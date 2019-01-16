@@ -11,9 +11,7 @@ import { Container } from "../../components/Grid";
 import API from "../../utils/API";
 import Login from "../../components/Login";
 import Signup from "../../components/Signup";
-import Create from "../Create";
 import LogoutBtn from "../../components/LogoutBtn";
-// import Nav from "../../components/Nav";
 import Profile from "../../pages/Profile";
 
 const initialState = {
@@ -53,13 +51,13 @@ class Start extends Component {
         ...this.state.user,
         [name]: value
       }
-    })
+    });
     this.props.updateState({
       ...this.state,
       key: name,
       value: value
-    })
-  }
+    });
+  };
 
   // handleInputChange = input => {
   //   // event.preventDefault();
@@ -123,6 +121,7 @@ class Start extends Component {
       username: this.state.user.email,
       password: this.state.user.account_key
     })
+<<<<<<< HEAD
     .then(res => {
       console.log("Start res: ", res.data);
       if (res.data) {
@@ -136,6 +135,29 @@ class Start extends Component {
             pic: res.data.pic,
             notes: res.data.notes
           }
+=======
+      .then(res => {
+        console.log("Start res: ", res.data);
+        if (res.data) {
+          let user = {
+            user: {
+              ...this.state.user,
+              uuid: res.data.uuid,
+              screenName: res.data.screenName,
+              firstName: res.data.firstName,
+              lastName: res.data.lastName,
+              pic: res.data.pic,
+              notes: res.data.notes
+            }
+          };
+          console.log("user: ", user.user);
+          this.setState(user);
+          this.props.updateStateItem(user.user);
+
+          console.log("res: ", res);
+        } else {
+          console.log("incorrect password");
+>>>>>>> 63379b7bfc793dc7804a6334c2b879ac55a438c2
         }
         console.log("user: ", user.user);   
         this.setState(user);
@@ -153,19 +175,18 @@ class Start extends Component {
     event.preventDefault();
     console.log("event.target: ", event.target);
     this.setState(initialState);
-    this.props.updateStateItem(initialState)
+    this.props.updateStateItem(initialState);
     console.log("this.state: ", this.state);
   };
 
   toggleStart = () => {
     console.log("does it hit?", this.state);
-    this.setState({ 
+    this.setState({
       ...this.state,
       resetPasswordBoolean: false,
       isUser: !this.state.isUser
-    })
-    
-  }
+    });
+  };
 
   viewProfile = () => this.setState({ viewProfile: !this.state.viewProfile });
 
@@ -174,13 +195,12 @@ class Start extends Component {
     console.log("resetting password: ");
     this.setState({
       resetPasswordBoolean: !this.state.resetPasswordBoolean
-    })
-  }
+    });
+  };
 
   sendResetEmail = () => {
     console.log("send reset email");
-  }
-  
+  };
 
   render() {
     // are you signed in?
@@ -188,16 +208,6 @@ class Start extends Component {
       // you are signed in
       return (
         <Container fluid>
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
           <Button name="Profile" click={this.viewProfile} />
           <LogoutBtn logout={this.logout} />
           {this.state.viewProfile ? (
@@ -216,7 +226,7 @@ class Start extends Component {
       return (
         <div>
           {this.state.isUser ? (
-          /* are you a user? */
+            /* are you a user? */
             /* pass functionality to reset password into the Login page */
             <Container fluid>
               <Login
@@ -224,11 +234,9 @@ class Start extends Component {
                 handleChange={this.handleChange}
                 submit={this.login}
                 click={this.resetPasswordBoolean}
-              /> 
-              <Button 
-                click={this.toggleStart}
-                name="Signup Instead" 
+                toggleStart={this.toggleStart}
               />
+              {/* <Button click={this.toggleStart} name="Signup Instead" /> */}
             </Container>
           ) : (
             // not a user so let's sign up
@@ -238,7 +246,7 @@ class Start extends Component {
                 handleChange={this.handleChange}
                 submit={this.signup}
               />
-              <Button click={this.toggleStart} name="Login Instead" />
+              {/* <Button click={this.toggleStart} name="Login Instead" /> */}
             </Container>
           )}
         </div>

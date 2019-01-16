@@ -4,8 +4,8 @@ const Signup = props => {
   // console.log("signup props: ", props);
   return (
     <div className="container">
-      <h5 className="grey-text text-darken-3">Sign Up</h5>
       <form onSubmit={this.handleSubmit} className="white">
+        <h5 className="grey-text text-darken-3">Sign Up</h5>
         <div className="input-field">
           <label htmlFor="name">User Name: </label>
           <input
@@ -34,6 +34,7 @@ const Signup = props => {
                 <label htmlFor="email">Email: </label>
                 <input
                   type="email"
+                  id="email"
                   name="email"
                   value={props.state.user.email}
                   onChange={props.handleChange}
@@ -42,6 +43,7 @@ const Signup = props => {
                   <label htmlFor="account_key">Password: </label>
                   <input
                     type="password"
+                    id="password"
                     name="account_key"
                     value={props.state.user.account_key}
                     onChange={props.handleChange}
@@ -50,18 +52,25 @@ const Signup = props => {
                     <label htmlFor="account_key">Confirm Password: </label>
                     <input
                       type="password"
+                      id="password"
                       name="account_key2"
                       value={props.state.user.account_key2}
                       onChange={props.handleChange}
                     />
-                    <button
-                      className="btn pink lighten-1 z-depth-0"
+                    <input
+                      className="btn pink lighten-1 z-depth-2"
+                      name="Sign Up "
                       type="submit"
-                      value="Signup"
+                      value="Sign Up"
                       onClick={props.submit}
-                    >
-                      Sign Up
-                    </button>
+                    />
+                    <input
+                      className="btn pink lighten-1 z-depth-2"
+                      name="Login"
+                      type="submit"
+                      value="Login"
+                      onClick={props.toggleStart}
+                    />
                   </div>
                 </div>
               </div>

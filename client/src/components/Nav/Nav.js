@@ -5,10 +5,13 @@ import SignedOutLinks from "./SignedOutLinks";
 
 const Nav = () => {
   return (
-    <nav className="nav-wrapper red lighten-6">
+    <nav
+      className="nav-wrapper teal darken-1
+		"
+    >
       <div className="container">
         {/* className is a Materialize classs*/}
-        <Link to="/" className="brand-logo">
+        <Link to="/landing" className="brand-logo">
           Greedy Bastards List
         </Link>{" "}
         <SignedInLinks />

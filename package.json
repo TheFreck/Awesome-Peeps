@@ -20,6 +20,7 @@
     "nodemon": "^1.11.0"
   },
   "dependencies": {
+<<<<<<< HEAD
     "axios": "^0.16.2",
     "bcryptjs": "^2.4.3",
     "crypto": "^1.0.1",
@@ -37,4 +38,9 @@
   },
   "keywords": [],
   "description": ""
+=======
+    "mailgun-js": "^0.22.0",
+    "yarn": "^1.13.0"
+  }
+>>>>>>> 63379b7bfc793dc7804a6334c2b879ac55a438c2
 }

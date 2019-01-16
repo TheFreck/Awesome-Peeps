@@ -1,66 +1,31 @@
+//----------Import external components----------
 import React, { Component } from "react";
 import UserList from "../../components/UserList"
 import API from "../../utils/API";
+import { Link } from "react-router-dom";
 import MainLogo from "../../components/MainLogo";
 
-
-
-class Friends extends Component {
+//----------Friends component----------
+class Friends extends React.Component {
+  
   state = {
-    savedItems: [],
-    item: "",
-    price: 0,
-    url: "",
-    pic: "",
-    occasion: "",
-    comments: "",
-    users: [],
-    user: {
-      uuid: "",
-      account_key: "",
-      sessionId: "",
-      email: "",
-      name: "",
-      pic: "",
-      shareWithMe: [],
-      shareWithOthers: [],
-      myItems: [],
-      notes: ""
-    }
+    users:[],
+    uuid: "",
+    user: this.props.state
+  };
+  
+
+  componentDidMount() {
+    this.getUsers();
+  }
+//Fetching firstName and lastName of users from the db
+  getUsers = () => {
+    API.getUsers()
+      .then(res =>
+        this.setState({ users: res.data, firstName:"", lastName:""}))
   }
 
-  // componentDidMount() {
-  //   this.getUsers();
-  // }
-
-  //Share registry with another user
-populateUsers = event => {
-  event.preventDefault();
-  console.log("Share with user")
-    API.getUsers({
-      name: this.state.name,
-      uuid: this.state.uuid
-    })
-      .then(res => {
-        console.log("users data: ", res);
-        this.getAllUsers();
-      })
-      .catch(err => console.log(err));
-};
-
-  renderUsers = () => {
-    return this.state.users.map(save => (
-      <UserList
-        _id={save._id}
-        key={save._id}uninsta
-        name={save.name}
-        uuid={save.uuid}
-        pic={save.pic}
-        selectUser={this.selectUser}
-      />
-    ))
-  }
-
+<<<<<<< HEAD:client/src/pages/Friends/Friends.js
 render() {
   return (
   
@@ -81,12 +46,34 @@ render() {
           <UserList />
           {/* <button className="waves-effect waves-light btn-large red seeGifts">{this.populateUsers}</button> */}
         </div>
+=======
+  nextPath(path) {
+    // this.state.users(path);
+  }
+  //-------------Rendering components to the Friends page------------------------
+  render(){
+    let users = this.state.users
+    return (
+      <div className="container">
+      <div class="Row">
+      <div class="col s12 center-align top:60px">
+        <MainLogo />
       </div>
-
-    </div>
-
-  );
+      <div>
+        <h3>WHICH GREEDY BASTARD DO YOU WANT TO BUY FOR?</h3>
+      </div>
+      <div>
+      {users.map(users => <button type="submit" className="btn btn-info"><Link to={"/users/" + users._id}>{users.firstName + users.lastName}</Link></button>)}
+      
+      
+      
+>>>>>>> 63379b7bfc793dc7804a6334c2b879ac55a438c2:new version/client/src/pages/Friends/Friends.js
+      </div>
+      </div>
+      </div>
+    )
   }
 }
 
 export default Friends;
+
