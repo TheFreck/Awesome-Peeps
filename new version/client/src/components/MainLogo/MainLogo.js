@@ -4,8 +4,8 @@ import logo from '../../Images/GreedyBastards2.png'; // Tell Webpack this JS fil
 console.log(logo); // Greedy Bastages main logo
 
 function Header() {
-  // Import result is the URL of the logo
-  return <img class="responsive-img" src={logo} class="" alt="Logo" width="500px" align="middle" />;
+	// Import result is the URL of the logo
+	return <img class="responsive-img" src={logo} alt="Logo" width="500px" align="middle" />;
 }
 
 export default Header;
