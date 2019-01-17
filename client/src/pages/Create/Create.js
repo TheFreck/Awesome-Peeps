@@ -17,7 +17,7 @@ class Create extends Component {
 		myItems: [],
 		notes: '',
 		user: this.props.state,
-		shared: []
+		shared: false
 	};
 	//These load whent the page loads
 	componentDidMount() {
@@ -79,13 +79,22 @@ class Create extends Component {
 		}
 	};
 
+	handleShared = () => {
+		this.setState({
+			shared: true
+		}).then ()
+	};
+
 	//Share registry with another user
 	shareRegistry = (event) => {
+		this.setState({ shared: true } )
 		event.preventDefault();
 		console.log('Share with user');
 		API.getUsers({
 			name: this.state.firstName,
-			uuid: this.state.uuid
+			uuid: this.state.uuid,
+			shared: this.state.shared
+			// shared: 
 		})
 			.then((res) => {
 				console.log('users data: ', res.data);
@@ -160,6 +169,26 @@ class Create extends Component {
 	};
 
 	render() {
+	if (this.state.shared) {
+		return (
+			<div className="container">
+				<form className="white">
+					
+					<h4>Who do you want to share your list with?</h4>
+					<UserList />
+					{/* <input
+					onChange={this.handleSearch}
+					name="search"
+					value={this.state.search}
+					type="text"
+					className="form-control"
+					id="search"
+					></input> */}
+					<div>{this.renderUsers()}</div>
+				</form>
+			</div>
+		);
+	} else {
 		return (
 			<div className="container">
 				<form className="white">
@@ -236,26 +265,11 @@ class Create extends Component {
 					<button onClick={this.shareRegistry} type="submit" className="btn pink lighten-1 z-depth-2">
 						Share Registry
 					</button>
+					<RegistryHeader />
+					<div>{this.renderSaved()}</div>
 				</form>
-				<div className="container">
-					<form className="white">
-						<RegistryHeader />
-						<div>{this.renderSaved()}</div>
-						<h4>Who do you want to share your list with?</h4>
-						<UserList />
-						{/* <input
-              onChange={this.handleSearch}
-              name="search"
-              value={this.state.search}
-              type="text"
-              className="form-control"
-              id="search"
-              ></input> */}
-						<div>{this.renderUsers()}</div>
-					</form>
 				</div>
-			</div>
-		);
-	}
-}
+		)};
+}}
+
 export default Create;
