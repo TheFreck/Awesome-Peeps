@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const usersController = require("../../controllers/usersController");
+const resetContoroller = require("../../controllers/resetController");
 
 // Matches with "/api/books"
 router
@@ -15,9 +16,33 @@ router
   .get(usersController.findUserAndItems)
   .put(usersController.updateUser)
   .delete(usersController.remove);
- router 
+router 
   .route("/friends/:id")
   .get(usersController.findFriendsAndItems)
+
+router
+  .route("/forgotPassword/:email")
+  .post(resetContoroller.forgot);
+
+router
+  .route("/checkResetToken/:token")
+  .get(resetContoroller.checkToken);
+
+router
+  .route("/resetPassword")
+  .put(resetContoroller.resetPassword);
+
+router
+  .route("/forgotPassword/:email")
+  .post(ResetPasswordCtrl.forgot);
+
+router
+  .route("/checkResetToken/:token")
+  .get(ResetPasswordCtrl.checkToken);
+
+router
+  .route("/resetPassword")
+  .put(ResetPasswordCtrl.resetPassword);
 
   // router.route("/items/")
   // .get(usersController.findUserAndItems)

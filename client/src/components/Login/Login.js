@@ -6,7 +6,7 @@ const Login = props => {
   return (
     <div>
       {props.state.resetPasswordBoolean ? (
-        <ResetPswd handleChange={props.handleChange} click={props.click} />
+        <ResetPswd handleChange={props.handleChange} reset={props.reset} />
       ) : (
         <div className="container">
           <form onSubmit={props.handleSubmit} className="white">
