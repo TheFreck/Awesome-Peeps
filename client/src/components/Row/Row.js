@@ -11,6 +11,7 @@ const Row = props => (
       </div>
       <div className="card-body">
         {props.url}
+        <br></br>
         {props.price}
       </div>
       <div className="card-footer">

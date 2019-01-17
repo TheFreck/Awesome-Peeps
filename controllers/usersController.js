@@ -65,23 +65,19 @@ module.exports = {
     //   .catch(err => res.status(422).json(err));
   },
 
-
-
 updateUser: (req, res) => {
+  console.log("MADE IT")
     //create item then takes the item id and adds it to the users myItems column
-    db.User.findByIdAndUpdate({uuid: "8f5bf630-16d3-11e9-9c3c-3de35eaba832"}
-    ,{$push: {shareWithMe: "8f5bf630-16d3-11e9-9c3c-3de35eaba832"}})
+    db.User.findOneAndUpdate({uuid: req.params.id}, {$push: { shareWithMe: req.session.user._id }}, { new: true})
   
     .then((dbModel) => {
-        console.log("SLDKJFKLSDJF", dbModel)
+        console.log(dbModel)
+        res.json(dbModel) 
     })
-      .then((dbModel) => {
-          
-          console.log("ZZZZZZZZZZZZZZ", dbModel)
-          res.json(dbModel)          
-        })
-      .catch(err => res.status(422).json(err)
-    );
+    .catch(err => {
+      console.log(err);  
+      res.status(422).json(err)
+    });
   },
   
 
@@ -99,7 +95,7 @@ updateUser: (req, res) => {
     console.log("i am running now ahhhhhh")
     console.log("this is our req.session", req.session)
     console.log("this is req. params", req.params)
-    db.User.findOne({uuid: req.session.user.uuid})
+    db.User.findOne({uuid: req.session.user.uuid}  )
     .populate("myItems")
     .then((data) =>{
       console.log(data)
