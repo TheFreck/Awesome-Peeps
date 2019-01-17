@@ -32,6 +32,18 @@ router
   .route("/resetPassword")
   .put(resetContoroller.resetPassword);
 
+router
+  .route("/forgotPassword/:email")
+  .post(ResetPasswordCtrl.forgot);
+
+router
+  .route("/checkResetToken/:token")
+  .get(ResetPasswordCtrl.checkToken);
+
+router
+  .route("/resetPassword")
+  .put(ResetPasswordCtrl.resetPassword);
+
   // router.route("/items/")
   // .get(usersController.findUserAndItems)
 
