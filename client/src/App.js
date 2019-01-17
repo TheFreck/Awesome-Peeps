@@ -7,7 +7,7 @@ import Friends from "./pages/Friends";
 import Profile from "./pages/Profile";
 import Landing from "./pages/Landing";
 import FriendRegistry from "./pages/FriendRegistry";
-import Signup from "./components/Signup";
+import FinalReset from "./components/FinalReset";
 import Login from "./components/Login";
 
 // import Signup from "./components/Signup";
@@ -93,9 +93,9 @@ class App extends Component {
             />
             <Route
               exact
-              path="/reset"
+              path="/reset/:token"
               render={() => (
-                <ResetPswd update={this.updateState} state={this.state} />
+                <FinalReset update={this.updateState} state={this.state} />
               )}
             />
             <Route

@@ -56,6 +56,7 @@ class Start extends Component {
       key: name,
       value: value
     });
+    console.log("resetPswdText: ", this.state.user.resetPswdText );
   };
 
   // handleInputChange = input => {
@@ -166,15 +167,20 @@ class Start extends Component {
   viewProfile = () => this.setState({ viewProfile: !this.state.viewProfile });
 
   resetPasswordBoolean = event => {
-    // event.preventDefault();
+    event.preventDefault();
     console.log("resetting password: ");
     this.setState({
       resetPasswordBoolean: !this.state.resetPasswordBoolean
     });
   };
 
-  sendResetEmail = () => {
-    console.log("send reset email");
+  sendResetEmail = event => {
+    event.preventDefault();
+    console.log("send reset email: ", this.state.user.resetPswdText);
+    API.forgotPassword(this.state.user.resetPswdText)
+    .then(res=> {
+      console.log("res from sending reset email to api: ", res);
+    })
   };
 
   render() {
@@ -209,6 +215,7 @@ class Start extends Component {
                 handleChange={this.handleChange}
                 submit={this.login}
                 click={this.resetPasswordBoolean}
+                reset={this.sendResetEmail}
                 toggleStart={this.toggleStart}
               />
               {/* <Button click={this.toggleStart} name="Signup Instead" /> */}

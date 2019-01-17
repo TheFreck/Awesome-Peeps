@@ -14,7 +14,7 @@ const ResetPswd = props => {
         />
         <input
           type="submit"
-          submit={props.click}
+          onClick={props.reset}
         />
       </form>
     </div>
