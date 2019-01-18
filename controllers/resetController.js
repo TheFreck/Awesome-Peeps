@@ -25,6 +25,8 @@ module.exports = {
           }
         )
         .then(userObj => {
+          console.log("userObj: ", userObj);
+          console.log("req.params.email: ", req.params.email);
           if (!userObj) return reject(404);
           // user exists, assign token with expiration date
           const resetPasswordToken = token;
@@ -32,7 +34,7 @@ module.exports = {
 
           // save the user model with the newly added
           // token and expiration date
-          db.User.updateOne(
+          db.User.update(
             {
               email: req.params.email
             },
@@ -40,8 +42,11 @@ module.exports = {
               resetPasswordToken,
               resetPasswordExpires
             })
-            .then(function (val) {
+            .then(val => {
                console.log("val: ", val);
+               console.log("resetPasswordToken: ", resetPasswordToken);
+               console.log("resetPasswordExpires: ", resetPasswordExpires);
+               console.log("after updating the db userObj: ", userObj)
               // if (!val) return reject(err);
               resolve({
                 user: userObj,
@@ -69,7 +74,7 @@ module.exports = {
           subject: 'greedy bastards Password Reset',
           text: 'You are receiving this because you (or someone else, maybe someone you know) have requested the reset of the password for your account.\n\n' +
           'Please click on the following link, or paste this into your browser to complete the process:\n\n' +
-          'http://' + req.headers.host + '/reset/' + user.token + '\n\n' +
+          'http://' + req.headers.host + '/api/reset/' + user.token + '\n\n' +
           'If you or someone you know did not request this, please ignore this email and your password will remain unchanged.\n'
         }
 
@@ -98,6 +103,7 @@ module.exports = {
     });
   },
   checkToken: (req, res) => {
+    console.log("req.params.token: ", req.params.token);
     db.User.findOne({
       resetPasswordToken: req.params.token,
       resetPasswordExpires: {
@@ -117,7 +123,8 @@ module.exports = {
           tokenStatus: "success"
         });
       }
-    });
+    })
+    .catch(err => console.log("checkToken err: ", err));
   },
   resetPassword: (req, res) => {
     console.log("resetPassword: ", req.params);

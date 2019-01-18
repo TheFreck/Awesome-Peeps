@@ -1,12 +1,19 @@
 import React, { Component } from 'react';
-import {Redirect} from 'react-router-dom';
-import API from '../../utils/API';
+// import {Redirect} from 'react-router-dom';
+// import API from '../../utils/API';
 
-class Login extends Component {
+class FinalReset extends Component {
   
   componentDidMount (){
-    console.log(this.props);
+    console.log("final reset this.props: ", this.props);
     // this.checkResetToken()
+  }
+
+  render() {
+    return (
+      <h1>Final Reset</h1>
+
+    )
   }
 
   //   state = {
@@ -105,4 +112,4 @@ class Login extends Component {
   // }
 }
 
-export default Login;
+export default FinalReset;
