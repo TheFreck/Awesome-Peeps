@@ -67,3 +67,11 @@ textarea.materialize-textarea:focus:not([readonly]) {
   border: none;
   align-content: right;
 }
+
+.brand-logo {
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  width: 80px;
+  border: none;
+}
