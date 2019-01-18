@@ -1,6 +1,5 @@
 //----------Import external components----------
 import React, { Component } from "react";
-import FriendBtn from "../../components/FriendBtn";
 import API from "../../utils/API";
 import { Link } from "react-router-dom";
 import MainLogo from "../../components/MainLogo";
@@ -25,9 +24,6 @@ class Friends extends React.Component {
         this.setState({ users: res.data, firstName:"", lastName:""}))
   }
 
-  nextPath(path) {
-    // this.state.users(path);
-  }
   //-------------Rendering components to the Friends page------------------------
   render(){
     let users = this.state.users
