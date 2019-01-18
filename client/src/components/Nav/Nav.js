@@ -2,18 +2,21 @@ import React from "react";
 import { Link } from "react-router-dom";
 import SignedInLinks from "./SignedInLinks";
 import SignedOutLinks from "./SignedOutLinks";
+import Mainlogo from "../../Images/GreedyBastards2.png";
 
 const Nav = () => {
   return (
     <nav
-      className="nav-wrapper teal darken-1
+      className="nav-wrapper blue darken-2
 		"
     >
       <div className="container">
         {/* className is a Materialize classs*/}
-        <Link to="/landing" className="brand-logo">
-          Greedy Bastards List
-        </Link>{" "}
+        <button type="submit" class="brand-logo">
+          <Link to={"/Landing/"}>
+            <img className="responsive-img" src={Mainlogo} alt="main logo" />
+          </Link>
+        </button>
         <SignedInLinks />
         <SignedOutLinks />
       </div>
