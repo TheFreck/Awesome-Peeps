@@ -6,36 +6,31 @@ import UserList from "../../components/UserList";
 import MainLogo from "../../components/MainLogo";
 import { Link } from "react-router-dom";
 import FindOnlineBtn from "../../components/FindOnlineBtn";
+import ResetPswd from "../../components/ResetPswd";
 
 class FriendRegistry extends Component {
   state = {
-    user: {},
-    myItems: {}
+    user: [],
+    myItems: [],
+    friends: []
   };
 
   componentDidMount() {
-    //this.props.match is the url bar and params.id is the users id
-    API.getFriendsandItems(this.props.match.params.userId).then((friendData)=>{
-      console.log(friendData)
-      //set to state
-      
-    })
-
+    this.getFriendsandItems();
   }
-    // API.getUserandItems(this.props.match.params.id)
-    //   .then(res => this.setState({ myItems: res.data}))
-    //   .catch(err => console.log(err));
-  // }
-
-  //This identifies who is logged in and populates their list with the items they want
-	// userAndItems = (id) => {
-	// 	API.getUserandItems(this.props.match.params.id)
-	// 		.then((res) => {
-	// 			console.log('this is our res fron userctrl', res.data.myItems);
-	// 			this.setState({ myItems: res.data.myItems });
-	// 		})
-	// 		.catch((err) => console.log(err));
-	// };
+    //this.props.match is the url bar and params.id is the users id
+    getFriendsandItems = () => {
+      API.getFriendsandItems(this.props.match.params.userId).then((friendData)=>{
+        console.log(friendData)
+        this.setState({ friends: friendData.data, item: "", price: "", occasion: "", comments: "" })
+        })
+      //   this.setState({ friends: res.data, item:"", price: "", occasion:"", comments: "" }))
+      
+      // .catch((err) => console.log(err));
+    };
+  
+    
+        
 
   render() {
     return (
@@ -45,12 +40,9 @@ class FriendRegistry extends Component {
       <div className="container">
         <div className="card">
           <div className="card-header">
-            {/* {props.item} */}
-            <p>stink bombs</p>
-            </div>
+            <p>{this.state.myItems}</p>
+            {/* {friends.map(friends => {this.state.friends})}  */}
             <div className="card-body">
-              <p>$5.99</p>
-              <p>Comments go here</p>
               {/* {props.url}
               {props.price} */}
               
@@ -73,6 +65,7 @@ class FriendRegistry extends Component {
       </div>
     </div>
   </div>
+</div>
     )};
     }
 export default FriendRegistry;

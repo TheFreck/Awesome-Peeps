@@ -25,9 +25,6 @@ class Friends extends React.Component {
         this.setState({ users: res.data, firstName:"", lastName:""}))
   }
 
-  nextPath(path) {
-    // this.state.users(path);
-  }
   //-------------Rendering components to the Friends page------------------------
   render(){
     let users = this.state.users
