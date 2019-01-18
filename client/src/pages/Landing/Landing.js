@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import FriendBubble from "../../Images/FriendsSpeechBubble.png";
+import MyBubble from "../../Images/MyListSpeechBubble.png";
 
 export class Landing extends Component {
   render() {
@@ -15,9 +17,26 @@ export class Landing extends Component {
           <div className="row">
             <div className="col s12 m12 center">
               <h4>What Do You Bastards Want?</h4>
-              <button>
-                <Link to="/Create" />
-              </button>
+              <div>
+                <button type="submit" class="btn-friend">
+                  <Link to={"/Create/"}>
+                    <img
+                      className="responsive-img"
+                      src={MyBubble}
+                      alt="My list bubble"
+                    />
+                  </Link>
+                </button>
+                <button type="submit" class="btn-friend">
+                  <Link to={"/Friends/"}>
+                    <img
+                      className="responsive-img"
+                      src={FriendBubble}
+                      alt="Friends list bubble"
+                    />
+                  </Link>
+                </button>
+              </div>
             </div>
           </div>
         </header>

@@ -59,4 +59,11 @@ textarea.materialize-textarea:focus:not([readonly]) {
   font-weight: bold;
 }
 
-.btnFriend;
+.btn-friend {
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  width: 850px;
+  border: none;
+  align-content: right;
+}
