@@ -35,7 +35,8 @@ module.exports = {
 updateUser: function(req, res) {
   console.log('this is update user sesison', req.session);
     //create item then takes the item id and adds it to the users myItems column
-    db.User.findOneAndUpdate({uuid: req.params.id}, {$push: { shareWithMe: req.session.user._id }}, { new: true})
+    db.User.findOneAndUpdate
+    ({uuid: req.params.id}, {$push: { shareWithMe: req.session.user._id }}, { new: true})
         .then((dbModel) => {
           console.log(dbModel);
           res.json(dbModel)          

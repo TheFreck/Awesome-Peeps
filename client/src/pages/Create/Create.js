@@ -91,10 +91,10 @@ class Create extends Component {
 		event.preventDefault();
 		console.log('Share with user');
 		API.getUsers({
-			name: this.state.firstName,
+			firstName: this.state.firstName,
+			lastName: this.state.lastName,
 			uuid: this.state.uuid,
 			shared: this.state.shared
-			// shared: 
 		})
 			.then((res) => {
 				console.log('users data: ', res.data);
@@ -160,6 +160,7 @@ class Create extends Component {
 				_id={save._id}
 				key={save._id}
 				firstName={save.firstName}
+				lastName={save.lastName}
 				uuid={save.uuid}
 				pic={save.pic}
 				sharewithMe={save.sharewithMe}
