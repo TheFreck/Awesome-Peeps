@@ -6,10 +6,13 @@ var uuidv1 = require("uuid/v1");
 // Defining methods for the UsersController
 module.exports = {
   findAll: (req, res) => {
-    db.User.find(req.query)
-      .sort({ date: -1 })
+    // db.User.find(req.query) 
+    db.User.find({ uuid: {$ne: req.session.user.uuid} })
+      .sort({ firstName: 1 })
+      // .then ({ uuid: {$ne: req.session.user.uuid} })
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
+      
   },
   
   login: (req, res) => {
