@@ -35,18 +35,24 @@ module.exports = {
           // save the user model with the newly added
           // token and expiration date
           db.User.update(
-            {
-              email: req.params.email
-            },
+            
             {
               resetPasswordToken,
               resetPasswordExpires
             })
             .then(val => {
-               console.log("val: ", val);
-               console.log("resetPasswordToken: ", resetPasswordToken);
-               console.log("resetPasswordExpires: ", resetPasswordExpires);
-               console.log("after updating the db userObj: ", userObj)
+                console.log("val: ", val);
+                console.log("resetPasswordToken: ", resetPasswordToken);
+                console.log("resetPasswordExpires: ", resetPasswordExpires);
+                console.log("after updating the db userObj: ", userObj)
+                db.User.findOneAndUpdate(
+                {
+                  email: userObj.email
+                },
+                {$push: {
+                 resetPasswordToken,
+                 resetPasswordExpires
+               }})
               // if (!val) return reject(err);
               resolve({
                 user: userObj,
@@ -103,9 +109,10 @@ module.exports = {
     });
   },
   checkToken: (req, res) => {
-    console.log("req.params.token: ", req.params.token);
+    let theToken = req.url.slice(1);
+    console.log("check theToken: ", theToken);
     db.User.findOne({
-      resetPasswordToken: req.params.token,
+      resetPasswordToken: theToken,
       resetPasswordExpires: {
         $gt: Date.now()
       }
@@ -114,17 +121,19 @@ module.exports = {
       console.log(user, "this is reset user data");
       if (!user && typeof user === "object") {
         res.send({
-          email: user.dataValues.email,
+          email: user.email,
           tokenStatus: "expired"
         });
       } else {
         res.send({
-          email: user.dataValues.email,
+          email: user.email,
           tokenStatus: "success"
         });
       }
     })
     .catch(err => console.log("checkToken err: ", err));
+    console.log("end of checkToken");
+    
   },
   resetPassword: (req, res) => {
     console.log("resetPassword: ", req.params);
