@@ -1,3 +1,4 @@
+//----------Import external components----------
 import React, { Component } from "react";
 import Row from "../../components/Row";
 import API from "../../utils/API";
@@ -50,7 +51,7 @@ class FriendRegistry extends Component {
 									<td>{item.price}</td>
 									<td>{item.comments}</td>
 									<td>
-										<button value={item._id} onClick={() => this.deleteItem(item._id)}>ADD TO SHOPPING LIST</button>
+                    <button type="submit" className="btn btn-info"><Link to={"/Shopping/"}>ADD TO SHOPPING LIST</Link></button>
 									</td>
                   <td>
 										<button value={item._id} onClick={() => this.deleteItem(item._id)}>FIND ONLINE</button>
