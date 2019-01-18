@@ -16,7 +16,7 @@ class Shopping extends Component {
 	};
 
 	componentDidMount() {
-		// this.getItems();
+		this.getItems();
 		this.getPerson();
 	}
 
@@ -36,16 +36,16 @@ class Shopping extends Component {
 						sharedItems: [
 							{
 								_id: "23jm4h5v2kj3g45",
-								name: "glove",
+								item: "glove",
 								price: 2,
-								ocassion: "baseball",
+								occasion: "baseball",
 								comments: "yo"
 							},
 							{
 								_id: "23jqkjdhgfa8i73g45",
-								name: "bat",
+								item: "bat",
 								price: 20,
-								ocassion: "baseball",
+								occasion: "baseball",
 								comments: "best bat ever brah"
 							}
 						]
@@ -61,7 +61,7 @@ class Shopping extends Component {
 	};
 
 	render() {
-		console.log(this.state.users.length)
+		console.log(this.props.state)
 		return (
 			<div>
 				<div class="col s12 center-align top:60px">
@@ -82,22 +82,27 @@ class Shopping extends Component {
 						<tbody>
 							{this.state.user.sharedItems.map((item) => (
 								<tr key={item._id}>
-									<td>{item.name} </td>
+									<td>{this.state.user.name} </td>
 									<td>{item.item}</td>
 									<td>{item.price}</td>
 									<td>{item.occasion}</td>
 									<td>{item.comments}</td>
 									<td>
 										<button value={item._id} onClick={() => this.deleteItem(item._id)}>Buy it!</button>
+
+										<form action="http://www.google.com/search" method="get">
+                   							<input type="" class="itemInput" name="q" value={item.item} />
+                   							<button type="submit" id="online" target={item.item} value={item.item} >get item</button>
+                 						</form>
 									</td>
 								</tr>
 							))}
-							{this.state.users.map((user) => (
+							{/* {this.state.stuff.map((user) => (
 								<tr key={user._id}>
-									<td>{user.firstName}</td>
-									<td>{user.myItems}</td>
+									<td>{user.item}</td>
+									<td>{user.price}</td>
 								</tr>
-							))}
+							))} */}
 						</tbody>
 					</form>
 				</div>
