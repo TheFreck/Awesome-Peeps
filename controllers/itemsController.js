@@ -2,7 +2,7 @@ const db = require("../models");
 
 // Defining methods for the ItemsController
 module.exports = {
- 
+
   findAll: function(req, res) {
     db.Item.find(req.query)
       .sort({ date: -1 })
@@ -23,14 +23,14 @@ module.exports = {
         db.User.findOneAndUpdate({uuid: req.body.uuid}, {$push: { myItems: dbModel._id}}, { new: true })
         .then((dbModel) => {
           console.log(dbModel)
-          res.json(dbModel)          
+          res.json(dbModel)
         })
         .catch(err => res.status(422).json(err));
       })
       .catch(err => res.status(422).json(err));
   },
   update: function(req, res) {
-    db.Item.findOneAndUpdate({ _id: req.params.id }, req.body)
+    db.Item.findOneAndUpdate({ _id: req.params.id }, {$set: req.body}, { new: true })
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
