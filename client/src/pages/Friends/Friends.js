@@ -1,6 +1,5 @@
 //----------Import external components----------
 import React, { Component } from "react";
-import FriendBtn from "../../components/FriendBtn";
 import API from "../../utils/API";
 import { Link } from "react-router-dom";
 import MainLogo from "../../components/MainLogo";
