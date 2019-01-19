@@ -34,8 +34,10 @@ module.exports = {
 
           // save the user model with the newly added
           // token and expiration date
-          db.User.update(
-            
+          db.User.updateOne(
+            {
+              email: req.params.email
+            },
             {
               resetPasswordToken,
               resetPasswordExpires
@@ -45,14 +47,7 @@ module.exports = {
                 console.log("resetPasswordToken: ", resetPasswordToken);
                 console.log("resetPasswordExpires: ", resetPasswordExpires);
                 console.log("after updating the db userObj: ", userObj)
-                db.User.findOneAndUpdate(
-                {
-                  email: userObj.email
-                },
-                {$push: {
-                 resetPasswordToken,
-                 resetPasswordExpires
-               }})
+                
               // if (!val) return reject(err);
               resolve({
                 user: userObj,
@@ -68,19 +63,21 @@ module.exports = {
         const gmailTransporter = nodemailer.createTransport({
           service: 'gmail',
           auth: {
-            user: "bastards.of.greed@gmail.com",
+            user: process.env.EMAIL_ACCOUNT,
             /////////////////add config file to pull in password
-            pass: "aLetterandthenumber1"
+            pass: process.env.EMAIL_PASSWORD
           }
         });
 
+        console.log("req.headers: ", req.headers.x-forwarded-host);
+        
         var mailOptions = {
           to: user.user.email,
           from: '"from one greedy bastard to another" <bastards.of.greed@gmail.com>',
           subject: 'greedy bastards Password Reset',
           text: 'You are receiving this because you (or someone else, maybe someone you know) have requested the reset of the password for your account.\n\n' +
           'Please click on the following link, or paste this into your browser to complete the process:\n\n' +
-          'http://' + req.headers.host + '/api/reset/' + user.token + '\n\n' +
+          'http://' + req.headers.referer + user.token + '\n\n' +
           'If you or someone you know did not request this, please ignore this email and your password will remain unchanged.\n'
         }
 
@@ -133,7 +130,7 @@ module.exports = {
     })
     .catch(err => console.log("checkToken err: ", err));
     console.log("end of checkToken");
-    
+
   },
   resetPassword: (req, res) => {
     console.log("resetPassword: ", req.params);

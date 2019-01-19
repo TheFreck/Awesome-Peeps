@@ -7,7 +7,7 @@ import Friends from "./pages/Friends";
 import Profile from "./pages/Profile";
 import Landing from "./pages/Landing";
 import FriendRegistry from "./pages/FriendRegistry";
-import FinalReset from "./components/FinalReset";
+import FinalReset from "./pages/FinalReset";
 
 // import Signup from "./components/Signup";
 // import Login from "./components/Login";
@@ -78,6 +78,16 @@ class App extends Component {
             />
             <Route
               exact
+              path="/reset/:token"
+              render={() => (
+                <FinalReset 
+                  update={this.updateState} 
+                  state={this.state} 
+                />
+              )}
+            />
+            <Route
+              exact
               path="/Landing"
               render={() => (
                 <Landing 
@@ -91,16 +101,6 @@ class App extends Component {
               path="/create"
               render={() => (
                 <Create 
-                  update={this.updateState} 
-                  state={this.state} 
-                />
-              )}
-            />
-            <Route
-              exact
-              path="/api/reset/:token"
-              render={() => (
-                <FinalReset 
                   update={this.updateState} 
                   state={this.state} 
                 />

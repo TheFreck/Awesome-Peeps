@@ -6,9 +6,9 @@ router
   .route("/forgot/:email")
   .post(resetController.forgot);
 
-router
-  .route("/:token")
-  .get(resetController.checkToken);
+// router
+//   .route("/:token")
+//   .get(resetController.checkToken);
 
 router
   .route("/")
