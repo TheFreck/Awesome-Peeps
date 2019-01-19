@@ -25,6 +25,8 @@ module.exports = {
           }
         )
         .then(userObj => {
+          console.log("userObj: ", userObj);
+          console.log("req.params.email: ", req.params.email);
           if (!userObj) return reject(404);
           // user exists, assign token with expiration date
           const resetPasswordToken = token;
@@ -40,8 +42,12 @@ module.exports = {
               resetPasswordToken,
               resetPasswordExpires
             })
-            .then(function (val) {
-               console.log("val: ", val);
+            .then(val => {
+                console.log("val: ", val);
+                console.log("resetPasswordToken: ", resetPasswordToken);
+                console.log("resetPasswordExpires: ", resetPasswordExpires);
+                console.log("after updating the db userObj: ", userObj)
+                
               // if (!val) return reject(err);
               resolve({
                 user: userObj,
@@ -53,23 +59,26 @@ module.exports = {
     })
     .then((user) => {
       console.log("user: ", user);
+      console.log("process.env.EMAIL_ACOUNT", process.env.EMAIL_ACCOUNT);
       return new Promise((resolve, reject) => {
         const gmailTransporter = nodemailer.createTransport({
           service: 'gmail',
           auth: {
-            user: "bastards.of.greed@gmail.com",
+            user: process.env.EMAIL_ACCOUNT,
             /////////////////add config file to pull in password
-            pass: "aLetterandthenumber1"
+            pass: process.env.EMAIL_PASSWORD
           }
         });
 
+        console.log("req.headers: ", req.headers);
+        
         var mailOptions = {
           to: user.user.email,
           from: '"from one greedy bastard to another" <bastards.of.greed@gmail.com>',
           subject: 'greedy bastards Password Reset',
           text: 'You are receiving this because you (or someone else, maybe someone you know) have requested the reset of the password for your account.\n\n' +
           'Please click on the following link, or paste this into your browser to complete the process:\n\n' +
-          'http://' + req.headers.host + '/reset/' + user.token + '\n\n' +
+          'http://' + req.headers.referer + "reset/" + user.token + '\n\n' +
           'If you or someone you know did not request this, please ignore this email and your password will remain unchanged.\n'
         }
 
@@ -98,8 +107,10 @@ module.exports = {
     });
   },
   checkToken: (req, res) => {
+    let theToken = req.url.slice(17);
+    console.log("check theToken: ", theToken);
     db.User.findOne({
-      resetPasswordToken: req.params.token,
+      resetPasswordToken: theToken,
       resetPasswordExpires: {
         $gt: Date.now()
       }
@@ -108,23 +119,27 @@ module.exports = {
       console.log(user, "this is reset user data");
       if (!user && typeof user === "object") {
         res.send({
-          email: user.dataValues.email,
+          email: user.email,
           tokenStatus: "expired"
         });
       } else {
         res.send({
-          email: user.dataValues.email,
+          email: user.email,
           tokenStatus: "success"
         });
       }
-    });
+    })
+    .catch(err => console.log("checkToken err: ", err));
+    console.log("end of checkToken");
+
   },
   resetPassword: (req, res) => {
-    console.log("resetPassword: ", req.params);
+    console.log("resetPassword: ", req.body);
     new Promise((resolve, reject) => {
       // search for user with the given email
       db.User.findOne({ email: req.body.email })
       .then((userObj) => {
+        console.log("userObj berfore salting: ", userObj);
         const resetPassword = req.body.password
         const saltRounds = 10;
         bcrypt.genSalt(saltRounds, function (err, salt) {
@@ -132,7 +147,7 @@ module.exports = {
             // Store hash in your password DB.
             // save the user model with the newly added
             // token and expiration date
-            db.Users.update({
+            db.User.update({
               password: hash,
               resetPasswordToken: '',
               resetPasswordExpires: ''
@@ -140,26 +155,24 @@ module.exports = {
             .then(function (updateRes) {
               //  console.log(userObj);
               // if (!userObj) return reject(err);
-
+              console.log("userObj before resolving: ", userObj);
               resolve({
-                user: userObj.dataValues
+                user: userObj
               });
             });
           });
         });
-
-
       });
     })
     .then((userObj) => {
-      console.log(userObj);
+      console.log("reset password userObj", userObj);
       return new Promise((resolve, reject) => {
         const gmailTransporter = nodemailer.createTransport({
           service: 'gmail',
           auth: {
-            user: "bastards.of.greed@gmail.com",
+            user: process.env.EMAIL_ACCOUNT,
             /////////////////add config file to pull in password
-            pass: "aLetterandthenumber1"
+            pass: process.env.EMAIL_PASSWORD
           }
         });
 
@@ -176,7 +189,6 @@ module.exports = {
             console.log(err);
             return reject(err);
           }
-
           resolve();
         });
       });
