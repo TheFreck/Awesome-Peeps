@@ -27,7 +27,6 @@ form-button,
   text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black,
     1px 1px 0 black;
 }
-
 .grey-text {
   margin: 5px 10px;
   font-family: "Permanent Marker", cursive;
@@ -67,6 +66,7 @@ textarea.materialize-textarea:focus:not([readonly]) {
   width: 850px;
   border: none;
   align-content: right;
+  z-index: 2;
 }
 
 .brand-logo {
