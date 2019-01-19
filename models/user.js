@@ -70,6 +70,14 @@ const userSchema = new Schema({
   notes: {
     type: String,
     required: false
+  },
+  resetPasswordToken: {
+    type: String,
+    require: false
+  },
+  resetPasswordExpires: {
+    type: String,
+    require: false
   }
 })
 

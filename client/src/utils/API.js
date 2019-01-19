@@ -53,23 +53,29 @@ export default {
   deleteItem: id => {
     return axios.delete("/api/items/" + id);
   },
+  updateItem: (itemId, updateItemData) => {
+
+    return axios.put(`/api/items/${itemId}`, updateItemData)
+  },
   // Saves an item to the database
   saveItem: itemData => {
     console.log("API user data: ", itemData);
     return axios.post("/api/items", itemData);
   },
   forgotPassword: email => {
-    console.log("api email: ", email);
+    console.log("api forgot email: ", email);
     //route can be diff but it need to call the forgot method inside of resetPasswordCtrl aka: resetPasswordCtrl.forgot()
     return axios.post(`/api/reset/forgot/${email}`)
   },
   checkResetToken: token => {
+    console.log("api checkreset token: ", token);
     //route can be diff but it need to call the checkToken method inside of resetPasswordCtrl aka: resetPasswordCtrl.checkToken()
     return axios.get(`/api/reset/checkResetToken/${token}`)
   },
   resetPassword: emailAndPass => {
+    console.log("api resetPassword emailAndPass: ", emailAndPass);
     //route can be diff but it need to call the resetPassword method inside of resetPasswordCtrl aka: resetPasswordCtrl.resetPassword()
     return axios.put(`/api/reset/resetPassword`, emailAndPass)
-  }
+  },
 
 };

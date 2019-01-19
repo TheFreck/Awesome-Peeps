@@ -12,7 +12,7 @@ const Nav = () => {
     >
       <div className="container">
         {/* className is a Materialize classs*/}
-        <button type="submit" class="brand-logo">
+        <button type="submit" className="brand-logo">
           <Link to={"/Landing/"}>
             <img className="responsive-img" src={Mainlogo} alt="main logo" />
           </Link>

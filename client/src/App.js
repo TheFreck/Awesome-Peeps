@@ -7,8 +7,7 @@ import Friends from "./pages/Friends";
 import Profile from "./pages/Profile";
 import Landing from "./pages/Landing";
 import FriendRegistry from "./pages/FriendRegistry";
-import FinalReset from "./components/FinalReset";
-import Login from "./components/Login";
+import FinalReset from "./pages/FinalReset";
 
 // import Signup from "./components/Signup";
 // import Login from "./components/Login";
@@ -48,7 +47,8 @@ class App extends Component {
       firstName: updates.firstName,
       lastName: updates.lastName,
       pic: updates.pic,
-      notes: updates.notes
+      notes: updates.notes,
+      account_key: ""
     });
   };
 
@@ -60,11 +60,90 @@ class App extends Component {
     });
   };
 
+  logout = () => {
+    this.setState(initialState);
+  }
+
   render() {
-    return (
-      <Router>
-        <div>
-          <Nav />
+    if(this.state.uuid) {
+      console.log("hit");
+      return (
+        <Router>
+          <div>
+            {<Nav />}
+            <Switch >
+              <Route
+                exact
+                path="/Landing"
+                render={() => (
+                  <Landing 
+                    update={this.updateState} 
+                    state={this.state} 
+                  />
+                )}
+              />
+              <Route
+                exact
+                path="/create"
+                render={() => (
+                  <Create 
+                    update={this.updateState} 
+                    state={this.state} 
+                  />
+                )}
+              />
+              <Route
+                exact
+                path="/friends"
+                render={() => (
+                  <Friends 
+                    update={this.updateState} 
+                    state={this.state} 
+                  />
+                )}
+              />
+              <Route
+                exact
+                path="/FriendRegistry/:userId"
+                render={props => (
+                  <FriendRegistry
+                    {...props}
+                    update={this.updateState}
+                    state={this.state}
+                  />
+                )}
+              />
+              <Route
+                exact
+                path="/Shopping"
+                render={() => (
+                  <Shopping 
+                    update={this.updateState} 
+                    state={this.state} 
+                  />
+                )}
+              />
+              <Route
+                exact
+                path="/Profile"
+                render={() => (
+                  <Profile 
+                    update={this.updateState} 
+                    state={this.state} 
+                  />
+                )}
+              />
+              <Route 
+                component={NoMatch} 
+              />
+            </Switch>
+          </div>
+        </Router>
+      );
+    }else{
+      console.log("miss");
+      return(
+        <Router >
           <Switch>
             <Route
               exact
@@ -79,64 +158,22 @@ class App extends Component {
             />
             <Route
               exact
-              path="/Landing"
-              render={() => (
-                <Landing update={this.updateState} state={this.state} />
-              )}
-            />
-            <Route
-              exact
-              path="/create"
-              render={() => (
-                <Create update={this.updateState} state={this.state} />
-              )}
-            />
-            <Route
-              exact
               path="/reset/:token"
-              render={() => (
-                <FinalReset update={this.updateState} state={this.state} />
-              )}
-            />
-            <Route
-              exact
-              path="/friends"
-              render={() => (
-                <Friends update={this.updateState} state={this.state} />
-              )}
-            />
-            <Route
-              exact
-              path="/FriendRegistry/:userId"
-              render={props => (
-                <FriendRegistry
-                  {...props}
-                  update={this.updateState}
-                  state={this.state}
+              render={token => (
+                <FinalReset 
+                  token={token}
+                  update={this.updateState} 
+                  state={this.state} 
                 />
               )}
             />
-            <Route
-              exact
-              path="/Shopping"
-              render={() => (
-                <Shopping update={this.updateState} state={this.state} />
-              )}
+            <Route 
+              component={NoMatch} 
             />
-            <Route
-              exact
-              path="/Profile"
-              render={() => (
-                <Profile update={this.updateState} state={this.state} />
-              )}
-            />
-            {/* //Navigation imports ***PENDING PAGES CREATION*** */}
-
-            <Route component={NoMatch} />
           </Switch>
-        </div>
-      </Router>
-    );
+        </Router>
+      )
+    }
   }
 }
 

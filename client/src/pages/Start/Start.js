@@ -132,7 +132,8 @@ class Start extends Component {
               firstName: res.data.firstName,
               lastName: res.data.lastName,
               pic: res.data.pic,
-              notes: res.data.notes
+              notes: res.data.notes,
+              account_key: ""
             }
           };
           console.log("user: ", user.user);
