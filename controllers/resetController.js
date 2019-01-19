@@ -59,6 +59,7 @@ module.exports = {
     })
     .then((user) => {
       console.log("user: ", user);
+      console.log("process.env.EMAIL_ACOUNT", process.env.EMAIL_ACCOUNT);
       return new Promise((resolve, reject) => {
         const gmailTransporter = nodemailer.createTransport({
           service: 'gmail',
@@ -69,7 +70,7 @@ module.exports = {
           }
         });
 
-        console.log("req.headers: ", req.headers.x-forwarded-host);
+        console.log("req.headers: ", req.headers);
         
         var mailOptions = {
           to: user.user.email,
@@ -77,7 +78,7 @@ module.exports = {
           subject: 'greedy bastards Password Reset',
           text: 'You are receiving this because you (or someone else, maybe someone you know) have requested the reset of the password for your account.\n\n' +
           'Please click on the following link, or paste this into your browser to complete the process:\n\n' +
-          'http://' + req.headers.referer + user.token + '\n\n' +
+          'http://' + req.headers.referer + "reset/" + user.token + '\n\n' +
           'If you or someone you know did not request this, please ignore this email and your password will remain unchanged.\n'
         }
 
@@ -170,9 +171,9 @@ module.exports = {
         const gmailTransporter = nodemailer.createTransport({
           service: 'gmail',
           auth: {
-            user: "bastards.of.greed@gmail.com",
+            user: process.env.EMAIL_ACCOUNT,
             /////////////////add config file to pull in password
-            pass: "aLetterandthenumber1"
+            pass: process.env.EMAIL_PASSWORD
           }
         });
 

@@ -8,13 +8,13 @@ class FinalReset extends Component {
     password: "",
     confirmPassword: "",
     redirect: false,
-    tokenStatus: false,
+    tokenStatus: true,
     resetSuccesful: false
   }
   
   componentDidMount (){
     console.log("final reset this.props: ", this.props);
-    // this.checkResetToken()
+    this.checkResetToken()
   }
   
   handleChange = (event) => {
@@ -24,25 +24,25 @@ class FinalReset extends Component {
     });
   }
 
-
   checkResetToken = () => {
-    console.log(this.props.match.params.token);
-    const token = this.props.match.params.token;
-    API.checkResetToken(token).then((res)=>{
-      console.log(res);
-      if(res.data.tokenStatus === "expired"){
-        console.log("BAD token");
-        this.setState({
-          tokenStatus: false
-        });
-      }else{
-        console.log("GOOD token");
-        this.setState({
-          tokenStatus: true,
-          email: res.data.email
-        });
-      }
-    })
+    console.log("this.params: ", this.params);
+    console.log("final reset this.props.match: ", this.props.match);
+    // const token = this.props.match.params.token;
+    // API.checkResetToken(token).then((res)=>{
+    //   console.log(res);
+    //   if(res.data.tokenStatus === "expired"){
+    //     console.log("BAD token");
+    //     this.setState({
+    //       tokenStatus: false
+    //     });
+    //   }else{
+    //     console.log("GOOD token");
+    //     this.setState({
+    //       tokenStatus: true,
+    //       email: res.data.email
+    //     });
+    //   }
+    // })
   }
 
   postForgotPassword = () => {

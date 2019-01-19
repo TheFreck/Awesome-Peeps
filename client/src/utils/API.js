@@ -75,5 +75,4 @@ export default {
     return axios.put(`/api/reset/resetPassword`, emailAndPass)
   },
 
-
 };
