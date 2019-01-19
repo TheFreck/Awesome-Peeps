@@ -2,6 +2,7 @@ import React from "react";
 import { Container } from "../../components/Grid";
 
 const Profile = props => {
+  console.log("profil props: ", props);
   return (
     <Container fluid>
       <h1>Profile Page</h1>
@@ -10,7 +11,7 @@ const Profile = props => {
         <input
           type="text"
           name="screenName"
-          value={props.state.user.screenName}
+          value={props.state.screenName}
           onChange={props.handleChange}
         />
         <br />
@@ -18,7 +19,7 @@ const Profile = props => {
         <input
           type="text"
           name="firstName"
-          value={props.state.user.firstName}
+          value={props.state.firstName}
           onChange={props.handleChange}
         />
         <br />
@@ -26,7 +27,7 @@ const Profile = props => {
         <input
           type="text"
           name="lastName"
-          value={props.state.user.lastName}
+          value={props.state.lastName}
           onChange={props.handleChange}
         />
         <br />
@@ -34,7 +35,7 @@ const Profile = props => {
         <input
           type="email"
           name="email"
-          value={props.state.user.email}
+          value={props.state.email}
           onChange={props.handleChange}
         />
         <br />
@@ -42,7 +43,7 @@ const Profile = props => {
         <input
           type="password"
           name="account_key"
-          value={props.state.user.account_key}
+          value={props.state.account_key}
           onChange={props.handleChange}
         />
         <br />
