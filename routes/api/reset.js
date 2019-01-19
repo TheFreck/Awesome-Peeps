@@ -7,11 +7,11 @@ router
   .post(resetController.forgot);
 
 router
-  .route("/:token")
+  .route("/checkResetToken/:token")
   .get(resetController.checkToken);
 
 router
-  .route("/")
+  .route("/resetPassword")
   .put(resetController.resetPassword);
     
 

@@ -7,6 +7,7 @@ const mongoose = require("mongoose");
 const routes = require("./routes");
 const app = express();
 const PORT = process.env.PORT || 3001;
+require('dotenv').config()
 
 // Define middleware here
 app.use(logger("dev"));
@@ -15,7 +16,7 @@ app.use(express.json());
 //sessions
 app.use(
   session({
-    secret: "muscle bound brute", //pick a random string to make the hash that is generated secure
+    secret: process.env.SESSION_SECRET,
     store: process.env.MONGODB_URI,
     resave: false, //required
     saveUninitialized: false //required
