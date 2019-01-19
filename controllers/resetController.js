@@ -107,7 +107,7 @@ module.exports = {
     });
   },
   checkToken: (req, res) => {
-    let theToken = req.url.slice(1);
+    let theToken = req.url.slice(17);
     console.log("check theToken: ", theToken);
     db.User.findOne({
       resetPasswordToken: theToken,
@@ -134,11 +134,12 @@ module.exports = {
 
   },
   resetPassword: (req, res) => {
-    console.log("resetPassword: ", req.params);
+    console.log("resetPassword: ", req.body);
     new Promise((resolve, reject) => {
       // search for user with the given email
       db.User.findOne({ email: req.body.email })
       .then((userObj) => {
+        console.log("userObj berfore salting: ", userObj);
         const resetPassword = req.body.password
         const saltRounds = 10;
         bcrypt.genSalt(saltRounds, function (err, salt) {
@@ -146,7 +147,7 @@ module.exports = {
             // Store hash in your password DB.
             // save the user model with the newly added
             // token and expiration date
-            db.Users.update({
+            db.User.update({
               password: hash,
               resetPasswordToken: '',
               resetPasswordExpires: ''
@@ -154,19 +155,17 @@ module.exports = {
             .then(function (updateRes) {
               //  console.log(userObj);
               // if (!userObj) return reject(err);
-
+              console.log("userObj before resolving: ", userObj);
               resolve({
-                user: userObj.dataValues
+                user: userObj
               });
             });
           });
         });
-
-
       });
     })
     .then((userObj) => {
-      console.log(userObj);
+      console.log("reset password userObj", userObj);
       return new Promise((resolve, reject) => {
         const gmailTransporter = nodemailer.createTransport({
           service: 'gmail',
@@ -190,7 +189,6 @@ module.exports = {
             console.log(err);
             return reject(err);
           }
-
           resolve();
         });
       });

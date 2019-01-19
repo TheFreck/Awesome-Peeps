@@ -79,8 +79,9 @@ class App extends Component {
             <Route
               exact
               path="/reset/:token"
-              render={() => (
+              render={token => (
                 <FinalReset 
+                  token={token}
                   update={this.updateState} 
                   state={this.state} 
                 />

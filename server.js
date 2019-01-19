@@ -16,7 +16,7 @@ app.use(express.json());
 //sessions
 app.use(
   session({
-    secret: "muscle bound brute", //pick a random string to make the hash that is generated secure
+    secret: process.env.SESSION_SECRET,
     store: process.env.MONGODB_URI,
     resave: false, //required
     saveUninitialized: false //required
