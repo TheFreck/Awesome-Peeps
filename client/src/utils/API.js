@@ -50,6 +50,10 @@ export default {
   deleteItem: id => {
     return axios.delete("/api/items/" + id);
   },
+  updateItem: (itemId, updateItemData) => {
+
+    return axios.put(`/api/items/${itemId}`, updateItemData)
+  },
   // Saves an item to the database
   saveItem: itemData => {
     console.log("API user data: ", itemData);
@@ -69,6 +73,7 @@ export default {
     console.log("api resetPassword emailAndPass: ", emailAndPass);
     //route can be diff but it need to call the resetPassword method inside of resetPasswordCtrl aka: resetPasswordCtrl.resetPassword()
     return axios.put(`/api/reset/resetPassword`, emailAndPass)
-  }
+  },
+
 
 };

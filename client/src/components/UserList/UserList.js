@@ -11,7 +11,7 @@ const UserList = props => (
         })}
         value={props.uuid}
         data-id={props._id}>
-        {props.firstName}
+        {props.firstName} {props.lastName}
       </button>
     </div>
   </div>

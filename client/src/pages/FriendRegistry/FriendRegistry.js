@@ -1,78 +1,66 @@
 import React, { Component } from "react";
 import Row from "../../components/Row";
 import API from "../../utils/API";
-// import RegistryHeader from "../../components/RegistryHeader"
 import UserList from "../../components/UserList";
 import MainLogo from "../../components/MainLogo";
 import { Link } from "react-router-dom";
 import FindOnlineBtn from "../../components/FindOnlineBtn";
+import ResetPswd from "../../components/ResetPswd";
 
 class FriendRegistry extends Component {
   state = {
-    user: {},
-    myItems: {}
+    user: this.props.state,
+    myItems: [],
+    friends: []
   };
 
   componentDidMount() {
-    //this.props.match is the url bar and params.id is the users id
-    API.getFriendsandItems(this.props.match.params.userId).then((friendData)=>{
-      console.log(friendData)
-      //set to state
-      
-    })
-
+    this.getFriendsandItems();
   }
-    // API.getUserandItems(this.props.match.params.id)
-    //   .then(res => this.setState({ myItems: res.data}))
-    //   .catch(err => console.log(err));
-  // }
-
-  //This identifies who is logged in and populates their list with the items they want
-	// userAndItems = (id) => {
-	// 	API.getUserandItems(this.props.match.params.id)
-	// 		.then((res) => {
-	// 			console.log('this is our res fron userctrl', res.data.myItems);
-	// 			this.setState({ myItems: res.data.myItems });
-	// 		})
-	// 		.catch((err) => console.log(err));
-	// };
-
-  render() {
-    return (
-      <div className="col-12">
-        <h3 class="center-align" id="greedy">I'M A GREEDY BASTARD - HERE IS MY LIST</h3>
+    //this.props.match is the url bar and params.id is the users id
+    getFriendsandItems = () => {
+      API.getFriendsandItems(this.props.match.params.userId).then((friendData)=>{
+        console.log(friendData)
+        this.setState({ friends: friendData.data.myItems})
+        })
+      .catch((err) => console.log(err));
+    };
   
+    
+//Render Friends Registry into a table
+  render() {
+    console.log(this.state.friends)
+    return (
       <div className="container">
-        <div className="card">
-          <div className="card-header">
-            {/* {props.item} */}
-            <p>stink bombs</p>
-            </div>
-            <div className="card-body">
-              <p>$5.99</p>
-              <p>Comments go here</p>
-              {/* {props.url}
-              {props.price} */}
-              
-            </div>
-            <div className="card-footer">
-              <span>
-                <button
-                className="btn btn-info ml-1">
-                {/* onClick={() => props.deleteItem(props._id)}> */}
-                  Add
-                </button>
-
-                <button
-                className="btn btn-info ml-1">
-                {/* onClick={() => props.deleteItem(props._id)}> */}
-                  Find Online
-                </button>
-            </span>
-            </div>
+      <form className="white">
+        <h3 className="grey-text text-darken-3">I'M A GREEDY BASTARD - HERE IS MY LIST</h3>
+        <thead>
+          <tr>
+            <th>ITEM</th>
+            <th>PRICE</th>
+            <th>COMMENTS</th>
+            <th>ADD TO SHOPPING LIST</th>
+            <th>FIND ONLINE</th>
+          </tr>
+        </thead>
+        <tbody>
+							{this.state.friends.map((item) => (
+								<tr key={item._id}>
+									<td>{item.item}</td>
+									<td>{item.price}</td>
+									<td>{item.comments}</td>
+									<td>
+										<button value={item._id} onClick={() => this.deleteItem(item._id)}>ADD TO SHOPPING LIST</button>
+									</td>
+                  <td>
+										<button value={item._id} onClick={() => this.deleteItem(item._id)}>FIND ONLINE</button>
+									</td>
+								</tr>
+							))}
+					</tbody>
+      </form>
       </div>
-    </div>
-  </div>
+      
     )};
     }
 export default FriendRegistry;
