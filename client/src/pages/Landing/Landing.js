@@ -18,7 +18,7 @@ export class Landing extends Component {
             <div className="col s12 m12 center">
               <h4>What Do You Bastards Want?</h4>
               <div>
-                <button type="submit" class="btn-friend">
+                <button type="submit" className="btn-friend">
                   <Link to={"/Create/"}>
                     <img
                       className="responsive-img"
@@ -27,7 +27,7 @@ export class Landing extends Component {
                     />
                   </Link>
                 </button>
-                <button type="submit" class="btn-friend">
+                <button type="submit" className="btn-friend">
                   <Link to={"/Friends/"}>
                     <img
                       className="responsive-img"
