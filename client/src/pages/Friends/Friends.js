@@ -27,8 +27,8 @@ class Friends extends React.Component {
     let users = this.state.users;
     return (
       <div className="container">
-        <div class="Row">
-          <div class="col s12 center-align top:60px">
+        <div className="Row">
+          <div className="col s12 center-align top:60px">
             <MainLogo />
           </div>
           <div>
