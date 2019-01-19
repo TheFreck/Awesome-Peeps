@@ -1,3 +1,4 @@
+//----------Import external components----------
 import React, { Component } from "react";
 import Row from "../../components/Row";
 import API from "../../utils/API";
@@ -26,7 +27,10 @@ class FriendRegistry extends Component {
       .catch((err) => console.log(err));
     };
   
-    
+//Add item to shopping list page
+addToShopping = (event) => {
+
+}
 //Render Friends Registry into a table
   render() {
     console.log(this.state.friends)
@@ -50,10 +54,14 @@ class FriendRegistry extends Component {
 									<td>{item.price}</td>
 									<td>{item.comments}</td>
 									<td>
-										<button value={item._id} onClick={() => this.deleteItem(item._id)}>ADD TO SHOPPING LIST</button>
+                    
+                    {/* <button onClick={this.addToShopping} type="submit" className="btn pink lighten-1 z-depth-2"><Link to={"/Shopping/"}>ADD TO SHOPPING LIST</Link></button> */}
 									</td>
                   <td>
-										<button value={item._id} onClick={() => this.deleteItem(item._id)}>FIND ONLINE</button>
+										<form action="http://www.google.com/search" method="get">
+                   		<input type="" class="itemInput" name="q" value={item.item} />
+                   		<button type="submit" id="online" target={item.item} value={item.item}>get item</button>
+                 		</form>
 									</td>
 								</tr>
 							))}

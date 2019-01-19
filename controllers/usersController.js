@@ -115,5 +115,18 @@ updateUser: (req, res) => {
       console.log(data)
       res.json(data)
     })
-  }
+  },
+  
+findShoppingListItems: (req, res) => {
+  console.log("i am running now ahhhhhh")
+  console.log("this is our req.session", req.session)
+  console.log("this is req. params", req.params)
+  db.User.findOne({_id: req.params.id})
+  .populate("myItems")
+  .then((data) =>{
+    console.log(data)
+    res.json(data)
+  })
+}
 };
+
