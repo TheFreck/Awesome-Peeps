@@ -96,14 +96,14 @@ class Share extends Component {
   //Share registry with another user
   shareRegistry = event => {
     event.preventDefault();
-    console.log("Share with user")
+    // console.log("Share with user")
       API.getUsers({
         name: this.state.user.profile.name,
         uuid: this.state.user.login.uuid
       })
         .then(res => {
   
-          console.log("users data: ", res);
+          // console.log("users data: ", res);
           this.getAllUsers();
         })
         .catch(err => console.log(err));
@@ -113,8 +113,8 @@ class Share extends Component {
   
   selectUser = event => {
     event.preventDefault();
-    console.log("User Selected")
-    console.log("Name:", this.state.users)
+    // console.log("User Selected")
+    // console.log("Name:", this.state.users)
       API.updateUser({
         pic: this.state.user.profile.uuid
       })

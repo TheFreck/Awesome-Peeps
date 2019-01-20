@@ -4,6 +4,9 @@ import FriendBubble from "../../Images/FriendsSpeechBubble.png";
 import MyBubble from "../../Images/MyListSpeechBubble.png";
 
 export class Landing extends Component {
+
+  componentDidMount() {
+  }
   render() {
     // function friendsRegistry() {
     //   location.href = "/Friends";

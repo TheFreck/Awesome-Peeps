@@ -25,11 +25,8 @@ class FinalReset extends Component {
   }
 
   checkResetToken = (tokenCheck) => {
-    console.log("checkResetToken token: ", tokenCheck);
     const token = tokenCheck;
-    console.log("token: ", token);
     API.checkResetToken(token).then((res)=>{
-      console.log(res);
       if(res.data.tokenStatus === "expired"){
         console.log("BAD token");
         this.setState({

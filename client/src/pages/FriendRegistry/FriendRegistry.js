@@ -21,7 +21,7 @@ class FriendRegistry extends Component {
     //this.props.match is the url bar and params.id is the users id
     getFriendsandItems = () => {
       API.getFriendsandItems(this.props.match.params.userId).then((friendData)=>{
-        console.log(friendData)
+        // console.log(friendData)
         this.setState({ friends: friendData.data.myItems})
         })
       .catch((err) => console.log(err));
@@ -33,7 +33,7 @@ addToShopping = (event) => {
 }
 //Render Friends Registry into a table
   render() {
-    console.log(this.state.friends)
+    // console.log(this.state.friends)
     return (
       <div className="container">
       <form className="white">

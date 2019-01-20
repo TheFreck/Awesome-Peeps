@@ -83,8 +83,8 @@ const userSchema = new Schema({
 
 userSchema.methods = {
   checkPassword: (inputPassword, checkPassword) => {
-    console.log("inputPassword: ", inputPassword);
-    console.log("this.login.account_key: ", checkPassword);
+    // console.log("inputPassword: ", inputPassword);
+    // console.log("this.login.account_key: ", checkPassword);
     return bcrypt.compareSync(inputPassword, checkPassword)
   },
   hashPassword: plainTextPassword => {
@@ -100,7 +100,7 @@ userSchema.pre('save', function (next) {
   } else {
     console.log('models/user.js hashPassword in pre save');
     this.account_key = this.hashPassword(this.account_key)
-    console.log("model account_key: ", this);
+    // console.log("model account_key: ", this);
     next()
   }
 })

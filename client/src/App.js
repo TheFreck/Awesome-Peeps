@@ -20,6 +20,7 @@ import Shopping from "./pages/Shopping";
 // import FriendRegistry from "./pages/FriendRegistry"
 // import Profile from "./pages/Profile";
 import ResetPswd from "./components/ResetPswd";
+import API from "./utils/API";
 
 const initialState = {
   uuid: "",
@@ -32,14 +33,19 @@ const initialState = {
   pic: "",
   shareWithMe: [],
   shareWithOthers: [],
-  notes: ""
+  notes: "",
+  loggedIn: false
 };
 
 class App extends Component {
   state = initialState;
 
+  componentDidMount() {
+    this.auth();
+    console.log("post initial auth this.state: ", this.state);
+  }
+
   updateStateItem = updates => {
-    console.log("updateStateItem: ", updates);
     this.setState({
       ...this.state,
       uuid: updates.uuid,
@@ -53,7 +59,6 @@ class App extends Component {
   };
 
   updateState = updates => {
-    console.log("updateState: ", updates);
     this.setState({
       ...this.state,
       [updates.key]: updates.value
@@ -61,16 +66,29 @@ class App extends Component {
   };
 
   logout = () => {
+    console.log("global logout");
     this.setState(initialState);
+    API.logout();
   }
 
+  auth = () => {
+    API.checkLogin()
+    .then(res => {
+      this.setState({ loggedIn: res.data })
+    });
+  }
+
+  
+
   render() {
-    if(this.state.uuid) {
-      console.log("hit");
+    if(this.state.loggedIn) {
+      console.log("you are logged in");
       return (
         <Router>
           <div>
-            {<Nav />}
+            <Nav 
+                logout={this.logout}
+              />
             <Switch >
               <Route
                 exact
@@ -141,36 +159,42 @@ class App extends Component {
         </Router>
       );
     }else{
-      console.log("miss");
+      console.log("you are logged out");
       return(
         <Router >
-          <Switch>
-            <Route
-              exact
-              path="/"
-              render={() => (
-                <Start
-                  updateState={this.updateState}
-                  updateStateItem={this.updateStateItem}
-                  state={this.state}
-                />
-              )}
+          <div>
+            <Nav 
+              logout={this.logout}
             />
-            <Route
-              exact
-              path="/reset/:token"
-              render={token => (
-                <FinalReset 
-                  token={token}
-                  update={this.updateState} 
-                  state={this.state} 
-                />
-              )}
-            />
-            <Route 
-              component={NoMatch} 
-            />
-          </Switch>
+            <Switch>
+              <Route
+                exact
+                path="/"
+                render={() => (
+                  <Start
+                    updateState={this.updateState}
+                    updateStateItem={this.updateStateItem}
+                    state={this.state}
+                  />
+                )}
+              />
+              <Route
+                exact
+                path="/reset/:token"
+                render={token => (
+                  <FinalReset 
+                    token={token}
+                    update={this.updateState} 
+                    state={this.state} 
+                  />
+                )}
+              />
+              <Route 
+                component={NoMatch} 
+                state={this.state}
+              />
+            </Switch>
+          </div>
         </Router>
       )
     }

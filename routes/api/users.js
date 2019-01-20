@@ -1,21 +1,14 @@
 const router = require("express").Router();
 const usersController = require("../../controllers/usersController");
-const resetContoroller = require("../../controllers/resetController");
+const resetController = require("../../controllers/resetController");
 
-// Matches with "/api/books"
-router
-  .route("/")
-  .get(usersController.findAll)
-  .post(usersController.create)
-  .put(usersController.update);
-
-// Matches with "/api/items/:id"
-router
-  .route("/:id")
-  .post(usersController.login)
-  .get(usersController.findUserAndItems)
-  .put(usersController.updateUser)
-  .delete(usersController.remove);
+function checkAuth(req, res, next) {
+  if (req.session.user != undefined) {
+    next()
+  } else {
+    res.status(401).send("authentication error. Must be logged in")
+  }
+}
 
 router
   .route("/shopping/:id")
@@ -26,18 +19,40 @@ router
 
 router 
   .route("/friends/:id")
-  .get(usersController.findFriendsAndItems)
+  .get(checkAuth, usersController.findFriendsAndItems)
 
 router
   .route("/forgotPassword/:email")
-  .post(resetContoroller.forgot);
+  .post(resetController.forgot);
 
 router
   .route("/checkResetToken/:token")
-  .get(resetContoroller.checkToken);
+  .get(resetController.checkToken);
+  
+router 
+  .route("/auth")
+  .get(usersController.auth);
+
+router 
+  .route("/logout")
+  .get(checkAuth, usersController.logout);
 
 router
+  .route("/:id")
+  .post(usersController.login)
+  .get(checkAuth, usersController.findUserAndItems)
+  .put(checkAuth, usersController.updateUser)
+  .delete(checkAuth, usersController.remove);
+  
+router
   .route("/resetPassword")
-  .put(resetContoroller.resetPassword);
+  .put(checkAuth, resetController.resetPassword);
+
+router
+  .route("/")
+  .get(checkAuth, usersController.findAll)
+  .post(checkAuth, usersController.create)
+  .put(checkAuth, usersController.update);
+
 
 module.exports = router;

@@ -28,7 +28,7 @@ class Create extends Component {
     userAndItems = (id) => {
         API.getUserandItems(id)
             .then((res) => {
-                console.log('this is our res fron userctrl', res.data.myItems);
+                // console.log('this is our res fron userctrl', res.data.myItems);
                 this.setState({ myItems: res.data.myItems });
             })
             .catch((err) => console.log(err));
@@ -37,7 +37,7 @@ class Create extends Component {
     getAllUsers = () => {
         API.getUsers()
             .then((res) => {
-                console.log('This is res.data', res.data);
+                // console.log('This is res.data', res.data);
                 this.setState({ users: res.data });
             })
             .catch((err) => console.log(err));
@@ -84,7 +84,7 @@ class Create extends Component {
     shareRegistry = (event) => {
         this.setState({ shared: true } )
         event.preventDefault();
-        console.log('Share with user');
+        // console.log('Share with user');
         API.getUsers({
             firstName: this.state.firstName,
             lastName: this.state.lastName,
@@ -92,13 +92,13 @@ class Create extends Component {
             shared: this.state.shared
         })
             .then((res) => {
-                console.log('users data: ', res.data);
+                // console.log('users data: ', res.data);
                 this.getAllUsers();
             })
             .catch((err) => console.log(err));
     };
     selectUser = (userdata) => {
-        console.log('THIS IS ID', userdata.uuid);
+        // console.log('THIS IS ID', userdata.uuid);
         // event.preventDefault();
         // this.setState({ shared: event.target.value})
         API.updateUser({

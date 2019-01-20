@@ -12,6 +12,7 @@ const NoMatch = () => (
               🙄
             </span>
           </h1>
+          <a href="/">go back whence you came</a>
         </Jumbotron>
       </Col>
     </Row>
