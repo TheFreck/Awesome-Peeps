@@ -1,8 +1,6 @@
 //----------Import external components----------
 import React, { Component } from "react";
-import Row from "../../components/Row";
 import API from "../../utils/API";
-import UserList from "../../components/UserList";
 import MainLogo from "../../components/MainLogo";
 import { Link } from "react-router-dom";
 import FindOnlineBtn from "../../components/FindOnlineBtn";
@@ -27,15 +25,24 @@ class FriendRegistry extends Component {
       .catch((err) => console.log(err));
     };
   
-//Add item to shopping list page
-addToShopping = (event) => {
-
-}
+  // //Add item to shoppingListItems array for Shopping page
+  // addShoppingListItems = () => {
+  //   API.getShoppingListItems()
+  //     .then((res) => {
+  //       this.setState({users: res.data})
+  //     .catch((err) => console.log(err));
+  //   }
+      
+  // };
 //Render Friends Registry into a table
   render() {
     // console.log(this.state.friends)
     return (
+    <div> 
       <div className="container">
+        <div className = "col s12 center-align">
+          <MainLogo />
+        </div>
       <form className="white">
         <h3 className="grey-text text-darken-3">I'M A GREEDY BASTARD - HERE IS MY LIST</h3>
         <thead>
@@ -54,7 +61,7 @@ addToShopping = (event) => {
 									<td>{item.price}</td>
 									<td>{item.comments}</td>
 									<td>
-                    
+                    <button>Add to List</button>
                     {/* <button onClick={this.addToShopping} type="submit" className="btn pink lighten-1 z-depth-2"><Link to={"/Shopping/"}>ADD TO SHOPPING LIST</Link></button> */}
 									</td>
                   <td>
@@ -68,6 +75,7 @@ addToShopping = (event) => {
 					</tbody>
       </form>
       </div>
+    </div>
       
     )};
     }

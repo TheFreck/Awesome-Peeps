@@ -15,7 +15,7 @@ router
   .post(usersController.login)
   .get(usersController.findShoppingListItems)
   .put(usersController.updateUser)
-  .delete(usersController.remove);
+  // .delete(usersController.remove);
 
 router 
   .route("/friends/:id")
