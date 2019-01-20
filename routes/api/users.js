@@ -2,9 +2,19 @@ const router = require("express").Router();
 const usersController = require("../../controllers/usersController");
 const resetController = require("../../controllers/resetController");
 
+function checkAuth(req, res, next) {
+  if (req.session.user != undefined) {
+    next()
+  } else {
+    res.status(401).send("authentication error. Must be logged in")
+  }
+}
+
+router.route('/avacados').get(checkAuth, usersController.update)
+
 router 
   .route("/friends/:id")
-  .get(usersController.findFriendsAndItems)
+  .get(checkAuth, usersController.findFriendsAndItems)
 
 router
   .route("/forgotPassword/:email")
@@ -19,24 +29,25 @@ router
   .get(usersController.auth);
 
 router 
-  .route("logout")
-  .get(usersController.logout);
+  .route("/logout")
+  .get(checkAuth, usersController.logout);
 
 router
   .route("/:id")
   .post(usersController.login)
-  .get(usersController.findUserAndItems)
-  .put(usersController.updateUser)
-  .delete(usersController.remove);
+  .get(checkAuth, usersController.findUserAndItems)
+  .put(checkAuth, usersController.updateUser)
+  .delete(checkAuth, usersController.remove);
   
 router
   .route("/resetPassword")
-  .put(resetController.resetPassword);
+  .put(checkAuth, resetController.resetPassword);
 
 router
   .route("/")
-  .get(usersController.findAll)
-  .post(usersController.create)
-  .put(usersController.update);
+  .get(checkAuth, usersController.findAll)
+  .post(checkAuth, usersController.create)
+  .put(checkAuth, usersController.update);
+
 
 module.exports = router;

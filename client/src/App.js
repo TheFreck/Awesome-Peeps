@@ -41,13 +41,11 @@ class App extends Component {
   state = initialState;
 
   componentDidMount() {
-    console.log("auth");
     this.auth();
     console.log("post initial auth this.state: ", this.state);
   }
 
   updateStateItem = updates => {
-    console.log("updateStateItem: ", updates);
     this.setState({
       ...this.state,
       uuid: updates.uuid,
@@ -61,7 +59,6 @@ class App extends Component {
   };
 
   updateState = updates => {
-    console.log("updateState: ", updates);
     this.setState({
       ...this.state,
       [updates.key]: updates.value
@@ -71,16 +68,13 @@ class App extends Component {
   logout = () => {
     console.log("global logout");
     this.setState(initialState);
-    API.logout()
-    .then(res => console.log("logout response: ", res));
+    API.logout();
   }
 
   auth = () => {
     API.checkLogin()
     .then(res => {
-      console.log("check res: ", res.data);
       this.setState({ loggedIn: res.data })
-      console.log("post update loggedIn: ", this.state.loggedIn);
     });
   }
 

@@ -40,17 +40,19 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
   logout: (req, res) => {
-    req.session.destroy((res) => {
-      console.log("logged out");
+    console.log("about to log out req.session: ", req.session);
+    req.session.destroy(() => {
+      console.log("logged out", res);
       res.json("you've been logged out");
     });
+    console.log("post session destroy req.session: ", req.session);
   },
   auth: (req, res) => {
     console.log("is it logged in? ", req.session.user);
     if(req.session) {
       return res.json(true);
     }else{
-      res.json(false);
+      return res.json(false);
     }
     
   },
