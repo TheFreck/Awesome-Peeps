@@ -10,7 +10,12 @@ function checkAuth(req, res, next) {
   }
 }
 
-router.route('/avacados').get(checkAuth, usersController.update)
+router
+  .route("/shopping/:id")
+  .post(usersController.login)
+  .get(usersController.findShoppingListItems)
+  .put(usersController.updateUser)
+  .delete(usersController.remove);
 
 router 
   .route("/friends/:id")

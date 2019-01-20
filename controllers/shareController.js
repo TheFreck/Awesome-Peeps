@@ -46,6 +46,21 @@ updateUser: function(req, res) {
         res.status(422).json(err)
       });
   },
+//This is for Shopping list
+  updateShopping: function(req, res) {
+    console.log('this is update user sesison', req.session);
+      //create item then takes the item id and adds it to the users myItems column
+      db.User.findOneAndUpdate
+      ({uuid: req.params.id}, {$push: { shareWithMe: req.session.user._id }}, { new: true})
+          .then((dbModel) => {
+            console.log(dbModel);
+            res.json(dbModel)          
+          })
+        .catch(err => {
+          console.log(err);  
+          res.status(422).json(err)
+        });
+    },
 
   remove: (req, res) => {
     db.User.findById({ _id: req.params.id })
