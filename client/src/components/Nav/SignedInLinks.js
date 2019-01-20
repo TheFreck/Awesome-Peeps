@@ -2,7 +2,6 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 
 const SignedInLinks = (props) => {
-  console.log("signed in links props: ", props);
 	return (
 		<ul className="right">
       <li>

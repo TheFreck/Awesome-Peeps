@@ -5,18 +5,18 @@ var db = require('../models');
 
 module.exports = {
   forgot: function (req, res, next) {
-    console.log("ResetPasswordCtrl forgot hit: ", req.params.email);
+    // console.log("ResetPasswordCtrl forgot hit: ", req.params.email);
     new Promise((resolve, reject) => {
       // generate reset token
       crypto.randomBytes(20, (err, buf) => {
         if (err) return reject(err);
         const token = buf.toString('hex');
-        console.log("token: ", token);
+        // console.log("token: ", token);
         resolve(token);
       });
     })
     .then((token) => {
-      console.log("then token: ", token);
+      // console.log("then token: ", token);
       return new Promise((resolve, reject) => {
         // search for user with the given email
         db.User.findOne(
@@ -25,8 +25,8 @@ module.exports = {
           }
         )
         .then(userObj => {
-          console.log("userObj: ", userObj);
-          console.log("req.params.email: ", req.params.email);
+          // console.log("userObj: ", userObj);
+          // console.log("req.params.email: ", req.params.email);
           if (!userObj) return reject(404);
           // user exists, assign token with expiration date
           const resetPasswordToken = token;
@@ -43,10 +43,10 @@ module.exports = {
               resetPasswordExpires
             })
             .then(val => {
-                console.log("val: ", val);
-                console.log("resetPasswordToken: ", resetPasswordToken);
-                console.log("resetPasswordExpires: ", resetPasswordExpires);
-                console.log("after updating the db userObj: ", userObj)
+                // console.log("val: ", val);
+                // console.log("resetPasswordToken: ", resetPasswordToken);
+                // console.log("resetPasswordExpires: ", resetPasswordExpires);
+                // console.log("after updating the db userObj: ", userObj)
                 
               // if (!val) return reject(err);
               resolve({
@@ -58,8 +58,8 @@ module.exports = {
       });
     })
     .then((user) => {
-      console.log("user: ", user);
-      console.log("process.env.EMAIL_ACOUNT", process.env.EMAIL_ACCOUNT);
+      // console.log("user: ", user);
+      // console.log("process.env.EMAIL_ACOUNT", process.env.EMAIL_ACCOUNT);
       return new Promise((resolve, reject) => {
         const gmailTransporter = nodemailer.createTransport({
           service: 'gmail',
@@ -70,7 +70,7 @@ module.exports = {
           }
         });
 
-        console.log("req.headers: ", req.headers);
+        // console.log("req.headers: ", req.headers);
         
         var mailOptions = {
           to: user.user.email,
@@ -84,8 +84,8 @@ module.exports = {
 
         gmailTransporter.sendMail(mailOptions, err => {
           if (err) {
-            console.log("mailOptions: ", mailOptions);
-            console.log("transporter error: ", err);
+            // console.log("mailOptions: ", mailOptions);
+            // console.log("transporter error: ", err);
             return reject(err);
           }
 
@@ -108,7 +108,7 @@ module.exports = {
   },
   checkToken: (req, res) => {
     let theToken = req.url.slice(17);
-    console.log("check theToken: ", theToken);
+    // console.log("check theToken: ", theToken);
     db.User.findOne({
       resetPasswordToken: theToken,
       resetPasswordExpires: {
@@ -116,7 +116,7 @@ module.exports = {
       }
     })
     .then(function (user) {
-      console.log(user, "this is reset user data");
+      // console.log(user, "this is reset user data");
       if (!user && typeof user === "object") {
         res.send({
           email: user.email,
@@ -130,16 +130,16 @@ module.exports = {
       }
     })
     .catch(err => console.log("checkToken err: ", err));
-    console.log("end of checkToken");
+    // console.log("end of checkToken");
 
   },
   resetPassword: (req, res) => {
-    console.log("resetPassword: ", req.body);
+    // console.log("resetPassword: ", req.body);
     new Promise((resolve, reject) => {
       // search for user with the given email
       db.User.findOne({ email: req.body.email })
       .then((userObj) => {
-        console.log("userObj berfore salting: ", userObj);
+        // console.log("userObj berfore salting: ", userObj);
         const resetPassword = req.body.password
         const saltRounds = 10;
         bcrypt.genSalt(saltRounds, function (err, salt) {
@@ -155,7 +155,7 @@ module.exports = {
             .then(function (updateRes) {
               //  console.log(userObj);
               // if (!userObj) return reject(err);
-              console.log("userObj before resolving: ", userObj);
+              // console.log("userObj before resolving: ", userObj);
               resolve({
                 user: userObj
               });
@@ -165,7 +165,7 @@ module.exports = {
       });
     })
     .then((userObj) => {
-      console.log("reset password userObj", userObj);
+      // console.log("reset password userObj", userObj);
       return new Promise((resolve, reject) => {
         const gmailTransporter = nodemailer.createTransport({
           service: 'gmail',

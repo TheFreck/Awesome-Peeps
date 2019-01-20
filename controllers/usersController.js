@@ -16,39 +16,37 @@ module.exports = {
   },
   
   login: (req, res) => {
-    console.log("req.session: ", req.session);
-    console.log("controller username: ", req.body.username);
-    console.log("controller password: ", req.body.password);
-    console.log("controller req.body: ", req.body);
+    // console.log("req.session: ", req.session);
+    // console.log("controller username: ", req.body.username);
+    // console.log("controller password: ", req.body.password);
+    // console.log("controller req.body: ", req.body);
     db.User.findOne(
       {
         email: req.body.username
       },
       (err, user) => {
-        console.log("controller user: ", user);
+        // console.log("controller user: ", user);
         req.session.user = user
-        console.log("req.session after assigning: ", req.session);
+        // console.log("req.session after assigning: ", req.session);
         if (err) throw err;
         if (!user) return res.json("incorrect username");
         return user.checkPassword(req.body.password, user.account_key);
       }
     )
       .then(dbModel => {
-        console.log("dbModel: ", dbModel);
+        // console.log("dbModel: ", dbModel);
         res.json(dbModel);
       })
       .catch(err => res.status(422).json(err));
   },
   logout: (req, res) => {
-    console.log("about to log out req.session: ", req.session);
     req.session.destroy(() => {
-      console.log("logged out", res);
+      // console.log("logged out", res);
       res.json("you've been logged out");
     });
-    console.log("post session destroy req.session: ", req.session);
   },
   auth: (req, res) => {
-    console.log("is it logged in? ", req.session.user);
+    // console.log("is it logged in? ", req.session.user);
     if(req.session) {
       return res.json(true);
     }else{
@@ -58,34 +56,32 @@ module.exports = {
   },
   create: (req, res) => {
     req.body.sessionId = req.session.id;
-    console.log("req.session.id: ", req.session.id);
     req.body.uuid = uuidv1();
     db.User.create(req.body)
       .then((dbModel) => {
-        console.log("", dbModel)
         req.session.user = dbModel;
         res.json(dbModel)
       })
       .catch(err => res.status(422).json(err));
   },
   update: (req, res) => {
-    console.log("hit the update: ", req.body);
+    // console.log("hit the update: ", req.body);
     // db.User.findOneAndUpdate({ uuid: req.params.id }, req.body)
     //   .then(dbModel => res.json(dbModel))
     //   .catch(err => res.status(422).json(err));
   },
 
 updateUser: (req, res) => {
-  console.log("MADE IT")
+  // console.log("MADE IT")
     //create item then takes the item id and adds it to the users myItems column
     db.User.findOneAndUpdate({uuid: req.params.id}, {$push: { shareWithMe: req.session.user._id }}, { new: true})
   
     .then((dbModel) => {
-        console.log(dbModel)
+        // console.log(dbModel)
         res.json(dbModel) 
     })
     .catch(err => {
-      console.log(err);  
+      // console.log(err);  
       res.status(422).json(err)
     });
   },
@@ -102,24 +98,24 @@ updateUser: (req, res) => {
   //   console.log("grabbed it: ", req.body);
   // },
   findUserAndItems: (req, res) => {
-    console.log("i am running now ahhhhhh")
-    console.log("this is our req.session", req.session)
-    console.log("this is req. params", req.params)
+    // console.log("i am running now ahhhhhh")
+    // console.log("this is our req.session", req.session)
+    // console.log("this is req. params", req.params)
     db.User.findOne({uuid: req.session.user.uuid})
     .populate("myItems")
     .then((data) =>{
-      console.log(data)
+      // console.log(data)
       res.json(data)
     })
   },
   findFriendsAndItems: (req, res) => {
-    console.log("i am running now ahhhhhh")
-    console.log("this is our req.session", req.session)
-    console.log("this is req. params", req.params)
+    // console.log("i am running now ahhhhhh")
+    // console.log("this is our req.session", req.session)
+    // console.log("this is req. params", req.params)
     db.User.findOne({_id: req.params.id})
     .populate("myItems")
     .then((data) =>{
-      console.log(data)
+      // console.log(data)
       res.json(data)
     })
   }

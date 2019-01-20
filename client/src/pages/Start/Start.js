@@ -42,7 +42,6 @@ class Start extends Component {
 
   handleChange = event => {
     event.preventDefault();
-    console.log("handleChange: ", event.target);
     const { name, value } = event.target;
     this.setState({
       ...this.state,
@@ -56,37 +55,18 @@ class Start extends Component {
       key: name,
       value: value
     });
-    console.log("resetPswdText: ", this.state.user.resetPswdText );
   };
-
-  // handleInputChange = input => {
-  //   // event.preventDefault();
-  //   console.log("handleInputChange target: ", event.target);
-  //   const { name, value } = event.target;
-  //   // this.setState({
-  //   //   ...this.state,
-  //   //   user: {
-  //   //     ...this.state.user,
-  //   //     [name]: value
-  //   //   }
-  //   // });
-  //   this.props.updateStateItem(input);
-  // };
 
   signup = event => {
     event.preventDefault();
-    console.log("signup event.target: ", event.target);
-    console.log("signup this.state.user: ", this.state.user);
+    // console.log("signup event.target: ", event.target);
+    // console.log("signup this.state.user: ", this.state.user);
 
     if (this.state.account_key === this.state.account_key2) {
       API.saveUser(this.state.user)
         .then(res => {
-          console.log("submit res.data: ", res.date);
+          // console.log("submit res.data: ", res.date);
           if (res.data) {
-            // this.setState({
-            //   ...this.state,
-            //   user: res.data
-            // });
             this.props.updateStateItem(res.data);
           } else {
             console.log("signup error");
@@ -107,22 +87,22 @@ class Start extends Component {
     event.preventDefault();
     // save state to the database
     API.updateUser(this.state.user).then(res => {
-      console.log("updateProfile: ", res);
+      // console.log("updateProfile: ", res);
     });
   };
 
   login = event => {
     event.preventDefault();
-    console.log("login: ", event.target);
-    console.log("this.state.user.email: ", this.state.user.email);
-    console.log("this.state.user.account_key: ", this.state.user.account_key);
+    // console.log("login: ", event.target);
+    // console.log("this.state.user.email: ", this.state.user.email);
+    // console.log("this.state.user.account_key: ", this.state.user.account_key);
 
     API.login({
       username: this.state.user.email,
       password: this.state.user.account_key
     })
     .then(res => {
-      console.log("Start res: ", res.data);
+      // console.log("Start res: ", res.data);
       if (res.data) {
         let user = {
           user: {
@@ -136,11 +116,11 @@ class Start extends Component {
             account_key: ""
           }
         };
-        console.log("user: ", user.user);
+        // console.log("user: ", user.user);
         this.setState(user);
         this.props.updateStateItem(user.user);
 
-        console.log("res: ", res);
+        // console.log("res: ", res);
       } else {
         console.log("incorrect password");
       }
@@ -150,14 +130,14 @@ class Start extends Component {
 
   logout = event => {
     event.preventDefault();
-    console.log("event.target: ", event.target);
+    // console.log("event.target: ", event.target);
     this.setState(initialState);
     this.props.logout();
-    console.log("this.state: ", this.state);
+    // console.log("this.state: ", this.state);
   };
 
   toggleStart = () => {
-    console.log("does it hit?", this.state);
+    // console.log("does it hit?", this.state);
     this.setState({
       ...this.state,
       resetPasswordBoolean: false,
@@ -169,7 +149,7 @@ class Start extends Component {
 
   resetPasswordBoolean = event => {
     event.preventDefault();
-    console.log("resetting password: ");
+    // console.log("resetting password: ");
     this.setState({
       resetPasswordBoolean: !this.state.resetPasswordBoolean
     });
@@ -177,10 +157,10 @@ class Start extends Component {
 
   sendResetEmail = event => {
     event.preventDefault();
-    console.log("send reset email: ", this.state.user.resetPswdText);
+    // console.log("send reset email: ", this.state.user.resetPswdText);
     API.forgotPassword(this.state.user.resetPswdText)
     .then(res=> {
-      console.log("res from sending reset email to api: ", res);
+      // console.log("res from sending reset email to api: ", res);
     })
   };
 

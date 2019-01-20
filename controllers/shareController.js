@@ -16,29 +16,29 @@ module.exports = {
  
   create: (req, res) => {
     req.body.sessionId = req.session.id;
-    console.log("req.session.id: ", req.session.id);
+    // console.log("req.session.id: ", req.session.id);
     req.body.uuid = uuidv1();
     db.User.create(req.body)
       .then((dbModel) => {
-        console.log("", dbModel)
+        // console.log("", dbModel)
         req.session.user = dbModel;
         res.json(dbModel)
       })
       .catch(err => res.status(422).json(err));
   },
   update: (req, res) => {
-    console.log("hit the update: ", req.body);
+    // console.log("hit the update: ", req.body);
   },
 
 
 
 updateUser: function(req, res) {
-  console.log('this is update user sesison', req.session);
+  // console.log('this is update user sesison', req.session);
     //create item then takes the item id and adds it to the users myItems column
     db.User.findOneAndUpdate
     ({uuid: req.params.id}, {$push: { shareWithMe: req.session.user._id }}, { new: true})
         .then((dbModel) => {
-          console.log(dbModel);
+          // console.log(dbModel);
           res.json(dbModel)          
         })
       .catch(err => {

@@ -17,7 +17,7 @@ class Row extends Component {
   }
   handleUpdatingItem = (e) => {
     e.preventDefault();
-    console.log("update button clicked");
+    // console.log("update button clicked");
     const updateItemData = {
       item: this.state.item,
       price: this.state.price,
@@ -25,7 +25,7 @@ class Row extends Component {
       occasion: this.state.occasion,
       comments: this.state.comments
     }
-    console.log(updateItemData);
+    // console.log(updateItemData);
     //make api call here
     API.updateItem(this.state._id, updateItemData)
     .then((updatedDbData) => {

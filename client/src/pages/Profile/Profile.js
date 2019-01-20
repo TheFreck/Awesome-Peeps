@@ -2,7 +2,6 @@ import React from "react";
 import { Container } from "../../components/Grid";
 
 const Profile = props => {
-  console.log("profil props: ", props);
   return (
     <Container fluid>
       <h1>Profile Page</h1>

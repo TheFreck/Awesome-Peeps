@@ -6,7 +6,6 @@ import MyBubble from "../../Images/MyListSpeechBubble.png";
 export class Landing extends Component {
 
   componentDidMount() {
-    console.log("landing req.session: ");
   }
   render() {
     // function friendsRegistry() {
