@@ -27,20 +27,10 @@ module.exports = {
       (err, user) => {
         console.log("controller user: ", user);
         req.session.user = user
+        console.log("req.session after assigning: ", req.session);
         if (err) throw err;
         if (!user) return res.json("incorrect username");
         return user.checkPassword(req.body.password, user.account_key);
-
-        // if (!user.checkPassword(req.body.password, user.account_key)) {
-        //   console.log("failed!!!", user);
-        //   res.json(false);
-        // }
-        // if (user.checkPassword(req.body.password, user.account_key)) {
-        //   console.log("passed!!!", user);
-        //   req.body.sessionId = req.session.id;
-        //   res.json(true);
-        // }
-        // return null, user;
       }
     )
       .then(dbModel => {
@@ -48,6 +38,21 @@ module.exports = {
         res.json(dbModel);
       })
       .catch(err => res.status(422).json(err));
+  },
+  logout: (req, res) => {
+    req.session.destroy((res) => {
+      console.log("logged out");
+      res.json("you've been logged out");
+    });
+  },
+  auth: (req, res) => {
+    console.log("is it logged in? ", req.session.user);
+    if(req.session) {
+      return res.json(true);
+    }else{
+      res.json(false);
+    }
+    
   },
   create: (req, res) => {
     req.body.sessionId = req.session.id;
@@ -98,7 +103,7 @@ updateUser: (req, res) => {
     console.log("i am running now ahhhhhh")
     console.log("this is our req.session", req.session)
     console.log("this is req. params", req.params)
-    db.User.findOne({uuid: req.session.user.uuid}  )
+    db.User.findOne({uuid: req.session.user.uuid})
     .populate("myItems")
     .then((data) =>{
       console.log(data)

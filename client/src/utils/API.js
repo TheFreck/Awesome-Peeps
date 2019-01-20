@@ -37,6 +37,12 @@ export default {
     userName = userName.replace("@", "-AT-");
     return axios.post("/api/users/" + userName, userData);
   },
+  checkLogin: () => {
+    return axios.get("/api/users/auth");
+  },
+  logout: () => {
+    return axios.get("/api/users/logout");
+  },
   getItems: (id) => {
     console.log("THIS IS ID FROM API", id)
     return axios.get("/api/items" + id);

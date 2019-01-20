@@ -4,7 +4,7 @@ import SignedInLinks from "./SignedInLinks";
 import SignedOutLinks from "./SignedOutLinks";
 import Mainlogo from "../../Images/GreedyBastards2.png";
 
-const Nav = () => {
+const Nav = (props) => {
   return (
     <nav
       className="nav-wrapper blue darken-2
@@ -17,8 +17,10 @@ const Nav = () => {
             <img className="responsive-img" src={Mainlogo} alt="main logo" />
           </Link>
         </button>
-        <SignedInLinks />
-        <SignedOutLinks />
+        <SignedInLinks 
+          logout={props.logout}
+        />
+        {/* <SignedOutLinks /> */}
       </div>
     </nav>
   );
