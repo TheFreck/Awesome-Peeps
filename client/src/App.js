@@ -74,6 +74,7 @@ class App extends Component {
   auth = () => {
     API.checkLogin()
     .then(res => {
+      console.log("App.js auth: ", res.data);
       this.setState({ loggedIn: res.data })
     });
   }
@@ -81,14 +82,15 @@ class App extends Component {
   
 
   render() {
+    console.log("this.state.loggedIn", this.state.loggedIn)
     if(this.state.loggedIn) {
       console.log("you are logged in");
       return (
         <Router>
           <div>
             <Nav 
-                logout={this.logout}
-              />
+                goodbye={this.logout}
+            />
             <Switch >
               <Route
                 exact
@@ -164,20 +166,9 @@ class App extends Component {
         <Router >
           <div>
             <Nav 
-              logout={this.logout}
+              logout={this.login}
             />
             <Switch>
-              <Route
-                exact
-                path="/"
-                render={() => (
-                  <Start
-                    updateState={this.updateState}
-                    updateStateItem={this.updateStateItem}
-                    state={this.state}
-                  />
-                )}
-              />
               <Route
                 exact
                 path="/reset/:token"
@@ -189,9 +180,15 @@ class App extends Component {
                   />
                 )}
               />
-              <Route 
-                component={NoMatch} 
-                state={this.state}
+              <Route
+                path="/"
+                render={() => (
+                  <Start
+                    updateState={this.updateState}
+                    updateStateItem={this.updateStateItem}
+                    state={this.state}
+                  />
+                )}
               />
             </Switch>
           </div>

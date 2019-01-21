@@ -132,7 +132,7 @@ class Start extends Component {
     event.preventDefault();
     // console.log("event.target: ", event.target);
     this.setState(initialState);
-    this.props.logout();
+    this.props.goodbye();
     // console.log("this.state: ", this.state);
   };
 
