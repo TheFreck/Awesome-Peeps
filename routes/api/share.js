@@ -1,6 +1,14 @@
 const router = require("express").Router();
 const shareController = require("../../controllers/shareController");
 
+function checkAuth(req, res, next) {
+  if (req.session.user != undefined) {
+    next()
+  } else {
+    res.status(401).send("authentication error. Must be logged in")
+  }
+}
+
 // Matches with "/api/share"
 router
   .route("/")

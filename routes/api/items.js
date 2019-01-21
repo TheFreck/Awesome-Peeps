@@ -1,6 +1,14 @@
 const router = require("express").Router();
 const itemsController = require("../../controllers/itemsController");
 
+function checkAuth(req, res, next) {
+  if (req.session.user != undefined) {
+    next()
+  } else {
+    res.status(401).send("authentication error. Must be logged in")
+  }
+}
+
 // Matches with "/api/items"
 router.route("/")
   .get(itemsController.findAll)

@@ -1,14 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import SignedInLinks from "./SignedInLinks";
-import SignedOutLinks from "./SignedOutLinks";
+// import SignedOutLinks from "./SignedOutLinks";
 import Mainlogo from "../../Images/GreedyBastards2.png";
 
 const Nav = (props) => {
   return (
     <nav
-      className="nav-wrapper blue darken-2
-		"
+      className="nav-wrapper blue darken-2"
     >
       <div className="container">
         {/* className is a Materialize classs*/}
@@ -18,7 +17,7 @@ const Nav = (props) => {
           </Link>
         </button>
         <SignedInLinks 
-          logout={props.logout}
+          logout={props.goodbye}
         />
         {/* <SignedOutLinks /> */}
       </div>

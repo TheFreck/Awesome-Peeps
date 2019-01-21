@@ -1,32 +1,9 @@
 import React, { Component } from "react";
-// import DeleteBtn from "../../components/DeleteBtn";
-// import Jumbotron from "../../components/Jumbotron";
-// import { Link } from "react-router-dom";
-// import { List, ListItem } from "../../components/List";
-// import { Input, TextArea, FormBtn } from "../../components/Form";
-// import SearchForm from "../../components/SearchForm";
 import { Redirect } from "react-router-dom";
-import Button from "../../components/Button";
 import { Container } from "../../components/Grid";
 import API from "../../utils/API";
 import Login from "../../components/Login";
 import Signup from "../../components/Signup";
-import LogoutBtn from "../../components/LogoutBtn";
-import Profile from "../../pages/Profile";
-
-const initialState = {
-  uuid: "",
-  account_key: "",
-  sessionId: "",
-  email: "",
-  firstName: "",
-  lastName: "",
-  screenName: "",
-  pic: "",
-  shareWithMe: [],
-  shareWithOthers: [],
-  notes: ""
-};
 
 class Start extends Component {
   state = {
@@ -102,7 +79,7 @@ class Start extends Component {
       password: this.state.user.account_key
     })
     .then(res => {
-      // console.log("Start res: ", res.data);
+      console.log("Start res: ", res.data);
       if (res.data) {
         let user = {
           user: {
@@ -113,25 +90,28 @@ class Start extends Component {
             lastName: res.data.lastName,
             pic: res.data.pic,
             notes: res.data.notes,
-            account_key: ""
+            account_key: "",
+            loggedIn: true
           }
         };
+        console.log("user: ", user);
         // console.log("user: ", user.user);
         this.setState(user);
         this.props.updateStateItem(user.user);
-
+        console.log("this.props.state", this.props.state)
         // console.log("res: ", res);
       } else {
         console.log("incorrect password");
       }
     })
     .catch(err => console.log("login err err: ", err));
+    console.log("this.props.state", this.props.state)
   };
 
   logout = event => {
     event.preventDefault();
     // console.log("event.target: ", event.target);
-    this.setState(initialState);
+    console.log("start logout props: ", this.props)
     this.props.goodbye();
     // console.log("this.state: ", this.state);
   };
@@ -166,31 +146,20 @@ class Start extends Component {
 
   render() {
     // are you signed in?
-    if (this.props.state.uuid) {
-      // you are signed in
-      return (
-        <Container fluid>
-          <Button name="Profile" click={this.viewProfile} />
-          <LogoutBtn logout={this.logout} />
-          {this.state.viewProfile ? (
-            <Profile
-              state={this.state}
-              handleChange={this.handleChange}
-              submit={this.updateProfile}
-            />
-          ) : (
-            <Redirect push to="/landing" />
-          )}
-        </Container>
-      );
+    if (this.props.loggedIn) {
+      // you're signed in - go play
+      return <Redirect push to="/Landing" />
     } else {
       // not signed in
       return (
         <div>
           {this.state.isUser ? (
             /* are you a user? */
-            /* pass functionality to reset password into the Login page */
+            /* pass functionality to reset password through the Login page */
             <Container fluid>
+              {/* <Nav 
+                toggleStart={this.toggleStart}
+              /> */}
               <Login
                 state={this.state}
                 handleChange={this.handleChange}
@@ -204,6 +173,9 @@ class Start extends Component {
           ) : (
             // not a user so let's sign up
             <Container fluid>
+              {/* <Nav 
+                toggleStart={this.toggleStart}
+              /> */}
               <Signup
                 state={this.state}
                 handleChange={this.handleChange}

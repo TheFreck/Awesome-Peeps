@@ -46,6 +46,15 @@ class App extends Component {
   }
 
   updateStateItem = updates => {
+    console.log("app update state item loggedIn: ", updates);
+    let loggedIn;
+    if(!updates.loggedIn) {
+      console.log("logged in = false");
+      loggedIn = false;
+    }else{
+      console.log("logged in = true");
+      loggedIn = true;
+    }
     this.setState({
       ...this.state,
       uuid: updates.uuid,
@@ -54,6 +63,7 @@ class App extends Component {
       lastName: updates.lastName,
       pic: updates.pic,
       notes: updates.notes,
+      loggedIn: loggedIn,
       account_key: ""
     });
   };
@@ -65,9 +75,11 @@ class App extends Component {
     });
   };
 
-  logout = () => {
+  logout = event => {
+    event.preventDefault();
     console.log("global logout");
     this.setState(initialState);
+    this.setState({ loggedIn: false })
     API.logout();
   }
 
@@ -79,69 +91,57 @@ class App extends Component {
     });
   }
 
-  
-
   render() {
     console.log("this.state.loggedIn", this.state.loggedIn)
     if(this.state.loggedIn) {
-      console.log("you are logged in");
+      // console.log("you are logged in");
       return (
         <Router>
           <div>
             <Nav 
-                goodbye={this.logout}
+              goodbye={this.logout}
             />
             <Switch >
-              <Route
-                exact
-                path="/Landing"
-                render={() => (
-                  <Landing 
-                    update={this.updateState} 
-                    state={this.state} 
-                  />
-                )}
-              />
               <Route
                 exact
                 path="/create"
                 render={() => (
                   <Create 
-                    update={this.updateState} 
-                    state={this.state} 
+                  update={this.updateState} 
+                  state={this.state} 
                   />
-                )}
+                  )}
               />
               <Route
                 exact
                 path="/friends"
                 render={() => (
                   <Friends 
-                    update={this.updateState} 
-                    state={this.state} 
+                  update={this.updateState} 
+                  state={this.state} 
                   />
-                )}
+                  )}
               />
               <Route
                 exact
                 path="/FriendRegistry/:userId"
                 render={props => (
                   <FriendRegistry
-                    {...props}
-                    update={this.updateState}
-                    state={this.state}
+                  {...props}
+                  update={this.updateState}
+                  state={this.state}
                   />
-                )}
+                  )}
               />
               <Route
                 exact
                 path="/Shopping"
                 render={() => (
                   <Shopping 
-                    update={this.updateState} 
-                    state={this.state} 
+                  update={this.updateState} 
+                  state={this.state} 
                   />
-                )}
+                  )}
               />
               <Route
                 exact
@@ -153,21 +153,29 @@ class App extends Component {
                   />
                 )}
               />
-              <Route 
-                component={NoMatch} 
+              <Route
+                path="/"
+                render={() => (
+                  <Landing 
+                    update={this.updateState} 
+                    state={this.state} 
+                  />
+                )}
               />
+              {/* <Route 
+                render={() => {
+                  <NoMatch />
+                }}
+              /> */}
             </Switch>
           </div>
         </Router>
       );
     }else{
-      console.log("you are logged out");
+      // console.log("you are logged out");
       return(
         <Router >
           <div>
-            <Nav 
-              logout={this.login}
-            />
             <Switch>
               <Route
                 exact
