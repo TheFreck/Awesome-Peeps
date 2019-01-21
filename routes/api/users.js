@@ -38,7 +38,7 @@ router
 
 router 
   .route("/logout")
-  .get(checkAuth, usersController.logout);
+  .get(usersController.logout);
 
 router
   .route("/:id")

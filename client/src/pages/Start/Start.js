@@ -73,7 +73,7 @@ class Start extends Component {
     // console.log("login: ", event.target);
     // console.log("this.state.user.email: ", this.state.user.email);
     // console.log("this.state.user.account_key: ", this.state.user.account_key);
-
+    console.log("login hit");
     API.login({
       username: this.state.user.email,
       password: this.state.user.account_key
