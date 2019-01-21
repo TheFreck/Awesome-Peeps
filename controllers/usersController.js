@@ -111,16 +111,30 @@ module.exports = {
       res.json(data)
     })
   },
+<<<<<<< HEAD
   findShoppingListItems: (req, res) => {
     console.log("i am running now ahhhhhh")
     console.log("this is our req.session", req.session)
     console.log("this is req. params", req.params)
     db.User.findOne({_id: req.params.id})
     .populate("myItems")
+=======
+  
+  findShoppingListItems: (req, res) => {
+    console.log("find shopping list items is running!")
+    console.log("this is our req.session", req.session)
+    console.log("this is req. params", req.params)
+    db.User.findOne({_id: req.params.id})
+    .populate("shoppingListItems")
+>>>>>>> f50d627db05d8bbfe398bb0626162a2fd478e46f
     .then((data) =>{
       console.log(data)
       res.json(data)
     })
   }
+<<<<<<< HEAD
 };
+=======
+  };
+>>>>>>> f50d627db05d8bbfe398bb0626162a2fd478e46f
 
