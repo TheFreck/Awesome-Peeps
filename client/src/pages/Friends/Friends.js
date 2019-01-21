@@ -9,7 +9,8 @@ class Friends extends React.Component {
   state = {
     users: [],
     uuid: "",
-    user: this.props.state
+    user: this.props.state,
+    shareWithMe:""
   };
 
   componentDidMount() {
@@ -18,7 +19,7 @@ class Friends extends React.Component {
   //Fetching firstName and lastName of users from the db
   getUsers = () => {
     API.getUsers().then(res =>
-      this.setState({ users: res.data, firstName: "", lastName: "" })
+      this.setState({ users: res.data, shareWithMe:"", firstName: "", lastName: "" })
     );
   };
 

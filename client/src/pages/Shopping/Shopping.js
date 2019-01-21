@@ -53,32 +53,32 @@ class Shopping extends Component {
 // 		// .catch((err) => console.log(err));
 // };
 
-  componentDidMount() {
-    this.getItems()
-    this.getPerson();
-  }
+  // componentDidMount() {
+  //   this.getItems()
+  //   this.getPerson();
+  // }
 
-  getItems = () => {
-    API.getItems()
-      .then(res =>
-        this.setState({ stuff: res.data, item: "", price: "" })
-      )
-      .catch(err => console.log(err));
-  };
+  // getItems = () => {
+  //   API.getItems()
+  //     .then(res =>
+  //       this.setState({ stuff: res.data, item: "", price: "" })
+  //     )
+  //     .catch(err => console.log(err));
+  // };
 
-  getPerson = () => {
-      API.getUsers()
-      .then(res =>
-        this.setState({ users: res.data, firstName: ""})
-      )
-        .catch(err => console.log(err));
-  }
+  // getPerson = () => {
+  //     API.getUsers()
+  //     .then(res =>
+  //       this.setState({ users: res.data, firstName: ""})
+  //     )
+  //       .catch(err => console.log(err));
+  // }
 
-  deleteItem = id => {
-    API.deleteItem(id)
-      .then(res => this.getItems())
-      .catch(err => console.log(err));
-  };
+  // deleteItem = id => {
+  //   API.deleteItem(id)
+  //     .then(res => this.getItems())
+  //     .catch(err => console.log(err));
+  // };
 
   render() {
     return (
@@ -95,7 +95,7 @@ class Shopping extends Component {
               <th>COMMENTS</th>
             </tr>
           </thead>
-          <tbody>
+          {/* <tbody>
             {this.state.stuff.map(item => (
               <tr key={item._id}>
                 <td>{item.name} </td>
@@ -117,7 +117,7 @@ class Shopping extends Component {
                <td>{user.myItems}</td>
               </tr> 
             ))}
-          </tbody>
+          </tbody> */}
       </div>
     );
   };

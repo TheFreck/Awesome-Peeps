@@ -24,16 +24,37 @@ class FriendRegistry extends Component {
         })
       .catch((err) => console.log(err));
     };
-  
-  // //Add item to shoppingListItems array for Shopping page
-  // addShoppingListItems = () => {
-  //   API.getShoppingListItems()
-  //     .then((res) => {
-  //       this.setState({users: res.data})
-  //     .catch((err) => console.log(err));
-  //   }
-      
-  // };
+    
+  //Add item to shoppingListItems array for Shopping page
+  addToShopping = (event) => {
+    event.preventDefault();
+    API.getShoppingListItems({
+      item: this.state.item,
+      price: this.state.price,
+      occasion: this.state.occasion,
+      comments: this.state.comments
+    })
+    
+    
+
+  }
+  //Share registry with another user
+  shareRegistry = (event) => {
+    this.setState({ shared: true } )
+    event.preventDefault();
+    console.log('Share with user');
+    API.getUsers({
+        firstName: this.state.firstName,
+        lastName: this.state.lastName,
+        uuid: this.state.uuid,
+        shared: this.state.shared
+    })
+        .then((res) => {
+            console.log('users data: ', res.data);
+            this.getAllUsers();
+        })
+        .catch((err) => console.log(err));
+};
 //Render Friends Registry into a table
   render() {
     console.log(this.state.friends)
@@ -61,16 +82,14 @@ class FriendRegistry extends Component {
 									<td>{item.price}</td>
 									<td>{item.comments}</td>
 									<td>
-                    <button>Add to List</button>
+                    <button onClick={this.addToShopping} type="submit" className="btn pink lighten-1 z-depth-2">
+                    <Link to={"/Shopping/"}> Add to Shopping List </Link>
+                    </button>
                     {/* <button onClick={this.addToShopping} type="submit" className="btn pink lighten-1 z-depth-2"><Link to={"/Shopping/"}>ADD TO SHOPPING LIST</Link></button> */}
 									</td>
-                  <td>
-										<form action="http://www.google.com/search" method="get">
-                   		<input type="" class="itemInput" name="q" value={item.item} />
-                   		<button type="submit" id="online" target={item.item} value={item.item}>get item</button>
-                 		</form>
-									</td>
-								</tr>
+                    
+                  <td><a href={"http://www.google.com/search?source=hp&ei=1XZBXJKpEammjwSG4KGgBQ&q=" + item.item} ><button className="btn pink lighten-1 z-depth-2">find online</button></a></td>
+                </tr>
 							))}
 					</tbody>
       </form>
