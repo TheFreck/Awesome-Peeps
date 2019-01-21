@@ -6,13 +6,29 @@ const Login = props => {
   return (
     <div>
       {props.state.resetPasswordBoolean ? (
-        <ResetPswd handleChange={props.handleChange} reset={props.reset} />
+        <ResetPswd 
+          handleChange={props.handleChange} 
+          reset={props.reset} 
+          toggleStart={props.toggleStart}
+        />
       ) : (
-        <div className="container">
-          <form onSubmit={props.handleSubmit} className="white">
-            <h5 className="grey-text text-darken-3">Login</h5>
-            <div className="input-field">
-              <label htmlFor="email">Email: </label>
+        <div 
+          className="container"
+        >
+          <form 
+            onSubmit={props.handleSubmit} 
+            className="white">
+            <h5 
+              className="grey-text text-darken-3"
+            >Login
+            </h5>
+            <div 
+              className="input-field"
+            >
+              <label 
+                htmlFor="email"
+              >Email: 
+              </label>
               <input
                 type="email"
                 id="email"

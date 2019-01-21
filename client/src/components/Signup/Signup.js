@@ -7,7 +7,7 @@ const Signup = props => {
       <form onSubmit={this.handleSubmit} className="white">
         <h5 className="grey-text text-darken-3">Sign Up</h5>
         <div className="input-field">
-          <label htmlFor="name">User Name: </label>
+          <label htmlFor="name">Screen Name: </label>
           <input
             type="text"
             name="screenName"
@@ -52,25 +52,27 @@ const Signup = props => {
                     <label htmlFor="account_key">Confirm Password: </label>
                     <input
                       type="password"
-                      id="password"
+                      id="passwordConfirm"
                       name="account_key2"
                       value={props.state.user.account_key2}
                       onChange={props.handleChange}
                     />
-                    <input
-                      className="btn pink lighten-1 z-depth-2"
-                      name="Sign Up "
-                      type="submit"
-                      value="Sign Up"
-                      onClick={props.submit}
-                    />
-                    <input
-                      className="btn pink lighten-1 z-depth-2"
-                      name="Login"
-                      type="submit"
-                      value="Login"
-                      onClick={props.toggleStart}
-                    />
+                    <div>
+                      <input
+                        className="btn pink lighten-1 z-depth-2"
+                        name="Sign Up "
+                        type="submit"
+                        value="Sign Up"
+                        onClick={props.submit}
+                      />
+                      <input
+                        className="btn pink lighten-1 z-depth-2"
+                        name="Login"
+                        type="submit"
+                        value="Login"
+                        onClick={props.toggleStart}
+                      />
+                    </div>
                   </div>
                 </div>
               </div>

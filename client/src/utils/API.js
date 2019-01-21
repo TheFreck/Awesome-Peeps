@@ -41,6 +41,7 @@ export default {
     return axios.post("/api/users/" + userName, userData);
   },
   checkLogin: () => {
+    console.log("checking loggin");
     return axios.get("/api/users/auth");
   },
   logout: () => {

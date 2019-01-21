@@ -1,7 +1,14 @@
 const router = require("express").Router();
 const resetController = require("../../controllers/resetController");
 
-// Matches with "/api/books"
+function checkAuth(req, res, next) {
+  if (req.session.user != undefined) {
+    next()
+  } else {
+    res.status(401).send("authentication error. Must be logged in")
+  }
+}
+
 router
   .route("/forgot/:email")
   .post(resetController.forgot);
@@ -12,7 +19,7 @@ router
 
 router
   .route("/resetPassword")
-  .put(resetController.resetPassword);
+  .put(checkAuth, resetController.resetPassword);
     
 
 module.exports = router;
