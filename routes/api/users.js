@@ -54,8 +54,7 @@ router
 router
   .route("/")
   .get(checkAuth, usersController.findAll)
-  .post(checkAuth, usersController.create)
-  .put(checkAuth, usersController.update);
+  .post(checkAuth, usersController.create);
 
 
 module.exports = router;
