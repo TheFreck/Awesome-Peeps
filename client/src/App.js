@@ -92,7 +92,7 @@ class App extends Component {
   }
 
   render() {
-    console.log("this.state.loggedIn", this.state.loggedIn)
+    // console.log("this.state.loggedIn", this.state.loggedIn)
     if(this.state.loggedIn) {
       console.log("you are logged in");
       return (

@@ -13,6 +13,7 @@ module.exports = {
       },
       (err, user) => {
         console.log("controller user: ", user);
+        console.log("controller req.session: ", req.session);
         if (err) throw err;
         if (!user) return res.json("incorrect username");
         console.log("user.checkPassword(req.body.password, user.account_key): ", user.checkPassword(req.body.password, user.account_key));
@@ -26,10 +27,10 @@ module.exports = {
         }
       }
     )
-    .then(dbModel => {
-      // console.log("dbModel: ", dbModel);
-      res.json(dbModel);
-    })
+    // .then(dbModel => {
+    //   // console.log("dbModel: ", dbModel);
+    //   res.json(dbModel);
+    // })
     .catch(err => res.status(422).json(err));
   },
   logout: (req, res) => {
