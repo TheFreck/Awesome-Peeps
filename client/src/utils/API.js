@@ -7,8 +7,6 @@ export default {
   login: userData => {
     let userName = userData.username;
     // console.log("api userData: ", userData);
-    userName = userName.replace(".", "-DOT-");
-    userName = userName.replace("@", "-AT-");
     return axios.post("/api/users/" + userName, userData);
   },
   checkLogin: () => {

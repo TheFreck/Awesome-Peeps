@@ -9,6 +9,8 @@ module.exports = {
   //          GATE KEEPERS 
   //     /*********************/*************//********///*****/////***////////**/////////////*/////////////////////*
   login: (req, res) => {
+    console.log("controller login req.body: ", req.body);
+    console.log("controller login req.params: ", req.params);
     db.User.findOne(
       {
         email: req.body.username
@@ -22,13 +24,15 @@ module.exports = {
         if(user.checkPassword(req.body.password, user.account_key)) {
           req.session.user = user
           console.log("req.session after assigning: ", req.session);
-          return user.checkPassword(req.body.password, user.account_key);
-        }else{
-          console.log("usersController failed login: ", req.session);
-          return user.checkPassword(req.body.password, user.account_key);
+          return res.json(req.session);
         }
       }
     )
+    // .then(res => {
+    //   console.log("login dot then res: ", res)
+    //   console.log("login dot then req.session: ", req.session);
+    //   res.json(req.session);
+    // })
     .catch(err => res.status(422).json(err));
   },
   logout: (req, res) => {
