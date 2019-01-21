@@ -96,16 +96,19 @@ class Start extends Component {
         };
         console.log("user: ", user);
         // console.log("user: ", user.user);
-        this.setState(user);
+        this.setState({
+          ...this.state,
+          user
+        });
         this.props.updateStateItem(user.user);
-        console.log("this.props.state", this.props.state)
+        console.log("login this.props.state", this.props.state)
         // console.log("res: ", res);
       } else {
         console.log("incorrect password");
       }
     })
     .catch(err => console.log("login err err: ", err));
-    console.log("this.props.state", this.props.state)
+    console.log("post login this.props.state", this.props.state)
   };
 
   logout = event => {

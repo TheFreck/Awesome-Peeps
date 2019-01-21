@@ -5,25 +5,30 @@ var uuidv1 = require("uuid/v1");
 
 // Defining methods for the UsersController
 module.exports = {
-  //                      GATE KEEPERS /********/*****//***///*****//********/
+  //     /*********************/*************//********///*****/////***////////**/////////////*/////////////////////*
+  //          GATE KEEPERS 
+  //     /*********************/*************//********///*****/////***////////**/////////////*/////////////////////*
   login: (req, res) => {
     db.User.findOne(
       {
         email: req.body.username
       },
       (err, user) => {
-        // console.log("controller user: ", user);
-        req.session.user = user
-        // console.log("req.session after assigning: ", req.session);
+        console.log("controller user: ", user);
+        console.log("controller req.session: ", req.session);
         if (err) throw err;
         if (!user) return res.json("incorrect username");
-        return user.checkPassword(req.body.password, user.account_key);
+        console.log("user.checkPassword(req.body.password, user.account_key): ", user.checkPassword(req.body.password, user.account_key));
+        if(user.checkPassword(req.body.password, user.account_key)) {
+          req.session.user = user
+          console.log("req.session after assigning: ", req.session);
+          return user.checkPassword(req.body.password, user.account_key);
+        }else{
+          console.log("usersController failed login: ", req.session);
+          return user.checkPassword(req.body.password, user.account_key);
+        }
       }
     )
-    .then(dbModel => {
-      // console.log("dbModel: ", dbModel);
-      res.json(dbModel);
-    })
     .catch(err => res.status(422).json(err));
   },
   logout: (req, res) => {
@@ -60,17 +65,10 @@ module.exports = {
     .then(dbModel => res.json(dbModel))
     .catch(err => res.status(422).json(err));
   },
-  update: (req, res) => {
-    // console.log("hit the update: ", req.body);
-    // db.User.findOneAndUpdate({ uuid: req.params.id }, req.body)
-    //   .then(dbModel => res.json(dbModel))
-    //   .catch(err => res.status(422).json(err));
-  },
   updateUser: (req, res) => {
   // console.log("MADE IT")
     //create item then takes the item id and adds it to the users myItems column
     db.User.findOneAndUpdate({uuid: req.params.id}, {$push: { shareWithMe: req.session.user._id }}, { new: true})
-  
     .then((dbModel) => {
         // console.log(dbModel)
         res.json(dbModel) 
@@ -86,9 +84,6 @@ module.exports = {
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
-  // grabInfoFromButton: (req, res) => {
-  //   console.log("grabbed it: ", req.body);
-  // },
   findUserAndItems: (req, res) => {
     // console.log("i am running now ahhhhhh")
     // console.log("this is our req.session", req.session)
@@ -111,7 +106,6 @@ module.exports = {
       res.json(data)
     })
   },
-  
   findShoppingListItems: (req, res) => {
     console.log("find shopping list items is running!")
     console.log("this is our req.session", req.session)

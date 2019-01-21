@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import MainLogo from "../../components/MainLogo";
 
 //----------Friends component----------
-class Friends extends React.Component {
+class Friends extends Component {
   state = {
     users: [],
     uuid: "",

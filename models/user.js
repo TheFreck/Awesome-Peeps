@@ -83,8 +83,8 @@ const userSchema = new Schema({
 
 userSchema.methods = {
   checkPassword: (inputPassword, checkPassword) => {
-    // console.log("inputPassword: ", inputPassword);
-    // console.log("this.login.account_key: ", checkPassword);
+    console.log("inputPassword: ", inputPassword);
+    console.log("this.login.account_key: ", checkPassword);
     return bcrypt.compareSync(inputPassword, checkPassword)
   },
   hashPassword: plainTextPassword => {

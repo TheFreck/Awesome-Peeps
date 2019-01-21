@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import NoMatch from "./pages/NoMatch";
+// import NoMatch from "./pages/NoMatch";
 import Nav from "./components/Nav/Nav";
 import Create from "./pages/Create";
 import Friends from "./pages/Friends";
@@ -19,7 +19,7 @@ import Start from "./pages/Start";
 import Shopping from "./pages/Shopping";
 // import FriendRegistry from "./pages/FriendRegistry"
 // import Profile from "./pages/Profile";
-import ResetPswd from "./components/ResetPswd";
+// import ResetPswd from "./components/ResetPswd";
 import API from "./utils/API";
 
 const initialState = {
@@ -92,9 +92,9 @@ class App extends Component {
   }
 
   render() {
-    console.log("this.state.loggedIn", this.state.loggedIn)
+    // console.log("this.state.loggedIn", this.state.loggedIn)
     if(this.state.loggedIn) {
-      // console.log("you are logged in");
+      console.log("you are logged in");
       return (
         <Router>
           <div>
@@ -107,6 +107,7 @@ class App extends Component {
                 path="/create"
                 render={() => (
                   <Create 
+                  auth={this.auth}
                   update={this.updateState} 
                   state={this.state} 
                   />
@@ -117,6 +118,7 @@ class App extends Component {
                 path="/friends"
                 render={() => (
                   <Friends 
+                  auth={this.auth}
                   update={this.updateState} 
                   state={this.state} 
                   />
@@ -128,6 +130,7 @@ class App extends Component {
                 render={props => (
                   <FriendRegistry
                   {...props}
+                  auth={this.auth}
                   update={this.updateState}
                   state={this.state}
                   />
@@ -138,6 +141,7 @@ class App extends Component {
                 path="/Shopping"
                 render={() => (
                   <Shopping 
+                  auth={this.auth}
                   update={this.updateState} 
                   state={this.state} 
                   />
@@ -148,6 +152,7 @@ class App extends Component {
                 path="/Profile"
                 render={() => (
                   <Profile 
+                    auth={this.auth}
                     update={this.updateState} 
                     state={this.state} 
                   />
@@ -157,6 +162,7 @@ class App extends Component {
                 path="/"
                 render={() => (
                   <Landing 
+                    auth={this.auth}
                     update={this.updateState} 
                     state={this.state} 
                   />
@@ -172,7 +178,7 @@ class App extends Component {
         </Router>
       );
     }else{
-      // console.log("you are logged out");
+      console.log("you are logged out");
       return(
         <Router >
           <div>
@@ -182,6 +188,7 @@ class App extends Component {
                 path="/reset/:token"
                 render={token => (
                   <FinalReset 
+                    auth={this.auth}
                     token={token}
                     update={this.updateState} 
                     state={this.state} 
@@ -192,6 +199,7 @@ class App extends Component {
                 path="/"
                 render={() => (
                   <Start
+                    auth={this.auth}
                     updateState={this.updateState}
                     updateStateItem={this.updateStateItem}
                     state={this.state}
