@@ -54,6 +54,7 @@ class Shopping extends Component {
 // };
 
   componentDidMount() {
+    console.log("shopping this.props: ", this.props);
     this.getItems()
     this.getPerson();
   }
@@ -83,7 +84,7 @@ class Shopping extends Component {
   render() {
     return (
       <div> 
-        <div class="col s12 center-align top:60px">
+        <div className="col s12 center-align top:60px">
           <MainLogo />
         </div>
         <thead>
@@ -108,7 +109,11 @@ class Shopping extends Component {
                   <button onClick={() => this.deleteItem(item._id)}>Buy it!</button>
                   
                 </td>         
-                <td><a href={"http://www.google.com/search?source=hp&ei=1XZBXJKpEammjwSG4KGgBQ&q=" + item.item} ><button>find online</button></a></td>
+                <td>
+                  <a href={"http://www.google.com/search?source=hp&ei=1XZBXJKpEammjwSG4KGgBQ&q=" + item.item} >
+                    <button>find online</button>
+                  </a>
+                </td>
               </tr>
           ))}
             {this.state.users.map(user =>(

@@ -12,12 +12,18 @@ module.exports = {
         email: req.body.username
       },
       (err, user) => {
-        // console.log("controller user: ", user);
-        req.session.user = user
-        // console.log("req.session after assigning: ", req.session);
+        console.log("controller user: ", user);
         if (err) throw err;
         if (!user) return res.json("incorrect username");
-        return user.checkPassword(req.body.password, user.account_key);
+        console.log("user.checkPassword(req.body.password, user.account_key): ", user.checkPassword(req.body.password, user.account_key));
+        if(user.checkPassword(req.body.password, user.account_key)) {
+          req.session.user = user
+          console.log("req.session after assigning: ", req.session);
+          return user.checkPassword(req.body.password, user.account_key);
+        }else{
+          console.log("usersController failed login: ", req.session);
+          return user.checkPassword(req.body.password, user.account_key);
+        }
       }
     )
     .then(dbModel => {

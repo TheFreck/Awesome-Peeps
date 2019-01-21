@@ -21,6 +21,8 @@ class Create extends Component {
     };
     //These load whent the page loads
     componentDidMount() {
+        console.log("create this.props", this.props)
+        this.props.auth();
         this.setState({ uuid: this.state.user.uuid });
         this.userAndItems(this.state.user.uuid);
     }
@@ -225,9 +227,8 @@ class Create extends Component {
                             value={this.state.url}
                             type="text"
                             className="form-control"
-							id="url"
-							placeholder="enter url if known"
-
+                            id="url"
+                            placeholder="enter url if known"
                         />
                     </div>
                     <div className="form-group">
@@ -265,7 +266,9 @@ class Create extends Component {
                     <RegistryHeader />
                     <div>{this.renderSaved()}</div>
                 </form>
-                </div>
-        )};
+            </div>
+        )
+    };
 }}
+
 export default Create;

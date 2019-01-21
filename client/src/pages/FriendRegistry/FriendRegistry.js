@@ -2,9 +2,9 @@
 import React, { Component } from "react";
 import API from "../../utils/API";
 import MainLogo from "../../components/MainLogo";
-import { Link } from "react-router-dom";
-import FindOnlineBtn from "../../components/FindOnlineBtn";
-import ResetPswd from "../../components/ResetPswd";
+// import { Link } from "react-router-dom";
+// import FindOnlineBtn from "../../components/FindOnlineBtn";
+// import ResetPswd from "../../components/ResetPswd";
 
 class FriendRegistry extends Component {
   state = {

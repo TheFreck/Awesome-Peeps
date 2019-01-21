@@ -7,7 +7,7 @@ function Header() {
   // Import result is the URL of the logo
   return (
     <img
-      class="responsive-img"
+      className="responsive-img"
       src={logo}
       alt="Logo"
       width="500px"
