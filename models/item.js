@@ -26,6 +26,11 @@ const itemSchema = new Schema({
   comments: {
     type: String,
     required: false,
+  },
+  inList: {
+    type: Boolean,
+    require: true,
+    default: false
   }
   
   

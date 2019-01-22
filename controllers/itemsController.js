@@ -58,5 +58,18 @@ module.exports = {
         res.json(dbModel)
       })
       .catch(err => res.status(422).json(err));
+  },
+  removeFromGeneralList: (req, res) => {
+    let itemId = req.body.itemId;
+    console.log("remove from gen list itemId: ", itemId);
+    db.Item.findOneAndUpdate({
+      _id: itemId
+    },
+    {
+      inList: true
+    })
+    .then(res => {
+      console.log("remove from gen list res: ", res);
+    })
   }
 };

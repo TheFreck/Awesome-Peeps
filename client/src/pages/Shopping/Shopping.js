@@ -2,11 +2,11 @@ import React, { Component } from "react";
 import API from "../../utils/API";
 import MainLogo from "../../components/MainLogo";
 import FindOnlineBtn from "../../components/FindOnlineBtn";
+import NevermindBtn from "../../components/NevermindBtn";
 
 class Shopping extends Component {
   state = {
     user: this.props.state,
-    stuff: [],
     users: [],
     item: "",
     price: "",
@@ -15,7 +15,6 @@ class Shopping extends Component {
 
   componentDidMount() {
     console.log("shopping this.props: ", this.props);
-    console.log("shopping this.state: ", this.state);
     API.getItems()
     this.getPerson();
   }
@@ -28,6 +27,22 @@ class Shopping extends Component {
         .catch(err => console.log(err));
   }
 
+  handleChange = event => {
+    event.preventDefault();
+    const { name, value } = event.target;
+    this.setState({
+      ...this.state,
+      user: {
+        ...this.state.user,
+        [name]: value
+      }
+    });
+    this.props.updateState({
+      ...this.state,
+      key: name,
+      value: value
+    })
+  }
   // deleteItem = id => {
   //   API.deleteItem(id)
   //     .then(res => this.getItems())
@@ -53,9 +68,10 @@ class Shopping extends Component {
           <tbody>
             {this.state.users.map(user =>(
               <tr key={user._id}>
-              <td>{user.firstName}</td>
-              <td>{user.myItems}</td>
-              <td><FindOnlineBtn name={user.firstName} /></td>
+               <td>{user.firstName}</td>
+               <td>{user.myItems}</td>
+               <td><FindOnlineBtn name={user.firstName} /></td>
+               <td><NevermindBtn name="Nevermind" click={() => console.log("click")} /></td>
               </tr> 
             ))}
           </tbody>

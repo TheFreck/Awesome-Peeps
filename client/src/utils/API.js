@@ -91,6 +91,10 @@ export default {
   },
   addToShoppingList: (itemId) => {
     return axios.post("/api/items/shoppingList", {itemId});
+ },
+ removeFromGeneralList: (itemId) => {
+   console.log("API remove from gen list itemId: ", itemId);
+   return axios.put("/api/items/shoppingLIst", {itemId});
  }
 
 };

@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import API from "../../utils/API";
 import MainLogo from "../../components/MainLogo";
 // import { Link } from "react-router-dom";
-// import FindOnlineBtn from "../../components/FindOnlineBtn";
+import FindOnlineBtn from "../../components/FindOnlineBtn";
 // import ResetPswd from "../../components/ResetPswd";
 
 class FriendRegistry extends Component {
@@ -65,13 +65,12 @@ class FriendRegistry extends Component {
                     <button onClick={(e)=>{
                       e.preventDefault();
                       API.addToShoppingList(item._id)
+                      API.removeFromGeneralList(item._id)
+                      console.log("this is after it is added before the switch")
                     }}>Add to List</button>
 									</td>
                   <td>
-										<form action="http://www.google.com/search" method="get">
-                   		<input type="" class="itemInput" name="q" value={item.item} />
-                   		<button type="submit" id="online" target={item.item} value={item.item}>get item</button>
-                 		</form>
+										<FindOnlineBtn name={item.item} />
 									</td>
 								</tr>
 							))}
