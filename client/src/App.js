@@ -33,6 +33,7 @@ const initialState = {
   pic: "",
   shareWithMe: [],
   shareWithOthers: [],
+  shoppingListItems: [],
   notes: "",
   loggedIn: false
 };
