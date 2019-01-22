@@ -104,7 +104,7 @@ class App extends Component {
             <Switch >
               <Route
                 exact
-                path="/create"
+                path="/Create"
                 render={() => (
                   <Create 
                   auth={this.auth}
@@ -115,7 +115,7 @@ class App extends Component {
               />
               <Route
                 exact
-                path="/friends"
+                path="/Friends"
                 render={() => (
                   <Friends 
                   auth={this.auth}
