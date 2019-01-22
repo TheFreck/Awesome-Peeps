@@ -22,7 +22,7 @@ class Create extends Component {
     //These load whent the page loads
     componentDidMount() {
         console.log("create this.props", this.props)
-        this.props.auth();
+        // this.props.auth();
         this.setState({ uuid: this.state.user.uuid });
         this.userAndItems(this.state.user.uuid);
     }
@@ -71,10 +71,10 @@ class Create extends Component {
                 comments: this.state.comments,
                 uuid: this.state.uuid
             })
-                .then((res) => {
-                    this.userAndItems();
-                })
-                .catch((err) => console.log(err));
+            .then((res) => {
+                this.userAndItems();
+            })
+            .catch((err) => console.log(err));
         }
     };
     handleShared = () => {

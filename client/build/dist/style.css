@@ -1,0 +1,88 @@
+html {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Nunito Sans", sans-serif;
+  background: url(./Images/background.jpg);
+  background-size: 100%;
+  background-position: bottom;
+  background-color: #1976d2;
+  min-height: 100%;
+}
+
+form {
+  padding: 20px;
+  margin-top: 60px;
+  border-radius: 25px;
+  border: 2px solid #ec407a;
+}
+
+form-button,
+.btn {
+  margin: 5px 10px;
+  font-family: "Permanent Marker", cursive;
+  text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black,
+    1px 1px 0 black;
+}
+.grey-text {
+  margin: 5px 10px;
+  font-family: "Permanent Marker", cursive;
+}
+
+input[type="text"]:not(.browser-default):focus:not([readonly]),
+input[type="email"]:not(.browser-default):focus:not([readonly]),
+input[type="password"]:not(.browser-default):focus:not([readonly]),
+textarea.materialize-textarea:focus:not([readonly]) {
+  border-color: #ec407a;
+  box-shadow: none;
+}
+
+.main-header {
+  background: url(../dist/Images/landingpg.jpg) no-repeat;
+  background-position: center;
+  min-height: 550px;
+}
+
+.showcase-container {
+  padding: 0px;
+  margin: 80px 20px;
+  background-color: #ec1f64;
+  border-radius: 15px;
+  box-shadow: 0 0 0 5px white;
+  font-family: "Permanent Marker", cursive;
+  color: white;
+  text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black,
+    1px 1px 0 black;
+  font-weight: bold;
+}
+
+.btn-friend {
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  width: 850px;
+  border: none;
+  align-content: right;
+  z-index: 2;
+}
+
+.brand-logo {
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  width: 80px;
+  border: none;
+}
+
+.nav-wrapper {
+  font-family: "Permanent Marker", cursive;
+  text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black,
+    1px 1px 0 black;
+}
+nav ul li:hover {
+  background-color: #fed821;
+  color: dimgrey;
+}

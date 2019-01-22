@@ -42,7 +42,7 @@ class Start extends Component {
     if (this.state.account_key === this.state.account_key2) {
       API.saveUser(this.state.user)
         .then(res => {
-          // console.log("submit res.data: ", res.date);
+          console.log("submit res.data: ", res.date);
           if (res.data) {
             this.props.updateStateItem(res.data);
           } else {
@@ -79,17 +79,17 @@ class Start extends Component {
       password: this.state.user.account_key
     })
     .then(res => {
-      console.log("Start res: ", res.data);
+      console.log("Start res.data.user.uuid: ", res.data.user.uuid);
       if (res.data) {
         let user = {
           user: {
             ...this.state.user,
-            uuid: res.data.uuid,
-            screenName: res.data.screenName,
-            firstName: res.data.firstName,
-            lastName: res.data.lastName,
-            pic: res.data.pic,
-            notes: res.data.notes,
+            uuid: res.data.user.uuid,
+            screenName: res.data.user.screenName,
+            firstName: res.data.user.firstName,
+            lastName: res.data.user.lastName,
+            pic: res.data.user.pic,
+            notes: res.data.user.notes,
             account_key: "",
             loggedIn: true
           }
