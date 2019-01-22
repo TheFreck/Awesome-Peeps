@@ -61,8 +61,10 @@ class FriendRegistry extends Component {
 									<td>{item.price}</td>
 									<td>{item.comments}</td>
 									<td>
-                    <button>Add to List</button>
-                    {/* <button onClick={this.addToShopping} type="submit" className="btn pink lighten-1 z-depth-2"><Link to={"/Shopping/"}>ADD TO SHOPPING LIST</Link></button> */}
+                    <button onClick={(e)=>{
+                      e.preventDefault();
+                      API.addToShoppingList(item._id)
+                    }}>Add to List</button>
 									</td>
                   <td>
 										<form action="http://www.google.com/search" method="get">

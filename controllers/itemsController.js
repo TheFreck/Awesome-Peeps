@@ -39,5 +39,24 @@ module.exports = {
       .then(dbModel => dbModel.remove())
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
+  },
+
+  addTolist: function(req, res) {
+    //create item then takes the item id and adds it to the users myItems column
+    console.log("item id:", req.body.itemId)
+    db.User.findOneAndUpdate({
+        uuid: req.session.user.uuid
+      }, {
+        $push: {
+          shoppingListItems: req.body.itemId
+        }
+      }, {
+        new: true
+      })
+      .then((dbModel) => {
+        // console.log(dbModel)
+        res.json(dbModel)
+      })
+      .catch(err => res.status(422).json(err));
   }
 };

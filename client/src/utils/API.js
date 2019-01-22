@@ -88,6 +88,9 @@ export default {
   saveItem: itemData => {
     // console.log("API user data: ", itemData);
     return axios.post("/api/items", itemData);
-  }
+  },
+  addToShoppingList: (itemId) => {
+    return axios.post("/api/items/shoppingList", {itemId});
+ }
 
 };
