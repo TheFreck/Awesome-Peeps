@@ -43,6 +43,10 @@ const userSchema = new Schema({
     type: String,
     required: false
   },
+  friends: {
+    type: Array,
+    required: false
+  },
   shareWithMe: [{
     // Store ObjectIds in the array
     type: Schema.Types.ObjectId,
