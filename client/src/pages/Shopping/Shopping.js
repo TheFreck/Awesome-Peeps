@@ -14,7 +14,7 @@ class Shopping extends Component {
 
   componentDidMount() {
     console.log("shopping this.props: ", this.props);
-    this.getItems()
+    API.getItems()
     this.getPerson();
   }
 

@@ -2,8 +2,8 @@
 import React, { Component } from "react";
 import API from "../../utils/API";
 import MainLogo from "../../components/MainLogo";
-// import { Link } from "react-router-dom";
-// import FindOnlineBtn from "../../components/FindOnlineBtn";
+import { Link } from "react-router-dom";
+import FindOnlineBtn from "../../components/FindOnlineBtn";
 // import ResetPswd from "../../components/ResetPswd";
 
 class FriendRegistry extends Component {
@@ -25,15 +25,6 @@ class FriendRegistry extends Component {
       .catch((err) => console.log(err));
     };
   
-  // //Add item to shoppingListItems array for Shopping page
-  // addShoppingListItems = () => {
-  //   API.getShoppingListItems()
-  //     .then((res) => {
-  //       this.setState({users: res.data})
-  //     .catch((err) => console.log(err));
-  //   }
-      
-  // };
 //Render Friends Registry into a table
   render() {
     // console.log(this.state.friends)
@@ -61,16 +52,13 @@ class FriendRegistry extends Component {
 									<td>{item.price}</td>
 									<td>{item.comments}</td>
 									<td>
-                    <button onClick={(e)=>{
+                    <button type="submit" className="btn pink lighten-1 z-depth-2" onClick={(e)=>{
                       e.preventDefault();
                       API.addToShoppingList(item._id)
-                    }}>Add to List</button>
+                    }}><Link to={"/Shopping/"}> Add to List </Link></button>
 									</td>
                   <td>
-										<form action="http://www.google.com/search" method="get">
-                   		<input type="" class="itemInput" name="q" value={item.item} />
-                   		<button type="submit" id="online" target={item.item} value={item.item}>get item</button>
-                 		</form>
+                  <td><FindOnlineBtn name={item.firstName} /></td>
 									</td>
 								</tr>
 							))}
