@@ -5,6 +5,7 @@ import FindOnlineBtn from "../../components/FindOnlineBtn";
 
 class Shopping extends Component {
   state = {
+    user: this.props.state,
     stuff: [],
     users: [],
     item: "",
@@ -14,7 +15,8 @@ class Shopping extends Component {
 
   componentDidMount() {
     console.log("shopping this.props: ", this.props);
-    this.getItems()
+    console.log("shopping this.state: ", this.state);
+    API.getItems()
     this.getPerson();
   }
 
@@ -38,24 +40,26 @@ class Shopping extends Component {
         <div className="col s12 center-align top:60px">
           <MainLogo />
         </div>
-        <thead>
-          <tr>
-            <th>GREEDY BASTARD</th>
-            <th>ITEM</th>
-            <th>PRICE</th>
-            <th>OCCASION</th>
-            <th>COMMENTS</th>
-          </tr>
-        </thead>
-        <tbody>
+        <table>
+          <thead>
+            <tr>
+              <th>GREEDY BASTARD</th>
+              <th>ITEM</th>
+              <th>PRICE</th>
+              <th>OCCASION</th>
+              <th>COMMENTS</th>
+            </tr>
+          </thead>
+          <tbody>
             {this.state.users.map(user =>(
               <tr key={user._id}>
-               <td>{user.firstName}</td>
-               <td>{user.myItems}</td>
-               <td><FindOnlineBtn name={user.firstName} /></td>
+              <td>{user.firstName}</td>
+              <td>{user.myItems}</td>
+              <td><FindOnlineBtn name={user.firstName} /></td>
               </tr> 
             ))}
           </tbody>
+        </table>
       </div>
     );
   };

@@ -44,6 +44,7 @@ class FriendRegistry extends Component {
           <MainLogo />
         </div>
       <form className="white">
+        <div>
         <h3 className="grey-text text-darken-3">I'M A GREEDY BASTARD - HERE IS MY LIST</h3>
         <thead>
           <tr>
@@ -75,6 +76,7 @@ class FriendRegistry extends Component {
 								</tr>
 							))}
 					</tbody>
+        </div>
       </form>
       </div>
     </div>
