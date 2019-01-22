@@ -24,4 +24,7 @@ router
   .put(checkAuth, itemsController.update)
   .delete(checkAuth, itemsController.remove);
 
+  router.route("/shoppingList")
+    .post(itemsController.addTolist);
+
 module.exports = router;
