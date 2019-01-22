@@ -88,33 +88,33 @@ class Shopping extends Component {
           <MainLogo />
         </div>
         <thead>
-            <tr>
-              <th>GREEDY BASTARD</th>
-              <th>ITEM</th>
-              <th>PRICE</th>
-              <th>OCCASION</th>
-              <th>COMMENTS</th>
+          <tr>
+            <th>GREEDY BASTARD</th>
+            <th>ITEM</th>
+            <th>PRICE</th>
+            <th>OCCASION</th>
+            <th>COMMENTS</th>
+          </tr>
+        </thead>
+        <tbody>
+          {this.state.stuff.map(item => (
+            <tr key={item._id}>
+              <td>{item.name} </td>
+              <td>{item.item}</td>
+              <td>{item.price}</td>
+              <td>{item.occasion}</td>
+              <td>{item.comments}</td>
+              <td>
+                <button onClick={() => this.deleteItem(item._id)}>Delete</button>
+                <button onClick={() => this.deleteItem(item._id)}>Buy it!</button>
+                
+              </td>         
+              <td>
+                <a href={"http://www.google.com/search?source=hp&ei=1XZBXJKpEammjwSG4KGgBQ&q=" + item.item} >
+                  <button>find online</button>
+                </a>
+              </td>
             </tr>
-          </thead>
-          <tbody>
-            {this.state.stuff.map(item => (
-              <tr key={item._id}>
-                <td>{item.name} </td>
-                <td>{item.item}</td>
-                <td>{item.price}</td>
-                <td>{item.occasion}</td>
-                <td>{item.comments}</td>
-                <td>
-                  <button onClick={() => this.deleteItem(item._id)}>Delete</button>
-                  <button onClick={() => this.deleteItem(item._id)}>Buy it!</button>
-                  
-                </td>         
-                <td>
-                  <a href={"http://www.google.com/search?source=hp&ei=1XZBXJKpEammjwSG4KGgBQ&q=" + item.item} >
-                    <button>find online</button>
-                  </a>
-                </td>
-              </tr>
           ))}
             {this.state.users.map(user =>(
               <tr key={user._id}>
