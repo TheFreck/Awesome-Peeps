@@ -20,7 +20,7 @@ class FriendRegistry extends Component {
     getFriendsandItems = () => {
       API.getFriendsandItems(this.props.match.params.userId).then((friendData)=>{
         console.log(friendData)
-        this.setState({ friends: friendData.data.myItems})
+        this.setState({ friends: friendData.data.myItems })
         })
       .catch((err) => console.log(err));
     };
@@ -47,6 +47,7 @@ class FriendRegistry extends Component {
       <form className="white">
         <div>
         <h3 className="grey-text text-darken-3">I'M A GREEDY BASTARD - HERE IS MY LIST</h3>
+
         <thead>
           <tr>
             <th>ITEM</th>
@@ -79,6 +80,8 @@ class FriendRegistry extends Component {
 								</tr>
 							))}
 					</tbody>
+
+
         </div>
       </form>
       </div>
