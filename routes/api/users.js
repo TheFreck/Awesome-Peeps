@@ -56,4 +56,8 @@ router
   .get(checkAuth, usersController.findAll)
   .post(usersController.create);
 
+router
+  .route("/session")
+  .get(usersController.session)
+
 module.exports = router;

@@ -13,7 +13,7 @@ const Nav = (props) => {
         {/* className is a Materialize classs*/}
         <button type="submit" className="brand-logo">
           <Link to={"/Landing/"}>
-            <img className="responsive-img" src={Mainlogo} alt="main logo" />
+            {/* <img className="responsive-img" src={Mainlogo} alt="main logo" /> */}
           </Link>
         </button>
         <SignedInLinks 

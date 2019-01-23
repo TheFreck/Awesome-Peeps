@@ -43,6 +43,7 @@ class App extends Component {
 
   componentDidMount() {
     this.auth();
+    this.getSession();
     console.log("post initial auth this.state: ", this.state);
   }
 
@@ -66,7 +67,7 @@ class App extends Component {
       notes: updates.notes,
       myItems: [],
       friends: [],
-      loggedIn: loggedIn,
+      loggedIn: false,
       account_key: ""
     });
   };
@@ -92,6 +93,15 @@ class App extends Component {
       console.log("App.js auth: ", res.data);
       this.setState({ loggedIn: res.data })
     });
+  }
+  
+  getSession = (res) => {
+    API.session().then((res) => {
+      this.setState({
+        ...this.state,
+        ...res.data
+      });
+    })
   }
 
   render() {
