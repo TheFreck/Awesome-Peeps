@@ -61,7 +61,7 @@ class FriendRegistry extends Component {
                     }}>Add to List</button>
 									</td>
                   <td>
-										<FindOnlineBtn name={item.item} />
+                  <td><FindOnlineBtn /></td>
 									</td>
 								</tr>
 							))}
