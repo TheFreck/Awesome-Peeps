@@ -138,7 +138,9 @@ class Row extends Component {
             <span>
               <button
                 className="btn btn-info ml-1"
-                onClick={() => this.state.deleteItem(this.state._id)}
+                onClick={() => {
+                  console.log("this.state._id: ", this.state._id);
+                  this.state.deleteItem(this.state._id)}}
               >
                 Delete
               </button>

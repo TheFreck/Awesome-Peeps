@@ -20,7 +20,7 @@ class FriendRegistry extends Component {
     getFriendsandItems = () => {
       API.getFriendsandItems(this.props.match.params.userId).then((friendData)=>{
         console.log(friendData)
-        this.setState({ friends: friendData.data.myItems})
+        this.setState({ friends: friendData.data.myItems })
         })
       .catch((err) => console.log(err));
     };
@@ -46,35 +46,37 @@ class FriendRegistry extends Component {
       <form className="white">
         <div>
         <h3 className="grey-text text-darken-3">I'M A GREEDY BASTARD - HERE IS MY LIST</h3>
-        <thead>
-          <tr>
-            <th>ITEM</th>
-            <th>PRICE</th>
-            <th>COMMENTS</th>
-            <th>ADD TO SHOPPING LIST</th>
-            <th>FIND ONLINE</th>
-          </tr>
-        </thead>
-        <tbody>
-							{this.state.friends.map((item) => (
-								<tr key={item._id}>
-									<td>{item.item}</td>
-									<td>{item.price}</td>
-									<td>{item.comments}</td>
-									<td>
-                    <button onClick={(e)=>{
-                      e.preventDefault();
-                      API.addToShoppingList(item._id)
-                      API.removeFromGeneralList(item._id)
-                      console.log("this is after it is added before the switch")
-                    }}>Add to List</button>
-									</td>
-                  <td>
-										<FindOnlineBtn name={item.item} />
-									</td>
-								</tr>
-							))}
-					</tbody>
+        <table>
+          <thead>
+            <tr>
+              <th>ITEM</th>
+              <th>PRICE</th>
+              <th>COMMENTS</th>
+              <th>ADD TO SHOPPING LIST</th>
+              <th>FIND ONLINE</th>
+            </tr>
+          </thead>
+          <tbody>
+            {this.state.friends.map((item) => (
+              <tr key={item._id}>
+                <td>{item.item}</td>
+                <td>{item.price}</td>
+                <td>{item.comments}</td>
+                <td>
+                  <button onClick={(e)=>{
+                    e.preventDefault();
+                    API.addToShoppingList(item)
+                    API.removeFromGeneralList(item._id)
+                    console.log("this is after it is added before the switch")
+                  }}>Add to List</button>
+                </td>
+                <td>
+                  <FindOnlineBtn name={item.item} />
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
         </div>
       </form>
       </div>

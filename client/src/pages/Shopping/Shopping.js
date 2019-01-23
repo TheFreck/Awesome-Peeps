@@ -15,25 +15,34 @@ class Shopping extends Component {
     shoppingListItems:[]
   };
 
-
   componentDidMount() {
     console.log("shopping this.props: ", this.props);
     this.getShoppingListItems();
   }
+
   getShoppingListItems = () => {
     API.getFriendsandItemsTwo().then((itemData) =>{
-      console.log(itemData)
+      console.log("itemData: ", itemData)
       this.setState({ shoppingItems: itemData.data.shoppingListItems })
+      this.getItemDetails(itemData.data._id);
     })
     .catch((err) => console.log(err))
   };
 
+  getItemDetails = id => {
+    console.log("getItemDetails id: ", id);
+    API.getItem(id)
+    .then(res => {
+      console.log("getItemDetails res: ", res);
+    })
+  }
+
   getPerson = () => {
       API.getUsers()
-      .then(res =>
+      .then(res => {
         this.setState({ users: res.data, firstName: ""})
-      )
-        .catch(err => console.log(err));
+      })
+      .catch(err => console.log(err));
   }
 
   handleChange = event => {
