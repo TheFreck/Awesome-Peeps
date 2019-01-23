@@ -52,7 +52,7 @@ export default {
     return axios.get("/api/users/friends/" + id);
   },
   getFriendsandItemsTwo: () => {
-    return axios.get("/api/users/shopping/");
+    return axios.get("/api/users/shopping/:id");
   },
   // getUserAndSharedItems: id => {
   //   return axios.get("api/users/shopping/" + id);
