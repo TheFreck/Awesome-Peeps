@@ -20,7 +20,7 @@ class FriendRegistry extends Component {
     getFriendsandItems = () => {
       API.getFriendsandItems(this.props.match.params.userId).then((friendData)=>{
         console.log(friendData)
-        this.setState({ friends: friendData.data.myItems})
+        this.setState({ friends: friendData.data.myItems })
         })
       .catch((err) => console.log(err));
     };
@@ -65,7 +65,7 @@ class FriendRegistry extends Component {
                 <td>
                   <button onClick={(e)=>{
                     e.preventDefault();
-                    API.addToShoppingList(item._id)
+                    API.addToShoppingList(item)
                     API.removeFromGeneralList(item._id)
                     console.log("this is after it is added before the switch")
                   }}>Add to List</button>
