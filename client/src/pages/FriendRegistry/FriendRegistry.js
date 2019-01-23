@@ -35,6 +35,7 @@ class FriendRegistry extends Component {
           <MainLogo />
         </div>
       <form className="white">
+        <div>
         <h3 className="grey-text text-darken-3">I'M A GREEDY BASTARD - HERE IS MY LIST</h3>
         <thead>
           <tr>
@@ -55,14 +56,17 @@ class FriendRegistry extends Component {
                     <button type="submit" className="btn pink lighten-1 z-depth-2" onClick={(e)=>{
                       e.preventDefault();
                       API.addToShoppingList(item._id)
-                    }}><Link to={"/Shopping/"}> Add to List </Link></button>
+                      API.removeFromGeneralList(item._id)
+                      console.log("this is after it is added before the switch")
+                    }}>Add to List</button>
 									</td>
                   <td>
-                  <td><FindOnlineBtn name={item.firstName} /></td>
+										<FindOnlineBtn name={item.item} />
 									</td>
 								</tr>
 							))}
 					</tbody>
+        </div>
       </form>
       </div>
     </div>

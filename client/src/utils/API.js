@@ -68,8 +68,8 @@ export default {
     return axios.put("/api/share/" + userData.uuid, userData)
   },
   getItems: (id) => {
-    // console.log("THIS IS ID FROM API", id)
-    return axios.get("/api/items" + id);
+    console.log("THIS IS ID FROM API", id)
+    return axios.get("/api/items/" + id);
 
     // return axios.get("/api/items" + id);
   },
@@ -91,6 +91,10 @@ export default {
   },
   addToShoppingList: (itemId) => {
     return axios.post("/api/items/shoppingList", {itemId});
+ },
+ removeFromGeneralList: (itemId) => {
+   console.log("API remove from gen list itemId: ", itemId);
+   return axios.put("/api/items/shoppingLIst", {itemId});
  }
 
 };

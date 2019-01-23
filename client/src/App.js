@@ -33,6 +33,7 @@ const initialState = {
   pic: "",
   shareWithMe: [],
   shareWithOthers: [],
+  shoppingListItems: [],
   notes: "",
   loggedIn: false
 };
@@ -63,6 +64,8 @@ class App extends Component {
       lastName: updates.lastName,
       pic: updates.pic,
       notes: updates.notes,
+      myItems: [],
+      friends: [],
       loggedIn: loggedIn,
       account_key: ""
     });
