@@ -79,7 +79,7 @@ class Start extends Component {
       password: this.state.user.account_key
     })
     .then(res => {
-      console.log("Start res.data.user.uuid: ", res.data.user.uuid);
+      console.log("Start res.data.user.uuid: ", res.data);
       if (res.data) {
         let user = {
           user: {

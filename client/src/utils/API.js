@@ -68,8 +68,8 @@ export default {
     return axios.put("/api/share/" + userData.uuid, userData)
   },
   getItems: (id) => {
-    // console.log("THIS IS ID FROM API", id)
-    return axios.get("/api/items" + id);
+    console.log("THIS IS ID FROM API", id)
+    return axios.get("/api/items/" + id);
 
     // return axios.get("/api/items" + id);
   },

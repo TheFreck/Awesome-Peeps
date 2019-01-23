@@ -55,16 +55,17 @@ class Shopping extends Component {
         <div className="col s12 center-align top:60px">
           <MainLogo />
         </div>
-        <thead>
-          <tr>
-            <th>GREEDY BASTARD</th>
-            <th>ITEM</th>
-            <th>PRICE</th>
-            <th>OCCASION</th>
-            <th>COMMENTS</th>
-          </tr>
-        </thead>
-        <tbody>
+        <table>
+          <thead>
+            <tr>
+              <th>GREEDY BASTARD</th>
+              <th>ITEM</th>
+              <th>PRICE</th>
+              <th>OCCASION</th>
+              <th>COMMENTS</th>
+            </tr>
+          </thead>
+          <tbody>
             {this.state.users.map(user =>(
               <tr key={user._id}>
                <td>{user.firstName}</td>
@@ -74,6 +75,7 @@ class Shopping extends Component {
               </tr> 
             ))}
           </tbody>
+        </table>
       </div>
     );
   };
