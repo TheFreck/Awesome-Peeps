@@ -51,6 +51,9 @@ export default {
   getFriendsandItems: id => {
     return axios.get("/api/users/friends/" + id);
   },
+  getFriendsandItemsTwo: () => {
+    return axios.get("/api/users/shopping/");
+  },
   // getUserAndSharedItems: id => {
   //   return axios.get("api/users/shopping/" + id);
   // },

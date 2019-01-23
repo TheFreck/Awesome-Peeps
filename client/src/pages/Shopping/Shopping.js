@@ -10,14 +10,23 @@ class Shopping extends Component {
     users: [],
     item: "",
     price: "",
+    shoppingItems:[],
+    friends:[],
+    shoppingListItems:[]
   };
 
 
   componentDidMount() {
     console.log("shopping this.props: ", this.props);
-    API.getItems()
-    this.getPerson();
+    this.getShoppingListItems();
   }
+  getShoppingListItems = () => {
+    API.getFriendsandItemsTwo().then((itemData) =>{
+      console.log(itemData)
+      this.setState({ shoppingItems: itemData.data.shoppingListItems })
+    })
+    .catch((err) => console.log(err))
+  };
 
   getPerson = () => {
       API.getUsers()
@@ -66,13 +75,16 @@ class Shopping extends Component {
             </tr>
           </thead>
           <tbody>
-            {this.state.users.map(user =>(
-              <tr key={user._id}>
-               <td>{user.firstName}</td>
-               <td>{user.myItems}</td>
-               <td><FindOnlineBtn name={user.firstName} /></td>
-               <td><NevermindBtn name="Nevermind" click={() => console.log("click")} /></td>
-              </tr> 
+            {this.state.shoppingItems.map(item => (
+								<tr key={item._id}>
+									<td>{item.item}</td>
+									<td>{item.price}</td>
+                  <td>{item.occasion}</td>
+									<td>{item.comments}</td>
+                  <td>
+										<FindOnlineBtn name={item.item} />
+									</td>
+                  </tr>
             ))}
           </tbody>
         </table>
