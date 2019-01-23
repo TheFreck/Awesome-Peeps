@@ -13,6 +13,7 @@ class Start extends Component {
     isUser: true,
     user: this.props.state
   };
+  
   componentDidMount() {
     console.log("state: ", this.props);
   }
