@@ -151,9 +151,10 @@ class App extends Component {
               />
               <Route
                 exact
-                path="/Shopping"
-                render={() => (
+                path="/Shopping/:userId"
+                render={props => (
                   <Shopping 
+                  {...props}
                   auth={this.auth}
                   update={this.updateState} 
                   state={this.state} 

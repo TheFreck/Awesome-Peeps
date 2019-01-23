@@ -2,7 +2,7 @@
 import React, { Component } from "react";
 import API from "../../utils/API";
 import MainLogo from "../../components/MainLogo";
-// import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import FindOnlineBtn from "../../components/FindOnlineBtn";
 // import ResetPswd from "../../components/ResetPswd";
 
@@ -36,6 +36,7 @@ class FriendRegistry extends Component {
   // };
 //Render Friends Registry into a table
   render() {
+    let name= this.props.match.params.userId;
     console.log(this.props)
     return (
     <div> 
@@ -67,7 +68,10 @@ class FriendRegistry extends Component {
                       API.addToShoppingList(item._id)
                       API.removeFromGeneralList(item._id)
                       console.log("this is after it is added before the switch")
-                    }}>Add to List</button>
+                    }}>
+                      <Link to={"/Shopping/" + name}>Add To List
+                      </Link>
+                    </button>
 									</td>
                   <td>
 										<FindOnlineBtn name={item.item} />
