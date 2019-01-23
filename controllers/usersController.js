@@ -120,6 +120,9 @@ module.exports = {
       console.log(data)
       res.json(data)
     })
+  },
+  session: (req, res) => {
+    res.json(req.session.user)
   }
 };
 
