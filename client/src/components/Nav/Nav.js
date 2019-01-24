@@ -18,6 +18,7 @@ const Nav = (props) => {
         </button>
         <SignedInLinks 
           logout={props.goodbye}
+          userId={props.userId}
         />
         {/* <SignedOutLinks /> */}
       </div>
