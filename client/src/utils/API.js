@@ -73,10 +73,11 @@ export default {
   getItems: (id) => {
     console.log("THIS IS ID FROM API", id)
     return axios.get("/api/items/" + id);
-
+    
     // return axios.get("/api/items" + id);
   },
   getItem: id => {
+    console.log("THIS IS ID FROM API", id)
     return axios.get("/api/items/" + id);
   },
   // Deletes the item with the given id
