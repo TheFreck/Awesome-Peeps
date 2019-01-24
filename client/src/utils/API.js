@@ -51,6 +51,9 @@ export default {
   getFriendsandItems: id => {
     return axios.get("/api/users/friends/" + id);
   },
+  getFriendsandItemsTwo: () => {
+    return axios.get("/api/users/shopping/:id");
+  },
   // getUserAndSharedItems: id => {
   //   return axios.get("api/users/shopping/" + id);
   // },
@@ -78,6 +81,7 @@ export default {
   },
   // Deletes the item with the given id
   deleteItem: id => {
+    console.log("api deleteItem id: ", id);
     return axios.delete("/api/items/" + id);
   },
   updateItem: (itemId, updateItemData) => {
@@ -91,13 +95,13 @@ export default {
   },
   addToShoppingList: (itemId) => {
     return axios.post("/api/items/shoppingList", {itemId});
- },
- removeFromGeneralList: (itemId) => {
-   console.log("API remove from gen list itemId: ", itemId);
-   return axios.put("/api/items/shoppingLIst", {itemId});
- },
- session: () => {
-   return axios.get('/api/users/session')
- },
+  },
+  removeFromGeneralList: (itemId) => {
+    console.log("API remove from gen list itemId: ", itemId);
+    return axios.put("/api/items/shoppingLIst", {itemId});
+  },
+  session: () => {
+    return axios.get('/api/users/session')
+  },
 
 };

@@ -10,21 +10,44 @@ class Shopping extends Component {
     users: [],
     item: "",
     price: "",
+    shoppingItems:[],
+    friends:[],
+    shoppingListItems:[]
   };
-
 
   componentDidMount() {
     console.log("shopping this.props: ", this.props);
-    API.getItems()
+    this.getShoppingListItems()
+    this.getFriendsandItems()
     this.getPerson();
   }
 
+  getShoppingListItems = () => {
+    API.getFriendsandItemsTwo().then((itemData) =>{
+      console.log("itemData: ", itemData)
+      this.setState({ shoppingItems: itemData.data.shoppingListItems })
+      this.getItemDetails(itemData.data._id);
+    })
+    .catch((err) => console.log(err))
+  };
+
+
+  getFriendsandItems = () => {
+    API.getFriendsandItems(this.props.match.params.userId).then((friendData) => {
+      console.log("this is friendDAta: ", friendData)
+      this.setState({ friends: friendData.data.firstName })
+    })
+    .catch((err) => console.log(err))
+  };
+
+  
+
   getPerson = () => {
       API.getUsers()
-      .then(res =>
+      .then(res => {
         this.setState({ users: res.data, firstName: ""})
-      )
-        .catch(err => console.log(err));
+      })
+      .catch(err => console.log(err));
   }
 
   handleChange = event => {
@@ -50,6 +73,8 @@ class Shopping extends Component {
   // };
 
   render() {
+    console.log("this is this.state.friends: " ,this.state.friends)
+    let name = this.state.friends
     return (
       <div> 
         <div className="col s12 center-align top:60px">
@@ -66,13 +91,17 @@ class Shopping extends Component {
             </tr>
           </thead>
           <tbody>
-            {this.state.users.map(user =>(
-              <tr key={user._id}>
-               <td>{user.firstName}</td>
-               <td>{user.myItems}</td>
-               <td><FindOnlineBtn name={user.firstName} /></td>
-               <td><NevermindBtn name="Nevermind" click={() => console.log("click")} /></td>
-              </tr> 
+            {this.state.shoppingItems.map(item => (
+								<tr key={item._id}>
+                  <td>{name}</td>
+									<td>{item.item}</td>
+									<td>{item.price}</td>
+                  <td>{item.occasion}</td>
+									<td>{item.comments}</td>
+                  <td>
+										<FindOnlineBtn name={item.item} />
+									</td>
+                  </tr>
             ))}
           </tbody>
         </table>

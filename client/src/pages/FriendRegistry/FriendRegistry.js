@@ -2,7 +2,7 @@
 import React, { Component } from "react";
 import API from "../../utils/API";
 import MainLogo from "../../components/MainLogo";
-// import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import FindOnlineBtn from "../../components/FindOnlineBtn";
 // import ResetPswd from "../../components/ResetPswd";
 
@@ -19,8 +19,8 @@ class FriendRegistry extends Component {
     //this.props.match is the url bar and params.id is the users id
     getFriendsandItems = () => {
       API.getFriendsandItems(this.props.match.params.userId).then((friendData)=>{
-        // console.log(friendData)
-        this.setState({ friends: friendData.data.myItems})
+        console.log(friendData)
+        this.setState({ friends: friendData.data.myItems })
         })
       .catch((err) => console.log(err));
     };
@@ -36,7 +36,8 @@ class FriendRegistry extends Component {
   // };
 //Render Friends Registry into a table
   render() {
-    // console.log(this.state.friends)
+    let name= this.props.match.params.userId;
+    console.log(this.props)
     return (
     <div> 
       <div className="container">
@@ -46,6 +47,7 @@ class FriendRegistry extends Component {
       <form className="white">
         <div>
         <h3 className="grey-text text-darken-3">I'M A GREEDY BASTARD - HERE IS MY LIST</h3>
+
         <thead>
           <tr>
             <th>ITEM</th>
@@ -67,7 +69,10 @@ class FriendRegistry extends Component {
                       API.addToShoppingList(item._id)
                       API.removeFromGeneralList(item._id)
                       console.log("this is after it is added before the switch")
-                    }}>Add to List</button>
+                    }}>
+                      <Link to={"/Shopping/" + name}>Add To List
+                      </Link>
+                    </button>
 									</td>
                   <td>
 										<FindOnlineBtn name={item.item} />
@@ -75,6 +80,8 @@ class FriendRegistry extends Component {
 								</tr>
 							))}
 					</tbody>
+
+
         </div>
       </form>
       </div>

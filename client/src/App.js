@@ -49,14 +49,6 @@ class App extends Component {
 
   updateStateItem = updates => {
     console.log("app update state item loggedIn: ", updates);
-    let loggedIn;
-    if(!updates.loggedIn) {
-      console.log("logged in = false");
-      loggedIn = false;
-    }else{
-      console.log("logged in = true");
-      loggedIn = true;
-    }
     this.setState({
       ...this.state,
       uuid: updates.uuid,
@@ -67,7 +59,7 @@ class App extends Component {
       notes: updates.notes,
       myItems: [],
       friends: [],
-      loggedIn: false,
+      loggedIn: updates.loggedIn,
       account_key: ""
     });
   };
@@ -151,9 +143,10 @@ class App extends Component {
               />
               <Route
                 exact
-                path="/Shopping"
-                render={() => (
+                path="/Shopping/:userId"
+                render={props => (
                   <Shopping 
+                  {...props}
                   auth={this.auth}
                   update={this.updateState} 
                   state={this.state} 

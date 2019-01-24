@@ -15,9 +15,9 @@ function checkAuth(req, res, next) {
 
 router
   .route("/shopping/:id")
-  .post(usersController.login)
+  // .post(usersController.login)
   .get(checkAuth, usersController.findShoppingListItems)
-  .put(checkAuth, usersController.updateUser)
+  // .put(checkAuth, usersController.updateUser)
   // .delete(usersController.remove);
 
 router 

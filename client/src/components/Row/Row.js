@@ -152,8 +152,7 @@ class Row extends Component {
                   e.preventDefault()
                   this.deleteItem(this.state._id)}
                 }
-            
-              >
+               >
                 Delete
               </button>
               <button
