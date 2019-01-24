@@ -17,7 +17,9 @@ class Shopping extends Component {
 
   componentDidMount() {
     console.log("shopping this.props: ", this.props);
-    this.getShoppingListItems();
+    this.getShoppingListItems()
+    this.getFriendsandItems()
+    this.getPerson();
   }
 
   getShoppingListItems = () => {
@@ -31,13 +33,16 @@ class Shopping extends Component {
     .catch((err) => console.log(err))
   };
 
-  getItemDetails = id => {
-    console.log("getItemDetails id: ", id);
-    API.getItem(id)
-    .then(res => {
-      console.log("getItemDetails res: ", res);
+
+  getFriendsandItems = () => {
+    API.getFriendsandItems(this.props.match.params.userId).then((friendData) => {
+      console.log("this is friendDAta: ", friendData)
+      this.setState({ friends: friendData.data.firstName })
     })
-  }
+    .catch((err) => console.log(err))
+  };
+
+  
 
   getPerson = () => {
       API.getUsers()
@@ -70,6 +75,8 @@ class Shopping extends Component {
   // };
 
   render() {
+    console.log("this is this.state.friends: " ,this.state.friends)
+    let name = this.state.friends
     return (
       <div> 
         <div className="col s12 center-align top:60px">
@@ -88,6 +95,7 @@ class Shopping extends Component {
           <tbody>
             {this.state.shoppingItems.map(item => (
 								<tr key={item._id}>
+                  <td>{name}</td>
 									<td>{item.item}</td>
 									<td>{item.price}</td>
                   <td>{item.occasion}</td>
