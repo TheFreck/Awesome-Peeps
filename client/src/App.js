@@ -60,7 +60,8 @@ class App extends Component {
       myItems: [],
       friends: [],
       loggedIn: updates.loggedIn,
-      account_key: ""
+      account_key: "",
+      account_key2: ""
     });
   };
 

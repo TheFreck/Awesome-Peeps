@@ -1,7 +1,7 @@
 import React from "react";
 
 const Signup = props => {
-  // console.log("signup props: ", props);
+  console.log("signup props: ", props);
   return (
     <div className="container">
       <form onSubmit={this.handleSubmit} className="white">
@@ -69,7 +69,7 @@ const Signup = props => {
                         className="btn pink lighten-1 z-depth-2"
                         name="Login"
                         type="submit"
-                        value="Login"
+                        value="Go To Login"
                         onClick={props.toggleStart}
                       />
                     </div>
