@@ -116,6 +116,7 @@ module.exports = {
     // console.log("this is req. params", req.params)
     db.User.findOne()
     .populate("shoppingListItems")
+    .populate("userItem")
     .then((data) =>{
       console.log(data)
       res.json(data)

@@ -109,8 +109,12 @@ class Create extends Component {
       firstName: userdata.firstName,
       lastName: userdata.lastName
     })
-      .then(res => {
-        alert("Your list has been shared with " + userdata.firstName);
+      .then((res) => {
+        // e.preventDefault();
+      
+        // alert("Your list has been shared with " + userdata.firstName);
+        console.log("THIS IS RES.DATA", res.data)
+       
         this.setState({ sharewithMe: res.data });
       })
       .catch(err => console.log(err));

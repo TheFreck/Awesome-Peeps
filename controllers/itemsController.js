@@ -19,6 +19,7 @@ module.exports = {
   },
   create: function(req, res) {
     //create item then takes the item id and adds it to the users myItems column
+    req.body.userItem = req.session.user._id
     db.Item
       .create(req.body)
       .then((dbModel) => {
