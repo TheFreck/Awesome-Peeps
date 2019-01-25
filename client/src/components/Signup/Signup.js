@@ -1,13 +1,13 @@
 import React from "react";
 
 const Signup = props => {
-  // console.log("signup props: ", props);
+  console.log("signup props: ", props);
   return (
     <div className="container">
       <form onSubmit={this.handleSubmit} className="white">
         <h5 className="grey-text text-darken-3">Sign Up</h5>
         <div className="input-field">
-          <label htmlFor="name">Screen Name: </label>
+          <label htmlFor="screenName">Screen Name: </label>
           <input
             type="text"
             name="screenName"
@@ -69,7 +69,7 @@ const Signup = props => {
                         className="btn pink lighten-1 z-depth-2"
                         name="Login"
                         type="submit"
-                        value="Login"
+                        value="Go To Login"
                         onClick={props.toggleStart}
                       />
                     </div>

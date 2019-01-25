@@ -3,6 +3,7 @@ import React from "react";
 import ResetPswd from "../ResetPswd";
 
 const Login = props => {
+  console.log("Login page props: ", props);
   return (
     <div>
       {props.state.resetPasswordBoolean ? (

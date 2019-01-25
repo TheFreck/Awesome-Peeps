@@ -14,7 +14,14 @@ const Nav = props => {
             <img className="responsive-img" src={Mainlogo} alt="main logo" />
           </Link>
         </button>
+<<<<<<< HEAD
         <SignedInLinks logout={props.goodbye} />
+=======
+        <SignedInLinks 
+          logout={props.goodbye}
+          userId={props.userId}
+        />
+>>>>>>> 64503d2260f17f6c64cfc4a3803eb9c5da5b4498
         {/* <SignedOutLinks /> */}
       </div>
     </nav>
