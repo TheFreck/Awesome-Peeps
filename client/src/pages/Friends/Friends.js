@@ -36,7 +36,7 @@ class Friends extends Component {
             {users.map(users => (
               <button key={users._id} type="submit" className="btn btn-info">
                 <Link to={"/FriendRegistry/" + users._id}>
-                  {users.firstName + users.lastName}
+                  {users.firstName + "  " + users.lastName}
                 </Link>
               </button>
             ))}

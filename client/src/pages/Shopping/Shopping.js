@@ -86,7 +86,9 @@ class Shopping extends Component {
             </tr>
           </thead>
           <tbody>
+
             {this.state.shoppingItems.map(item => (
+<<<<<<< HEAD
               <tr key={item._id}>
                 <td>{name}</td>
                 <td>{item.item}</td>
@@ -97,6 +99,19 @@ class Shopping extends Component {
                   <FindOnlineBtn name={item.item} />
                 </td>
               </tr>
+=======
+								<tr key={item._id}>
+                  <td>{name}</td>
+									<td>{item.item}</td>
+									<td>{item.price}</td>
+                  <td>{item.occasion}</td>
+									<td>{item.comments}</td>
+
+                  <td>
+										<FindOnlineBtn name={itemData.itemData} />
+									</td>
+                  </tr>
+>>>>>>> ebc799c7c9bfbd54cf8f613d028c523dedf5ecfd
             ))}
           </tbody>
         </table>

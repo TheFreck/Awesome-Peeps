@@ -13,6 +13,7 @@ class FriendRegistry extends Component {
   };
 
   componentDidMount() {
+    console.log("registry this.props: ", this.props);
     this.getFriendsandItems();
   }
   //this.props.match is the url bar and params.id is the users id
@@ -25,15 +26,23 @@ class FriendRegistry extends Component {
       .catch(err => console.log(err));
   };
 
-  // //Add item to shoppingListItems array for Shopping page
-  // addShoppingListItems = () => {
-  //   API.getShoppingListItems()
-  //     .then((res) => {
-  //       this.setState({users: res.data})
-  //     .catch((err) => console.log(err));
-  //   }
+  handleChange = event => {
+    event.preventDefault();
+    const { name, value } = event.target;
+    this.setState({
+      ...this.state,
+      user: {
+        ...this.state.user,
+        [name]: value
+      }
+    });
+    this.props.updateState({
+      ...this.state,
+      key: name,
+      value: value
+    });
+  };
 
-  // };
   //Render Friends Registry into a table
   render() {
     let name = this.props.match.params.userId;
@@ -73,7 +82,20 @@ class FriendRegistry extends Component {
                     </button>
                   </td>
                   <td>
-                    <FindOnlineBtn name={item.item} />
+                    <a
+                      href={
+                        "http://www.google.com/search?source=hp&ei=1XZBXJKpEammjwSG4KGgBQ&q=" +
+                        this.props.item
+                      }
+                      target="blank"
+                    >
+                      <button
+                        type="submit"
+                        className="btn pink lighten-1 z-depth-2"
+                      >
+                        Find Online
+                      </button>
+                    </a>
                   </td>
                 </tr>
               ))}
