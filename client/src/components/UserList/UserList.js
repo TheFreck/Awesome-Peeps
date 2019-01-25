@@ -4,7 +4,7 @@ const UserList = props => (
   <div className="container text-center">
 
     <div className="col s12">
-      <button
+      <button className="btn"
         onClick={(e) => {
           e.preventDefault()
           props.selectUser({
