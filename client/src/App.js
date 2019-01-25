@@ -25,6 +25,7 @@ import API from "./utils/API";
 const initialState = {
   uuid: "",
   account_key: "",
+  account_key2: "",
   sessionId: "",
   email: "",
   firstName: "",
@@ -60,7 +61,8 @@ class App extends Component {
       myItems: [],
       friends: [],
       loggedIn: updates.loggedIn,
-      account_key: ""
+      account_key: "",
+      account_key2: ""
     });
   };
 
@@ -105,6 +107,7 @@ class App extends Component {
           <div>
             <Nav 
               goodbye={this.logout}
+              userId={this.state.uuid}
             />
             <Switch >
               <Route

@@ -26,7 +26,9 @@ class Shopping extends Component {
     API.getFriendsandItemsTwo().then((itemData) =>{
       console.log("itemData: ", itemData)
       this.setState({ shoppingItems: itemData.data.shoppingListItems })
-      this.getItemDetails(itemData.data._id);
+      for(let i=0; i<this.state.shoppingItems.length; i++){
+        this.getItemDetails(this.state.shoppingItems[i]);
+      }
     })
     .catch((err) => console.log(err))
   };

@@ -18,13 +18,13 @@ const SignedInLinks = (props) => {
 				<NavLink to="/Create"> Wishlist </NavLink>
 			</li>
 			<li>
-				<NavLink to="/Shopping"> Shopping List</NavLink>
+				<NavLink to={`/Shopping/${props.userId}`}> Shopping List</NavLink>
 			</li>
 			<li>
 				<NavLink to="/Friends"> Friends List</NavLink>
 			</li>
 			<li>
-				<NavLink to="/FriendRegistry"> Friends Registry</NavLink>
+				<NavLink to={`/FriendRegistry/${props.userId}`}> Friends Registry</NavLink>
 			</li>
 			<li>
 				<NavLink to="/Profile" className="btn btn-floating yellow darken-2">

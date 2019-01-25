@@ -51,6 +51,7 @@ class Start extends Component {
             console.log("finished form submit false: ", this.state.user);
           }
           console.log("finished form submit anyway:  ", this.state.user);
+          this.login(event);
         })
         .catch(err => console.log("signup server err: ", err));
     } else {
@@ -92,6 +93,7 @@ class Start extends Component {
             pic: res.data.user.pic,
             notes: res.data.user.notes,
             account_key: "",
+            account_key2: "",
             loggedIn: true
           }
         };
@@ -172,20 +174,15 @@ class Start extends Component {
                 reset={this.sendResetEmail}
                 toggleStart={this.toggleStart}
               />
-              {/* <Button click={this.toggleStart} name="Signup Instead" /> */}
             </Container>
           ) : (
             // not a user so let's sign up
             <Container fluid>
-              {/* <Nav 
-                toggleStart={this.toggleStart}
-              /> */}
               <Signup
                 state={this.state}
                 handleChange={this.handleChange}
                 submit={this.signup}
               />
-              {/* <Button click={this.toggleStart} name="Login Instead" /> */}
             </Container>
           )}
         </div>
