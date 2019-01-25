@@ -114,9 +114,15 @@ module.exports = {
     // console.log("find shopping list items is running!")
     // console.log("this is our req.session", req.session)
     // console.log("this is req. params", req.params)
-    db.User.findOne()
-    .populate("shoppingListItems")
-    .populate("userItem")
+    db.User.findOne({_id: req.session.user._id})
+    .populate({
+      path: "shoppingListItems",
+      populate: {
+        path: "userItem",
+        model: "User"
+      }
+    })
+    // .populate("userItem")
     .then((data) =>{
       console.log(data)
       res.json(data)

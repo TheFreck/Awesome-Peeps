@@ -39,7 +39,6 @@ const itemSchema = new Schema({
     ref: "User"
   }
   
-  
 })
 
 const Item = mongoose.model("Item", itemSchema);
