@@ -2,18 +2,19 @@ import React from "react";
 
 const UserList = props => (
   <div className="container text-center">
-
     <div className="col s12">
       <button
-        onClick={(e) => {
-          e.preventDefault()
+        className="btn"
+        onClick={e => {
+          e.preventDefault();
           props.selectUser({
             uuid: props.uuid,
             firstName: props.firstName
-          })
+          });
         }}
         value={props.uuid}
-        data-id={props._id}>
+        data-id={props._id}
+      >
         {props.firstName} {props.lastName}
       </button>
     </div>
