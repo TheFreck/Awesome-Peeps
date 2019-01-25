@@ -23,17 +23,16 @@ form {
   text-transform: capitalize;
 }
 
-/* .create-page {
-	background-color: #1976d2;
-} */
 form-button,
+button,
 .btn,
-.user-button,
-.btn-info {
+.user-button {
   margin: 5px 10px;
   font-family: "Permanent Marker", cursive;
   text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black,
     1px 1px 0 black;
+  font-size: 16px;
+  border: 2px solid white;
 }
 
 u {
@@ -59,13 +58,6 @@ u {
   background-color: #ec407a;
   border: 2px solid white;
 }
-/* input[type="text"]:not(.browser-default):focus:not([readonly]),
-input[type="email"]:not(.browser-default):focus:not([readonly]),
-input[type="password"]:not(.browser-default):focus:not([readonly]),
-textarea.materialize-textarea:focus:not([readonly]) {
-  border-color: #ec407a;
-  box-shadow: none;
-} */
 
 .card-title {
   font-family: "Permanent Marker", cursive;
@@ -79,14 +71,12 @@ textarea.materialize-textarea:focus:not([readonly]) {
   border-radius: 25px;
   z-index: 2;
 }
-
-/* Landing Page Showcase Container */
-.main-header {
-  background: url(../dist/Images/landingpg.jpg) no-repeat;
-  background-position: center;
-  min-height: 550px;
+/* general cards */
+.card-title {
+  font-size: 30px;
 }
 
+/* Landing page container  */
 .showcase-container {
   padding: 0px;
   margin: 80px 20px;
@@ -100,6 +90,14 @@ textarea.materialize-textarea:focus:not([readonly]) {
   font-weight: bold;
 }
 
+/* Landing Page Showcase Container */
+.main-header {
+  background: url(../dist/Images/landingpg.jpg) no-repeat;
+  background-position: center;
+  min-height: 550px;
+}
+
+/* Landing page img buttons */
 .btn-friend {
   margin: 0;
   padding: 0;
@@ -109,7 +107,30 @@ textarea.materialize-textarea:focus:not([readonly]) {
   align-content: right;
   z-index: 2;
 }
+.show-on-large {
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  width: 850px;
+  border: none;
+  align-content: right;
+  z-index: 2;
+}
 
+/* nav bar styling */
+.nav-wrapper {
+  font-family: "Permanent Marker", cursive;
+  text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black,
+    1px 1px 0 black;
+}
+
+/* nav link hover effect */
+nav ul li:hover {
+  background-color: #fed821;
+  color: dimgrey;
+}
+
+/* nav bar logo (left) */
 .brand-logo {
   margin: 0;
   padding: 0;
@@ -118,16 +139,72 @@ textarea.materialize-textarea:focus:not([readonly]) {
   border: none;
 }
 
-.nav-wrapper {
-  font-family: "Permanent Marker", cursive;
-  text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black,
-    1px 1px 0 black;
+/* login card styling */
+.login-card {
+  padding: 40px;
+  width: 400px;
+  border-radius: 25px;
+  background-color: #f7f7f7;
+  margin: 60px auto 10px;
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
 }
 
-.card-title {
-  font-size: 30px;
+.login-card h1 {
+  font-weight: 100;
+  text-align: center;
+  font-size: 2.3em;
 }
-nav ul li:hover {
-  background-color: #fed821;
-  color: dimgrey;
+
+.login-card input[type="submit"] {
+  width: 100%;
+  display: block;
+  margin-bottom: 10px;
+  position: relative;
+}
+
+.login-card input[type="text"],
+input[type="password"] {
+  height: 44px;
+  font-size: 16px;
+  width: 100%;
+  margin-bottom: 10px;
+  -webkit-appearance: none;
+  background: #fff;
+  border: 1px solid #d9d9d9;
+  border-top: 1px solid #c0c0c0;
+  /* border-radius: 2px; */
+  padding: 0 8px;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+}
+
+.login-card input[type="text"]:hover,
+input[type="password"]:hover {
+  border: 1px solid #b9b9b9;
+  border-top: 1px solid #a0a0a0;
+  -moz-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+  -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.login {
+  text-align: center;
+  font-size: 14px;
+  font-family: "Arial", sans-serif;
+  font-weight: 700;
+  height: 36px;
+  padding: 0 8px;
+  /* border-radius: 3px; */
+  /* -webkit-user-select: none;
+  user-select: none; */
+}
+
+.login-card a:hover {
+  opacity: 1;
+}
+
+.login-help {
+  text-align: center;
+  font-size: 12px;
 }

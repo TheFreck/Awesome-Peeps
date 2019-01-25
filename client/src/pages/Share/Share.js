@@ -166,7 +166,7 @@ class Share extends Component {
           <h4>
             <u>Who do you want to share your list with?</u>
           </h4>
-          <div className="user-button">{this.renderUsers()}</div>
+          <button>{this.renderUsers()}</button>
         </form>
       </div>
     );
