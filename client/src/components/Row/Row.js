@@ -15,6 +15,15 @@ class Row extends Component {
       updateItem: !this.state.updateItem
     });
   }
+
+  deleteItem = (id) => {
+    API.deleteItem(id)
+        // .then(res => this.getSavedItems())
+        .then((res) => this.props.userAndItems())
+        .catch((err) => {
+            console.log(err);
+        });
+};
   handleUpdatingItem = (e) => {
     e.preventDefault();
     // console.log("update button clicked");
@@ -45,14 +54,12 @@ class Row extends Component {
       <div>
         <div className="container">
           <div className="card">
-            <div className="card-header">
-            {this.state.item}
-            </div>
+            
             <div className="card-body">
               {
                 this.state.updateItem && (
                   <div>
-                    <h5 className="grey-text text-darken-3">Update Your Item <span onClick={this.openUpdateForm}>X</span></h5>
+                    <h5 className="grey-text text-darken-3">Update Your Item <span onClick={this.openUpdateForm}>--- close ---</span></h5>
                     <div className="form-group">
                       <label htmlFor="item">
                         <h6>Item</h6>
@@ -125,6 +132,9 @@ class Row extends Component {
                   </div>
                 )
               }
+              <div className="card-header">
+            {this.state.item}
+            </div>
               {this.state.url}
               <br></br>
               ${this.state.price}
@@ -138,8 +148,11 @@ class Row extends Component {
             <span>
               <button
                 className="btn btn-info ml-1"
-                onClick={() => this.state.deleteItem(this.state._id)}
-              >
+                onClick={(e) => {
+                  e.preventDefault()
+                  this.deleteItem(this.state._id)}
+                }
+               >
                 Delete
               </button>
               <button

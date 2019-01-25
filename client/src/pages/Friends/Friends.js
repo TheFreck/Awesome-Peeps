@@ -25,6 +25,7 @@ class Friends extends Component {
   //-------------Rendering components to the Friends page------------------------
   render() {
     let users = this.state.users;
+    console.log("friends users: ", users);
     return (
       <div className="container">
         <div className="Row">
@@ -36,7 +37,7 @@ class Friends extends Component {
           </div>
           <div>
             {users.map(users => (
-              <button type="submit" className="btn btn-info">
+              <button key={users._id} type="submit" className="btn btn-info">
                 <Link to={"/FriendRegistry/" + users._id}>
                   {users.firstName + "  " + users.lastName}
                 </Link>

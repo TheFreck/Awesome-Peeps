@@ -21,7 +21,7 @@ class FriendRegistry extends Component {
     getFriendsandItems = () => {
       API.getFriendsandItems(this.props.match.params.userId).then((friendData)=>{
         console.log(friendData)
-        this.setState({ friends: friendData.data.myItems})
+        this.setState({ friends: friendData.data.myItems })
         })
       .catch((err) => console.log(err));
     };
@@ -45,6 +45,7 @@ class FriendRegistry extends Component {
   
 //Render Friends Registry into a table
   render() {
+    let name= this.props.match.params.userId;
     console.log(this.props)
     return (
     <div> 
@@ -55,6 +56,7 @@ class FriendRegistry extends Component {
       <form className="white">
         <div>
         <h3 className="grey-text text-darken-3">I'M A GREEDY BASTARD - HERE IS MY LIST</h3>
+
         <thead>
           <tr>
             <th>ITEM</th>
@@ -76,7 +78,10 @@ class FriendRegistry extends Component {
                       API.addToShoppingList(item._id)
                       API.removeFromGeneralList(item._id)
                       console.log("this is after it is added before the switch")
-                    }}>Add to List</button>
+                    }}>
+                      <Link to={"/Shopping/" + name}>Add To List
+                      </Link>
+                    </button>
 									</td>
                   <td>
                     <a href={"http://www.google.com/search?source=hp&ei=1XZBXJKpEammjwSG4KGgBQ&q=" + this.props.item } target="blank" ><button type="submit" className="btn pink lighten-1 z-depth-2">Find Online</button></a>
@@ -84,6 +89,8 @@ class FriendRegistry extends Component {
 								</tr>
 							))}
 					</tbody>
+
+
         </div>
       </form>
       </div>

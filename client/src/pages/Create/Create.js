@@ -84,8 +84,9 @@ class Create extends Component {
     };
     //Share registry with another user
     shareRegistry = (event) => {
-        this.setState({ shared: true } )
         event.preventDefault();
+        this.setState({ shared: true } )
+        
         // console.log('Share with user');
         API.getUsers({
             firstName: this.state.firstName,
@@ -172,15 +173,7 @@ class Create extends Component {
                 <form className="white">
                     
                     <h4>Who do you want to share your list with?</h4>
-                    <UserList />
-                    {/* <input
-                    onChange={this.handleSearch}
-                    name="search"
-                    value={this.state.search}
-                    type="text"
-                    className="form-control"
-                    id="search"
-                    ></input> */}
+                   
                     <div>{this.renderUsers()}</div>
                 </form>
             </div>

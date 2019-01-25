@@ -15,25 +15,39 @@ class Shopping extends Component {
     shoppingListItems:[]
   };
 
-
   componentDidMount() {
     console.log("shopping this.props: ", this.props);
-    this.getShoppingListItems();
+    this.getShoppingListItems()
+    this.getFriendsandItems()
+    this.getPerson();
   }
+
   getShoppingListItems = () => {
     API.getFriendsandItemsTwo().then((itemData) =>{
-      console.log(itemData)
+      console.log("itemData: ", itemData)
       this.setState({ shoppingItems: itemData.data.shoppingListItems })
+      this.getItemDetails(itemData.data._id);
     })
     .catch((err) => console.log(err))
   };
 
+
+  getFriendsandItems = () => {
+    API.getFriendsandItems(this.props.match.params.userId).then((friendData) => {
+      console.log("this is friendDAta: ", friendData)
+      this.setState({ friends: friendData.data.firstName })
+    })
+    .catch((err) => console.log(err))
+  };
+
+  
+
   getPerson = () => {
       API.getUsers()
-      .then(res =>
+      .then(res => {
         this.setState({ users: res.data, firstName: ""})
-      )
-        .catch(err => console.log(err));
+      })
+      .catch(err => console.log(err));
   }
 
   handleChange = event => {
@@ -59,6 +73,8 @@ class Shopping extends Component {
   // };
 
   render() {
+    console.log("this is this.state.friends: " ,this.state.friends)
+    let name = this.state.friends
     return (
       <div> 
         <div className="col s12 center-align top:60px">
@@ -75,13 +91,15 @@ class Shopping extends Component {
             </tr>
           </thead>
           <tbody>
-            {this.state.shoppingItems.map(itemData => (
-								<tr key={itemData._id}>
-                  <td>{itemData.screenName}</td>
-									<td>{itemData.item}</td>
-									<td>{itemData.price}</td>
-                  <td>{itemData.occasion}</td>
-									<td>{itemData.comments}</td>
+
+            {this.state.shoppingItems.map(item => (
+								<tr key={item._id}>
+                  <td>{name}</td>
+									<td>{item.item}</td>
+									<td>{item.price}</td>
+                  <td>{item.occasion}</td>
+									<td>{item.comments}</td>
+
                   <td>
 										<FindOnlineBtn name={itemData.itemData} />
 									</td>
