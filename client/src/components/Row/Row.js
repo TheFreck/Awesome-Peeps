@@ -59,8 +59,8 @@ class Row extends Component {
                   <span onClick={this.openUpdateForm}>
                     <h5 className="most-headers">
                       Update Your Item{" "}
-                      <a class="btn-floating btn-med waves-effect waves-light red darken-3">
-                        <i class="material-icons right">close</i>
+                      <a className="btn-floating btn-med waves-effect waves-light red darken-3">
+                        <i className="material-icons right">close</i>
                         <br />
                       </a>
                     </h5>

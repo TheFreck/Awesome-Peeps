@@ -44,7 +44,7 @@ router
   .route("/:id")
   .post(usersController.login)
   .get(checkAuth, usersController.findUserAndItems)
-  .put(checkAuth, usersController.updateUser)
+  .put(usersController.updateUser)
   .delete(checkAuth, usersController.remove);
   
 router

@@ -68,6 +68,7 @@ export default {
   },
   //updates user profile with given id
   updateUser: userData => {
+    // debugger;
     return axios.put("/api/share/" + userData.uuid, userData)
   },
   getItems: (id) => {

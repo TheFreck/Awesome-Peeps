@@ -15,15 +15,15 @@ function checkAuth(req, res, next) {
 // Matches with "/api/share"
 router
   .route("/")
-  .get(checkAuth, shareController.findAll)
-  .post(checkAuth, shareController.create)
-  .put(checkAuth, shareController.update);
+  .get(shareController.findAll)
+  .post(shareController.create)
+  .put(shareController.update);
 
 // Matches with "/api/share/:id"
 router
   .route("/:id")
-  .get(checkAuth, shareController.findAll)
-  .put(checkAuth, shareController.updateUser)
+  .get(shareController.findAll)
+  .put(shareController.updateUser)
 //   .get(usersController.findUserAndItems)
 //   .put(usersController.updateUser)
 //   .delete(usersController.remove);
