@@ -65,11 +65,12 @@ class Shopping extends Component {
       value: value
     });
   };
-  // deleteItem = id => {
-  //   API.deleteItem(id)
-  //     .then(res => this.getItems())
-  //     .catch(err => console.log(err));
-  // };
+  deleteItem = id => {
+    API.deleteItem(id)
+      .then(res => 
+        this.getShoppingListItems())
+      .catch(err => console.log(err));
+  };
 
   render() {
     console.log("this is this.state.friends: ", this.state.friends);
@@ -96,6 +97,9 @@ class Shopping extends Component {
                 <td>{item.comments}</td>
                 <td>
                   <FindOnlineBtn name={item.item} />
+                </td>
+                <td>
+                  <button className="btn pink lighten-1 z-depth-2" onClick={() => this.deleteItem(item._id)}>Purchase</button>
                 </td>
               </tr>
             ))}

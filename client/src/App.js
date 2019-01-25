@@ -142,7 +142,7 @@ class App extends Component {
               />
               <Route
                 exact
-                path="/Shopping/:userId"
+                path="/Shopping"
                 render={props => (
                   <Shopping
                     {...props}

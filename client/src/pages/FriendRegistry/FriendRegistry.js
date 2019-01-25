@@ -78,7 +78,7 @@ class FriendRegistry extends Component {
                         );
                       }}
                     >
-                      <Link to={"/Shopping/" + name}>Add To List</Link>
+                      Add to List
                     </button>
                   </td>
                   <td>
