@@ -31,8 +31,13 @@ const itemSchema = new Schema({
     type: Boolean,
     require: true,
     default: false
+  },
+  userItem: {
+    // Store ObjectIds in the array
+    type: Schema.Types.ObjectId,
+    // The ObjectIds will refer to the ids in the Note model
+    ref: "User"
   }
-  
   
 })
 
