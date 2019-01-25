@@ -4,9 +4,7 @@
   "main": "server.js",
   "proxy": "http://localhost:3001",
   "scripts": {
-    "start": "node server.js",
-    "build": "cd client && npm run build",
-    "heroku-postbuild": "npm run build"
+    "start": "node server.js"
   },
   "author": "",
   "license": "ISC",
