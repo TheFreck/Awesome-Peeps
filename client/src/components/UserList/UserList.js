@@ -5,10 +5,13 @@ const UserList = props => (
 
     <div className="col s12">
       <button
-        onClick={() => props.selectUser({
-          uuid: props.uuid,
-          firstName: props.firstName
-        })}
+        onClick={(e) => {
+          e.preventDefault()
+          props.selectUser({
+            uuid: props.uuid,
+            firstName: props.firstName
+          })
+        }}
         value={props.uuid}
         data-id={props._id}>
         {props.firstName} {props.lastName}
