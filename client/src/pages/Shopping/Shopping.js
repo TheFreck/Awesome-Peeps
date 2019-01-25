@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import API from "../../utils/API";
-import MainLogo from "../../components/MainLogo";
 import FindOnlineBtn from "../../components/FindOnlineBtn";
 import NevermindBtn from "../../components/NevermindBtn";
 
@@ -10,45 +9,44 @@ class Shopping extends Component {
     users: [],
     item: "",
     price: "",
-    shoppingItems:[],
-    friends:[],
-    shoppingListItems:[]
+    shoppingItems: [],
+    friends: [],
+    shoppingListItems: []
   };
 
   componentDidMount() {
     console.log("shopping this.props: ", this.props);
-    this.getShoppingListItems()
-    this.getFriendsandItems()
+    this.getShoppingListItems();
+    this.getFriendsandItems();
     this.getPerson();
   }
 
   getShoppingListItems = () => {
-    API.getFriendsandItemsTwo().then((itemData) =>{
-      console.log("itemData: ", itemData)
-      this.setState({ shoppingItems: itemData.data.shoppingListItems })
-      this.getItemDetails(itemData.data._id);
-    })
-    .catch((err) => console.log(err))
-  };
-
-
-  getFriendsandItems = () => {
-    API.getFriendsandItems(this.props.match.params.userId).then((friendData) => {
-      console.log("this is friendDAta: ", friendData)
-      this.setState({ friends: friendData.data.firstName })
-    })
-    .catch((err) => console.log(err))
-  };
-
-  
-
-  getPerson = () => {
-      API.getUsers()
-      .then(res => {
-        this.setState({ users: res.data, firstName: ""})
+    API.getFriendsandItemsTwo()
+      .then(itemData => {
+        console.log("itemData: ", itemData);
+        this.setState({ shoppingItems: itemData.data.shoppingListItems });
+        this.getItemDetails(itemData.data._id);
       })
       .catch(err => console.log(err));
-  }
+  };
+
+  getFriendsandItems = () => {
+    API.getFriendsandItems(this.props.match.params.userId)
+      .then(friendData => {
+        console.log("this is friendDAta: ", friendData);
+        this.setState({ friends: friendData.data.firstName });
+      })
+      .catch(err => console.log(err));
+  };
+
+  getPerson = () => {
+    API.getUsers()
+      .then(res => {
+        this.setState({ users: res.data, firstName: "" });
+      })
+      .catch(err => console.log(err));
+  };
 
   handleChange = event => {
     event.preventDefault();
@@ -64,8 +62,8 @@ class Shopping extends Component {
       ...this.state,
       key: name,
       value: value
-    })
-  }
+    });
+  };
   // deleteItem = id => {
   //   API.deleteItem(id)
   //     .then(res => this.getItems())
@@ -73,14 +71,11 @@ class Shopping extends Component {
   // };
 
   render() {
-    console.log("this is this.state.friends: " ,this.state.friends)
-    let name = this.state.friends
+    console.log("this is this.state.friends: ", this.state.friends);
+    let name = this.state.friends;
     return (
-      <div> 
-        <div className="col s12 center-align top:60px">
-          <MainLogo />
-        </div>
-        <table>
+      <div className="container">
+        <table className="most-headers">
           <thead>
             <tr>
               <th>GREEDY BASTARD</th>
@@ -92,22 +87,22 @@ class Shopping extends Component {
           </thead>
           <tbody>
             {this.state.shoppingItems.map(item => (
-								<tr key={item._id}>
-                  <td>{name}</td>
-									<td>{item.item}</td>
-									<td>{item.price}</td>
-                  <td>{item.occasion}</td>
-									<td>{item.comments}</td>
-                  <td>
-										<FindOnlineBtn name={item.item} />
-									</td>
-                  </tr>
+              <tr key={item._id}>
+                <td>{name}</td>
+                <td>{item.item}</td>
+                <td>{item.price}</td>
+                <td>{item.occasion}</td>
+                <td>{item.comments}</td>
+                <td>
+                  <FindOnlineBtn name={item.item} />
+                </td>
+              </tr>
             ))}
           </tbody>
         </table>
       </div>
     );
-  };
-};
+  }
+}
 
 export default Shopping;

@@ -28,10 +28,7 @@ class Friends extends Component {
     console.log("friends users: ", users);
     return (
       <div className="container">
-        <div className="Row">
-          <div className="col s12 center-align top:60px">
-            <MainLogo />
-          </div>
+        <form className="most-headers">
           <div>
             <h3>WHICH GREEDY BASTARD DO YOU WANT TO BUY FOR?</h3>
           </div>
@@ -44,7 +41,7 @@ class Friends extends Component {
               </button>
             ))}
           </div>
-        </div>
+        </form>
       </div>
     );
   }

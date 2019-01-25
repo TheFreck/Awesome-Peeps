@@ -17,29 +17,70 @@ form {
   padding: 20px;
   margin-top: 60px;
   border-radius: 25px;
+  font-size: 16px;
   border: 2px solid #ec407a;
+  background-color: white;
+  text-transform: capitalize;
 }
 
+/* .create-page {
+	background-color: #1976d2;
+} */
 form-button,
-.btn {
+.btn,
+.user-button,
+.btn-info {
   margin: 5px 10px;
   font-family: "Permanent Marker", cursive;
   text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black,
     1px 1px 0 black;
 }
-.grey-text {
-  margin: 5px 10px;
-  font-family: "Permanent Marker", cursive;
+
+u {
+  border-bottom: 1px dotted #000;
+  text-decoration: none;
 }
 
-input[type="text"]:not(.browser-default):focus:not([readonly]),
+.inverted-header {
+  font-family: "Permanent Marker", cursive;
+  text-align: center;
+  color: white;
+  font-size: 30px;
+}
+
+.most-headers {
+  font-family: "Permanent Marker", cursive;
+  text-align: center;
+  color: #ec407a;
+  font-size: 30px;
+}
+
+.registry-form {
+  background-color: #ec407a;
+  border: 2px solid white;
+}
+/* input[type="text"]:not(.browser-default):focus:not([readonly]),
 input[type="email"]:not(.browser-default):focus:not([readonly]),
 input[type="password"]:not(.browser-default):focus:not([readonly]),
 textarea.materialize-textarea:focus:not([readonly]) {
   border-color: #ec407a;
   box-shadow: none;
+} */
+
+.card-title {
+  font-family: "Permanent Marker", cursive;
+  font-weight: bold;
+  text-transform: capitalize;
+  padding-top: 10px;
+  padding-left: 10px;
 }
 
+.card {
+  border-radius: 25px;
+  z-index: 2;
+}
+
+/* Landing Page Showcase Container */
 .main-header {
   background: url(../dist/Images/landingpg.jpg) no-repeat;
   background-position: center;
@@ -81,6 +122,10 @@ textarea.materialize-textarea:focus:not([readonly]) {
   font-family: "Permanent Marker", cursive;
   text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black,
     1px 1px 0 black;
+}
+
+.card-title {
+  font-size: 30px;
 }
 nav ul li:hover {
   background-color: #fed821;
