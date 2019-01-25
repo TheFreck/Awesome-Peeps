@@ -33,6 +33,7 @@ module.exports = {
 
 
 updateUser: function(req, res) {
+ 
   // console.log('this is update user sesison', req.session);
     //create item then takes the item id and adds it to the users myItems column
     db.User.findOneAndUpdate

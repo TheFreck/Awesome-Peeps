@@ -26,9 +26,8 @@ const SignedInLinks = props => {
           <NavLink to="/"> Logout </NavLink>
         </div>
       </li>
-	
 		</ul>
-	);
+  );
 };
 
 export default SignedInLinks;

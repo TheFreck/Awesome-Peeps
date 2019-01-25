@@ -7,29 +7,18 @@ const Login = props => {
   return (
     <div>
       {props.state.resetPasswordBoolean ? (
-        <ResetPswd 
-          handleChange={props.handleChange} 
-          reset={props.reset} 
+        <ResetPswd
+          handleChange={props.handleChange}
+          reset={props.reset}
           toggleStart={props.toggleStart}
         />
       ) : (
-        <div 
-          className="container"
-        >
-          <form 
-            onSubmit={props.handleSubmit} 
-            className="white">
-            <h5 
-              className="grey-text text-darken-3"
-            >Login
-            </h5>
-            <div 
-              className="input-field"
-            >
-              <label 
-                htmlFor="email"
-              >Email: 
-              </label>
+        <div className="container">
+          <form onSubmit={props.handleSubmit} className="login-card">
+            <h1>Login</h1>
+            <br />
+            <div className="input-field">
+              <label htmlFor="email">Email:</label>
               <input
                 type="email"
                 id="email"
@@ -52,21 +41,23 @@ const Login = props => {
                   value="Login"
                   onClick={props.submit}
                 />
-                <input
-                  className="btn pink lighten-1 z-depth-2"
-                  name="forgot password"
-                  type="submit"
-                  value="Forgot Password"
-                  pword={props.state.resetPswd}
-                  onClick={props.click}
-                />
-                <input
-                  className="btn pink lighten-1 z-depth-2"
-                  name="Register"
-                  type="submit"
-                  value="Register"
-                  onClick={props.toggleStart}
-                />
+                <div className="login-help">
+                  <input
+                    className="btn pink lighten-1 z-depth-2"
+                    name="forgot password"
+                    type="submit"
+                    value="Forgot Password"
+                    pword={props.state.resetPswd}
+                    onClick={props.click}
+                  />
+                  <input
+                    className="btn pink lighten-1 z-depth-2"
+                    name="Register"
+                    type="submit"
+                    value="Register"
+                    onClick={props.toggleStart}
+                  />
+                </div>
               </div>
             </div>
           </form>

@@ -77,103 +77,99 @@ class App extends Component {
     event.preventDefault();
     console.log("global logout");
     this.setState(initialState);
-    this.setState({ loggedIn: false })
+    this.setState({ loggedIn: false });
     API.logout();
-  }
+  };
 
   auth = () => {
-    API.checkLogin()
-    .then(res => {
+    API.checkLogin().then(res => {
       console.log("App.js auth: ", res.data);
-      this.setState({ loggedIn: res.data })
+      this.setState({ loggedIn: res.data });
     });
-  }
-  
-  getSession = (res) => {
-    API.session().then((res) => {
+  };
+
+  getSession = res => {
+    API.session().then(res => {
       this.setState({
         ...this.state,
         ...res.data
       });
-    })
-  }
+    });
+  };
 
   render() {
     // console.log("this.state.loggedIn", this.state.loggedIn)
-    if(this.state.loggedIn) {
+    if (this.state.loggedIn) {
       console.log("you are logged in");
       return (
         <Router>
           <div>
-            <Nav 
-              goodbye={this.logout}
-              userId={this.state.uuid}
-            />
-            <Switch >
+            <Nav goodbye={this.logout} userId={this.state.uuid} />
+            <Switch>
               <Route
                 exact
                 path="/Create"
                 render={() => (
-                  <Create 
-                  auth={this.auth}
-                  update={this.updateState} 
-                  state={this.state} 
+                  <Create
+                    auth={this.auth}
+                    update={this.updateState}
+                    state={this.state}
                   />
-                  )}
+                )}
               />
               <Route
                 exact
                 path="/Friends"
                 render={() => (
-                  <Friends 
-                  auth={this.auth}
-                  update={this.updateState} 
-                  state={this.state} 
+                  <Friends
+                    auth={this.auth}
+                    update={this.updateState}
+                    state={this.state}
                   />
-                  )}
+                )}
               />
               <Route
                 exact
                 path="/FriendRegistry/:userId"
                 render={props => (
                   <FriendRegistry
-                  {...props}
-                  auth={this.auth}
-                  update={this.updateState}
-                  state={this.state}
+                    {...props}
+                    auth={this.auth}
+                    update={this.updateState}
+                    state={this.state}
                   />
-                  )}
+                )}
               />
               <Route
                 exact
                 path="/Shopping/:userId"
                 render={props => (
-                  <Shopping 
-                  {...props}
-                  auth={this.auth}
-                  update={this.updateState} 
-                  state={this.state} 
+                  <Shopping
+                    {...props}
+                    auth={this.auth}
+                    update={this.updateState}
+                    state={this.state}
                   />
-                  )}
+                )}
               />
               <Route
                 exact
                 path="/Profile"
                 render={() => (
-                  <Profile 
+                  <Profile
                     auth={this.auth}
-                    update={this.updateState} 
-                    state={this.state} 
+                    update={this.updateState}
+                    state={this.state}
                   />
                 )}
               />
               <Route
                 path="/"
                 render={() => (
-                  <Landing 
+                  <Landing
                     auth={this.auth}
-                    update={this.updateState} 
-                    state={this.state} 
+                    update={this.updateState}
+                    state={this.state}
                   />
                 )}
               />
@@ -186,21 +182,21 @@ class App extends Component {
           </div>
         </Router>
       );
-    }else{
+    } else {
       console.log("you are logged out");
-      return(
-        <Router >
+      return (
+        <Router>
           <div>
             <Switch>
               <Route
                 exact
                 path="/reset/:token"
                 render={token => (
-                  <FinalReset 
+                  <FinalReset
                     auth={this.auth}
                     token={token}
-                    update={this.updateState} 
-                    state={this.state} 
+                    update={this.updateState}
+                    state={this.state}
                   />
                 )}
               />
@@ -218,7 +214,7 @@ class App extends Component {
             </Switch>
           </div>
         </Router>
-      )
+      );
     }
   }
 }
