@@ -1,0 +1,77 @@
+Arguments: 
+  C:\Program Files\nodejs\node.exe C:\Users\erdma\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js build
+
+PATH: 
+  C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\iCLS\;C:\Program Files\Intel\Intel(R) Management Engine Components\iCLS\;C:\windows\system32;C:\windows;C:\windows\System32\Wbem;C:\windows\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Intel\WiFi\bin\;C:\Program Files\Common Files\Intel\WirelessCommon\;C:\Program Files\Git\cmd;C:\Program Files\nodejs\;C:\Program Files\MongoDB\Server\4.0\bin;C:\Users\erdma\AppData\Local\Microsoft\WindowsApps;C:\Users\erdma\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\erdma\AppData\Roaming\npm;C:\Program Files\heroku\bin
+
+Yarn version: 
+  1.12.3
+
+Node version: 
+  10.11.0
+
+Platform: 
+  win32 x64
+
+Trace: 
+  SyntaxError: C:\Users\erdma\Desktop\dev\uubc\homework\AwesomePeeps\Awesome-Peeps\package.json: Unexpected token / in JSON at position 538
+      at JSON.parse (<anonymous>)
+      at C:\Users\erdma\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:1631:59
+      at Generator.next (<anonymous>)
+      at step (C:\Users\erdma\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:304:30)
+      at C:\Users\erdma\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:315:13
+
+npm manifest: 
+  {
+    "name": "mern",
+    "version": "1.0.0",
+    "main": "server.js",
+    "proxy": "http://localhost:3001",
+    "scripts": {
+      "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
+      "start:prod": "node server.js",
+      "start:dev": "concurrently \"nodemon --ignore 'client/*'\" \"npm run client\"",
+      "client": "cd client && npm run start",
+      "seed": "node scripts/seedDB.js",
+      "install": "cd client && yarn install",
+      "build": "cd client && npm run build",
+      "heroku-postbuild": "npm run build"
+    },
+    // "scripts": {
+    //   "start": "node server.js",
+    //   "build": "cd client && npm run build",
+    //   "heroku-postbuild": "npm run build"
+    // },
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+      "concurrently": "^3.5.0",
+      "nodemon": "^1.11.0"
+    },
+    "dependencies": {
+      "axios": "^0.16.2",
+      "bcryptjs": "^2.4.3",
+      "dotenv": "^6.2.0",
+      "emoji": "^0.3.2",
+      "express": "^4.16.3",
+      "express-session": "^1.15.6",
+      "if-env": "^1.0.4",
+      "mongoose": "^5.0.17",
+      "morgan": "^1.9.1",
+      "nodemailer": "^5.1.1",
+      "passport": "^0.4.0",
+      "passport-local": "^1.0.0",
+      "react-materialize": "^2.6.0",
+      "react-router-dom": "^4.3.1",
+      "react-search-input": "^0.11.3",
+      "uuid": "^3.3.2"
+    },
+    "keywords": [],
+    "description": ""
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile

@@ -17,7 +17,7 @@ app.use(express.json());
 app.use(
   session({
     secret: process.env.SESSION_SECRET,
-    store: process.env.MONGODB_URI,
+    // store: process.env.MONGODB_URI,
     resave: false, //required
     saveUninitialized: false //required
   })
