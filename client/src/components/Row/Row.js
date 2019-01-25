@@ -56,15 +56,9 @@ class Row extends Component {
             <div className="card-content">
               {this.state.updateItem && (
                 <div>
-                  <span onClick={this.openUpdateForm}>
-                    <h5 className="most-headers">
-                      Update Your Item{" "}
-                      <a className="btn-floating btn-med waves-effect waves-light red darken-3">
-                        <i className="material-icons right">close</i>
-                        <br />
-                      </a>
-                    </h5>
-                  </span>
+                  <h5 className="most-headers">
+                    <u> Update Your Item </u>
+                  </h5>
                   <div className="form-group">
                     <label htmlFor="item">
                       <h6>Item</h6>
@@ -138,6 +132,12 @@ class Row extends Component {
                   >
                     Update Item
                   </button>
+                  <span onClick={this.openUpdateForm}>
+                    <a class="btn-floating btn-med waves-effect waves-light red darken-1">
+                      <i class="material-icons right">close</i>
+                      <br />
+                    </a>
+                  </span>
                 </div>
               )}
               <div className="card sticky-action" />

@@ -8,16 +8,12 @@ const Nav = props => {
   return (
     <nav className="nav-wrapper blue darken-2">
       <div className="container">
-        {/* className is a Materialize classs*/}
         <button type="submit" className="brand-logo">
           <Link to={"/Landing/"}>
             <img className="responsive-img" src={Mainlogo} alt="main logo" />
           </Link>
         </button>
-        <SignedInLinks 
-          logout={props.goodbye}
-          userId={props.userId}
-        />
+        <SignedInLinks logout={props.goodbye} userId={props.userId} />
         {/* <SignedOutLinks /> */}
       </div>
     </nav>

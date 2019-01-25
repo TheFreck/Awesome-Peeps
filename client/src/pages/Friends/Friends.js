@@ -2,7 +2,6 @@
 import React, { Component } from "react";
 import API from "../../utils/API";
 import { Link } from "react-router-dom";
-import MainLogo from "../../components/MainLogo";
 
 //----------Friends component----------
 class Friends extends Component {
@@ -30,12 +29,14 @@ class Friends extends Component {
       <div className="container">
         <form className="most-headers">
           <div>
-            <h3>WHICH GREEDY BASTARD DO YOU WANT TO BUY FOR?</h3>
+            <h3>
+              <u> Who's The Lucky Bastard You're Buying For?</u>
+            </h3>
           </div>
           <div>
             {users.map(users => (
-              <button key={users._id} type="submit" className="btn btn-info">
-                <Link to={"/FriendRegistry/" + users._id}>
+              <button key={users._id} type="submit">
+                <Link className="btn" to={"/FriendRegistry/" + users._id}>
                   {users.firstName + "  " + users.lastName}
                 </Link>
               </button>
