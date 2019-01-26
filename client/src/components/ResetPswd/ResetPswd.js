@@ -6,7 +6,8 @@ const ResetPswd = props => {
       className="container">
       <form 
         onSubmit={props.reset} 
-        className="white">
+        className="white"
+      >
         <h5 
           className="grey-text text-darken-3"
         >Enter your email to reset your password
