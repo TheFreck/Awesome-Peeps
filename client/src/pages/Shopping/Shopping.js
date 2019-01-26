@@ -25,7 +25,10 @@ class Shopping extends Component {
     API.getFriendsandItemsTwo()
       .then(itemData => {
         console.log("itemData: ", itemData);
-        console.log("userItem data: ", itemData.data.shoppingListItems.userItem)
+        console.log(
+          "userItem data: ",
+          itemData.data.shoppingListItems.userItem
+        );
         this.setState({ shoppingItems: itemData.data.shoppingListItems });
         this.getItemDetails(itemData.data._id);
       })
@@ -67,8 +70,7 @@ class Shopping extends Component {
   };
   deleteItem = id => {
     API.deleteItem(id)
-      .then(res => 
-        this.getShoppingListItems())
+      .then(res => this.getShoppingListItems())
       .catch(err => console.log(err));
   };
 
@@ -77,34 +79,42 @@ class Shopping extends Component {
     let name = this.state.friends;
     return (
       <div className="container">
-        <table className="most-headers">
-          <thead>
-            <tr>
-              <th>GREEDY BASTARD</th>
-              <th>ITEM</th>
-              <th>PRICE</th>
-              <th>OCCASION</th>
-              <th>COMMENTS</th>
-            </tr>
-          </thead>
-          <tbody>
-            {this.state.shoppingItems.map(item => (
-              <tr key={item._id}>
-                <td>{item.userItem.firstName}</td>
-                <td>{item.item}</td>
-                <td>{item.price}</td>
-                <td>{item.occasion}</td>
-                <td>{item.comments}</td>
-                <td>
-                  <FindOnlineBtn name={item.item} />
-                </td>
-                <td>
-                  <button className="btn pink lighten-1 z-depth-2" onClick={() => this.deleteItem(item._id)}>Purchase</button>
-                </td>
+        <form className="most-headers">
+          <u> THIS Is What You Finally Decided On?!</u>
+          <table className="responsive-table striped highlight">
+            <thead className="table-head">
+              <tr>
+                <th>GREEDY BASTARD</th>
+                <th>ITEM</th>
+                <th>PRICE</th>
+                <th>OCCASION</th>
+                <th>COMMENTS</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody className="table-body">
+              {this.state.shoppingItems.map(item => (
+                <tr key={item._id}>
+                  <td>{item.userItem.firstName}</td>
+                  <td>{item.item}</td>
+                  <td>{item.price}</td>
+                  <td>{item.occasion}</td>
+                  <td>{item.comments}</td>
+                  <td>
+                    <FindOnlineBtn name={item.item} />
+                  </td>
+                  <td>
+                    <button
+                      className="btn pink lighten-1 z-depth-2"
+                      onClick={() => this.deleteItem(item._id)}
+                    >
+                      Purchase
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </form>
       </div>
     );
   }
