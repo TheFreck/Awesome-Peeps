@@ -50,7 +50,7 @@ class FriendRegistry extends Component {
     return (
       <div>
         <div className="container">
-          <form className="most-headers">
+          <div className="most-headers">
             <u> I Deserve All This Stuff!</u>
             <table className="responsive-table striped highlight">
               <thead className="table-head">
@@ -83,26 +83,13 @@ class FriendRegistry extends Component {
                       </button>
                     </td>
                     <td>
-                      <a
-                        href={
-                          "http://www.google.com/search?source=hp&ei=1XZBXJKpEammjwSG4KGgBQ&q=" +
-                          this.props.item
-                        }
-                        target="blank"
-                      >
-                        <button
-                          type="submit"
-                          className="btn pink lighten-1 z-depth-2"
-                        >
-                          Find Online
-                        </button>
-                      </a>
+                     <FindOnlineBtn name={item.item} />
                     </td>
                   </tr>
                 ))}
               </tbody>
             </table>
-          </form>
+          </div>
         </div>
       </div>
     );
