@@ -69,7 +69,7 @@ class FriendRegistry extends Component {
                     <td>{item.price}</td>
                     <td>{item.comments}</td>
                     <td>
-                      <button
+                      <button type="submit" className="btn pink lighten-1 z-depth-2"
                         onClick={e => {
                           e.preventDefault();
                           API.addToShoppingList(item._id);
