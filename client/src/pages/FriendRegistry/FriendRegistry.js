@@ -2,7 +2,7 @@
 import React, { Component } from "react";
 import API from "../../utils/API";
 // import { Link } from "react-router-dom";
-// import FindOnlineBtn from "../../components/FindOnlineBtn";
+import FindOnlineBtn from "../../components/FindOnlineBtn";
 // import ResetPswd from "../../components/ResetPswd";
 
 class FriendRegistry extends Component {

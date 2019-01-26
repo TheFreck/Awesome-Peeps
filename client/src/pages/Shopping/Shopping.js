@@ -79,7 +79,7 @@ class Shopping extends Component {
     let name = this.state.friends;
     return (
       <div className="container">
-        <form className="most-headers">
+        <div className="most-headers">
           <u> THIS Is What You Finally Decided On?!</u>
           <table className="responsive-table striped highlight">
             <thead className="table-head">
@@ -114,7 +114,7 @@ class Shopping extends Component {
               ))}
             </tbody>
           </table>
-        </form>
+        </div>
       </div>
     );
   }
