@@ -43,6 +43,7 @@ class FriendRegistry extends Component {
     });
   };
 
+  
   //Render Friends Registry into a table
   render() {
     let name = this.props.match.params.userId;
@@ -50,7 +51,7 @@ class FriendRegistry extends Component {
     return (
       <div>
         <div className="container">
-          <form className="most-headers">
+          <div className="most-headers">
             I'M A GREEDY BASTARD - HERE IS MY LIST
             <thead>
               <tr>
@@ -81,11 +82,15 @@ class FriendRegistry extends Component {
                       Add to List
                     </button>
                   </td>
-                  <td>
+                  <td> 
+                    <FindOnlineBtn name={item.item} />
+                  </td>
+                 
+                  {/* <td>
                     <a
                       href={
                         "http://www.google.com/search?source=hp&ei=1XZBXJKpEammjwSG4KGgBQ&q=" +
-                        this.props.item
+                        item.item
                       }
                       target="blank"
                     >
@@ -94,13 +99,13 @@ class FriendRegistry extends Component {
                         className="btn pink lighten-1 z-depth-2"
                       >
                         Find Online
-                      </button>
-                    </a>
-                  </td>
+                      </button> */}
+                    {/* </a>
+                  </td> */}
                 </tr>
               ))}
             </tbody>
-          </form>
+          </div>
         </div>
       </div>
     );
