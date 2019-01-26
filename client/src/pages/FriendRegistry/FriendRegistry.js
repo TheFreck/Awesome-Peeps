@@ -1,8 +1,8 @@
 //----------Import external components----------
 import React, { Component } from "react";
 import API from "../../utils/API";
-import { Link } from "react-router-dom";
-import FindOnlineBtn from "../../components/FindOnlineBtn";
+// import { Link } from "react-router-dom";
+// import FindOnlineBtn from "../../components/FindOnlineBtn";
 // import ResetPswd from "../../components/ResetPswd";
 
 class FriendRegistry extends Component {
@@ -51,55 +51,57 @@ class FriendRegistry extends Component {
       <div>
         <div className="container">
           <form className="most-headers">
-            I'M A GREEDY BASTARD - HERE IS MY LIST
-            <thead>
-              <tr>
-                <th>ITEM</th>
-                <th>PRICE</th>
-                <th>COMMENTS</th>
-                <th>ADD TO SHOPPING LIST</th>
-                <th>FIND ONLINE</th>
-              </tr>
-            </thead>
-            <tbody>
-              {this.state.friends.map(item => (
-                <tr key={item._id}>
-                  <td>{item.item}</td>
-                  <td>{item.price}</td>
-                  <td>{item.comments}</td>
-                  <td>
-                    <button
-                      onClick={e => {
-                        e.preventDefault();
-                        API.addToShoppingList(item._id);
-                        API.removeFromGeneralList(item._id);
-                        console.log(
-                          "this is after it is added before the switch"
-                        );
-                      }}
-                    >
-                      Add to List
-                    </button>
-                  </td>
-                  <td>
-                    <a
-                      href={
-                        "http://www.google.com/search?source=hp&ei=1XZBXJKpEammjwSG4KGgBQ&q=" +
-                        this.props.item
-                      }
-                      target="blank"
-                    >
-                      <button
-                        type="submit"
-                        className="btn pink lighten-1 z-depth-2"
-                      >
-                        Find Online
-                      </button>
-                    </a>
-                  </td>
+            <u> I Deserve All This Stuff!</u>
+            <table className="responsive-table striped highlight">
+              <thead className="table-head">
+                <tr>
+                  <th>ITEM</th>
+                  <th>PRICE</th>
+                  <th>COMMENTS</th>
+                  <th>ADD TO SHOPPING LIST</th>
+                  <th>FIND ONLINE</th>
                 </tr>
-              ))}
-            </tbody>
+              </thead>
+              <tbody className="table-body">
+                {this.state.friends.map(item => (
+                  <tr key={item._id}>
+                    <td>{item.item}</td>
+                    <td>{item.price}</td>
+                    <td>{item.comments}</td>
+                    <td>
+                      <button
+                        onClick={e => {
+                          e.preventDefault();
+                          API.addToShoppingList(item._id);
+                          API.removeFromGeneralList(item._id);
+                          console.log(
+                            "this is after it is added before the switch"
+                          );
+                        }}
+                      >
+                        Add to List
+                      </button>
+                    </td>
+                    <td>
+                      <a
+                        href={
+                          "http://www.google.com/search?source=hp&ei=1XZBXJKpEammjwSG4KGgBQ&q=" +
+                          this.props.item
+                        }
+                        target="blank"
+                      >
+                        <button
+                          type="submit"
+                          className="btn pink lighten-1 z-depth-2"
+                        >
+                          Find Online
+                        </button>
+                      </a>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </form>
         </div>
       </div>

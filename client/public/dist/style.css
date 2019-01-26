@@ -76,6 +76,22 @@ u {
   font-size: 30px;
 }
 
+.table-body {
+  margin: 0;
+  padding: 0;
+  font-family: "Nunito Sans", sans-serif;
+}
+
+.table-head {
+  font-family: "Permanent Marker", cursive;
+  font-weight: bold;
+  font-size: 16px;
+  text-transform: capitalize;
+  color: black;
+  padding-top: 10px;
+  padding-left: 10px;
+}
+
 /* Landing page container  */
 .showcase-container {
   padding: 0px;
