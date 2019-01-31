@@ -25,8 +25,11 @@ class FinalReset extends Component {
   }
 
   checkResetToken = (tokenCheck) => {
+    console.log("check token");
     const token = tokenCheck;
-    API.checkResetToken(token).then((res)=>{
+    API.checkResetToken(token)
+    .then(res => {
+      console.log("check token res: ", res);
       if(res.data.tokenStatus === "expired"){
         console.log("BAD token");
         this.setState({
@@ -38,28 +41,26 @@ class FinalReset extends Component {
           tokenStatus: true,
           email: res.data.email
         });
+        console.log("this.state: ", this.state);
       }
     })
   }
 
-  postForgotPassword = () => {
-    console.log(this.props.match.params.email);
-    // API.resetPassword(this.state.forgotEmail).then((res) => {
-    //   <Redirect to="/"/>
-    // })
-  }
-
-  handleReset = () => {
+  handleReset = event => {
+    event.preventDefault();
+    console.log("this.state.email: ", this.state.email);
+    console.log("handleReset: ", this.state.password + "&" + this.state.confirmPassword);
     if (this.state.password === this.state.confirmPassword) {
       API.resetPassword({
         email: this.state.email,
         password: this.state.password
-      }).then((res) => {
-        this.setState({
-          redirect: true
-        });
       })
-      
+      // .then(res => {
+      //   console.log("post resetPassword res: ", res);
+      //   this.setState({
+      //     redirect: true
+      //   });
+      // })
     }else{
       console.log("passwords don't match bummer");
     }
@@ -68,28 +69,52 @@ class FinalReset extends Component {
 
   render() {
     if (this.state.redirect) {
-      return <Redirect to={`/login`} />;
+      return <Redirect to={`/`} />;
     }
     else if(this.state.resetSuccesful){
       return <h1>AWWWWW YEAH PASSWORD RESET HOMIE</h1>
     }
     else if (this.state.tokenStatus){
       return (
-      <div className="container-fluid reset-page-background">
-        <div className="row justify-content-center">
-          <div className="col-sm-3 login-group-container">
-            <div className="form-group">
-              <label>Password</label>
-              <input type="password" className="form-control" placeholder="Password" name="password" value={this.state.password} onChange={this.handleChange} />
-            </div>
-            <div className="form-group">
-              <label> Confirm Password</label>
-              <input type="password" className="form-control" placeholder="Confirm Password" name="confirmPassword" value={this.state.confirmPassword} onChange={this.handleChange} />
-            </div>
-            <button className="btn justify-content-center" onClick={this.handleReset}>Reset Password</button>
+      <div className="container">
+        <form
+          className="white"
+        >
+          <h5 
+            className="grey-text tet-darken-3"
+          >Enter your new password
+          </h5>
+          <div>
+            <label
+              htmlFor="password"
+            >Password
+            </label>
+            <input 
+              type="password"
+              placeholder="Password" 
+              name="password" 
+              value={this.state.password} 
+              onChange={this.handleChange} 
+            />
           </div>
-
-        </div>
+          <div>
+            <label
+              htmlFor="confirmPassword"
+            > Confirm Password
+            </label>
+            <input 
+              type="password" 
+              placeholder="Confirm Password" 
+              name="confirmPassword" 
+              value={this.state.confirmPassword} 
+              onChange={this.handleChange} />
+          </div>
+          <button 
+            className="btn pink lighten-1 z-depth-2"
+            onClick={this.handleReset}
+          >Reset Password
+          </button>
+        </form>
       </div>
     );
     }

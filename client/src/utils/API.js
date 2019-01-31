@@ -17,23 +17,18 @@ export default {
     return axios.get("/api/users/logout");
   },  
   forgotPassword: email => {
-    // console.log("api forgot email: ", email);
-    //route can be diff but it need to call the forgot method inside of resetPasswordCtrl aka: resetPasswordCtrl.forgot()
+    console.log("api forgot email: ", email);
     return axios.post(`/api/reset/forgot/${email}`)
   },
   checkResetToken: token => {
-    // console.log("api checkreset token: ", token);
-    //route can be diff but it need to call the checkToken method inside of resetPasswordCtrl aka: resetPasswordCtrl.checkToken()
+    console.log("api checkreset token: ", token);
     return axios.get(`/api/reset/checkResetToken/${token}`)
   },
   resetPassword: emailAndPass => {
-    // console.log("api resetPassword emailAndPass: ", emailAndPass);
-    //route can be diff but it need to call the resetPassword method inside of resetPasswordCtrl aka: resetPasswordCtrl.resetPassword()
+    console.log("api resetPassword emailAndPass: ", emailAndPass);
     return axios.put(`/api/reset/resetPassword`, emailAndPass)
   },
   //  /*************/********//*****///***////* //**////////*/////////////* 
-  //  END GATE KEEPER SCHTUFF
-  //  /*************/********//*****///***/// *///**////////*/////////////* 
 
   // Gets all users
   getUsers: () => {
